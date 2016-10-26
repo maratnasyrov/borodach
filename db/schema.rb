@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20100713113845) do
+ActiveRecord::Schema.define(version: 20161026090508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "days", force: :cascade do |t|
+    t.integer "number_of_the_day", null: false
+    t.integer "month_id"
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.string  "name_of_the_month", null: false
+    t.integer "year_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -38,5 +48,9 @@ ActiveRecord::Schema.define(version: 20100713113845) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "years", force: :cascade do |t|
+    t.integer "number", null: false
+  end
 
 end
