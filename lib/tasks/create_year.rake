@@ -1,23 +1,14 @@
 namespace :sync do
   task create_calendar: [:environment] do
     def update_calendar
-      Year.last.nil? ? create_year : create_next_year
+      Year.last.nil? ? create_year(Time.now.year) : create_year(Year.last.number + 1)
+    end
+
+    def create_year(year_number)
+      year = Year.new(number: year_number)
+      year.save
 
       create_months(Year.last)
-    end
-
-    def create_year
-      year_number = Time.now.year
-
-      year = Year.new(number: year_number)
-      year.save
-    end
-
-    def create_next_year
-      year_number = Year.last.number + 1
-
-      year = Year.new(number: year_number)
-      year.save
     end
 
     def create_months(year)
@@ -39,11 +30,11 @@ namespace :sync do
         month = Month.new(name_of_the_month: month, year_id: year.id)
         success = month.save
 
-        create_days(month) if success
+        create_days(month, year.number) if success
       end
     end
 
-    def create_days(month)
+    def create_days(month ,year_number)
       month_31 = [
          'January',
           'March',
@@ -55,26 +46,20 @@ namespace :sync do
       ]
 
       if 'February'.eql?(month.name_of_the_month)
-        i = 1
-        while i < 30
-          day = Day.new(number_of_the_day: i, month_id: month.id)
-          day.save
-          i += 1
-        end
+        Date.leap?(year_number) ? create_days_number(month, 30) : create_days_number(month, 29)    
       elsif !month_31.include?(month.name_of_the_month)
-        i = 1
-        while i < 31
-          day = Day.new(number_of_the_day: i, month_id: month.id)
-          day.save
-          i += 1
-        end
+        create_days_number(month, 31)
       elsif month_31.include?(month.name_of_the_month)
-        i = 1
-        while i < 32
-          day = Day.new(number_of_the_day: i, month_id: month.id)
-          day.save
-          i += 1
-        end
+        create_days_number(month, 32)
+      end
+    end
+
+    def create_days_number(month, n)
+      i = 1
+      while i < n
+        day = Day.new(number_of_the_day: i, month_id: month.id)
+        day.save
+        i += 1
       end
     end
 

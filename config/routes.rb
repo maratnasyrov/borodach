@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :months do
     resources :days
   end
+
+  get 'now', to: 'days#show_current_date'
 end
