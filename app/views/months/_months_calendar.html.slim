@@ -1,0 +1,58 @@
+.row
+  ul.pagination.text-center aria-label="Pagination" role="navigation"
+    - Month.all_month_in_year.each do |month_part|
+      - if  month.id == month_part.id
+        li.current-month
+          = link_to month_part.name_of_the_month, month_path(month_part)
+      - else
+        li
+          = link_to month_part.name_of_the_month, month_path(month_part)
+.month = month.name_of_the_month
+center
+  table.schedulle-table
+    thead
+      tr
+        th Masters
+        - month.days.first(15).each do |day|
+            th = day.number_of_the_day
+
+    tbody
+      - Master.all.each do |master|
+        tr
+          td
+            = master.name
+            = master.last_name
+          
+          - month.days.first(15).each do |day|
+            td.in-tbl
+              - if SchedulePolicy.new(master.id, day.id).create?
+                = form_for work_day do |f|
+                  = hidden_field_tag :master_id, master.id
+                  = hidden_field_tag :day_id, day.id
+                  = f.button "-", class: "btn"
+              - else
+                = link_to 'x', work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day "       
+
+  table.schedulle-table
+    thead
+      tr
+        th Masters
+        - month.days.last(16).each do |day|
+          th = day.number_of_the_day
+
+    tbody
+      - Master.all.each do |master|
+        tr
+          td
+            = master.name
+            = master.last_name
+
+          - month.days.last(16).each do |day|
+            td.in-tbl
+              - if SchedulePolicy.new(master.id, day.id).create?
+                = form_for work_day do |f|
+                  = hidden_field_tag :master_id, master.id
+                  = hidden_field_tag :day_id, day.id
+                  = f.button "-", class: "btn"
+              - else
+                .work-day +

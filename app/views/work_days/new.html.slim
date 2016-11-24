@@ -1,0 +1,5 @@
+= simple_form_for work_day do |f|
+  = f.label :master_id
+  = f.select :master_id,  masters.all.collect { |p| [ p.id  ] }
+
+  = f.button :submit
