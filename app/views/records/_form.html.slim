@@ -1,0 +1,17 @@
+button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
+  .time.large-1.medium-1.small-1.columns
+    .hour
+      = record.time_start
+    .minute
+      = record.time_end
+  .client-info.large-11.medium-14.small-11.columns
+    = record.decorate.client_info
+div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown="" 
+  = simple_form_for [work_day, record] do |f|
+    .row
+      .medium-6.columns
+        label = f.input :client_name
+        = f.input :client_added, as: :hidden, input_html: { value: true }
+      .medium-6.columns
+        label = f.input :client_phone
+        = f.submit

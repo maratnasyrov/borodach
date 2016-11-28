@@ -1,8 +1,16 @@
 class DaysController < ApplicationController
   expose(:month)
+
   expose(:days)
   expose(:day, attributes: :days_params)
 
+  expose(:work_days) { day.work_days }
+  expose(:work_day)
+
+  expose(:masters) { Master.all }
+
+  expose(:record)
+  
   def show_current_date
     current_year = Date.today.year
     current_month = Date::MONTHNAMES[Date.today.month]

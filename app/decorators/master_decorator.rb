@@ -1,13 +1,8 @@
 class MasterDecorator < ApplicationDecorator
-  delegate_all
+  delegate :id, :name, :last_name
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def master_info
+    "#{object.name} #{object.last_name}"
+  end
 
 end

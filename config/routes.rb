@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :days do
     resources :work_days
   end
+  resources :work_days do
+    resources :records
+  end
 
   get 'fill_schedule', to: 'work_days#fill_schedule'
   

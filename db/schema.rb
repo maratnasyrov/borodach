@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108135515) do
+ActiveRecord::Schema.define(version: 20161127135058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,23 @@ ActiveRecord::Schema.define(version: 20161108135515) do
   create_table "months", force: :cascade do |t|
     t.string  "name_of_the_month", null: false
     t.integer "year_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.string   "client_name"
+    t.string   "client_phone"
+    t.string   "payment_method"
+    t.string   "time_start"
+    t.string   "time_end"
+    t.string   "comment"
+    t.integer  "discount"
+    t.integer  "price"
+    t.boolean  "dinner",         default: false, null: false
+    t.boolean  "client_added",   default: false, null: false
+    t.boolean  "closed_record",  default: false, null: false
+    t.integer  "work_day_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "users", force: :cascade do |t|

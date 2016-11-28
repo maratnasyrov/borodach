@@ -1,0 +1,30 @@
+.date-month, .date-day {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #0d8c3e;
+}
+
+.date-day {
+  margin-bottom: 0;
+}
+
+.master-info {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 10px;
+  color: #0d8c3e;
+  border-bottom: 1px solid #E6E7E8;
+  background-color: #fff;
+}
+
+.work-day-info {
+  border: 1px solid #E6E7E8;
+  background-color: #fff;
+  margin-bottom: 10px;
+  border-right: none;
+  padding: 0 !important;
+  box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}

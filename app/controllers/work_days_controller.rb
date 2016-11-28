@@ -11,11 +11,14 @@ class WorkDaysController < ApplicationController
   expose(:months) { Month.all}
   expose(:month)
 
+  expose(:record) { Record.update() }
+
   def create
     work_day = WorkDay.create(master_id: master.id, day_id: day.id)
     success = work_day.save
+    work_day.create_records if success
 
-    redirect_to month_path(day.month_id) if success
+    redirect_to month_path(day.month_id)
   end
 
   def destroy

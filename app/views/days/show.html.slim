@@ -1,4 +1,25 @@
-h1 
-  = day.number_of_the_day
-h1
-  = month.name_of_the_month
+.row
+  ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
+    - Month.all_month_in_year.each do |month_part|
+      - if  month.id == month_part.id
+        li.current-month
+          = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
+      - else
+        li
+          = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
+  ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
+    - month.days.each do |day_part|
+      - if  day.id == day_part.id
+        li.current-day
+          = link_to day_part.number_of_the_day, month_day_path(month, day_part)
+      - else
+        li
+          = link_to day_part.number_of_the_day, month_day_path(month, day_part)
+  .columns
+    .row
+      - work_days.each do |work_day|
+        .records
+          .large-4.medium-4.columns.work-day-info
+            .master-info = day.find_master(work_day.master_id)
+            - work_day.records.all_records.each do |record|
+              = render "records/form", work_day: work_day, record: record

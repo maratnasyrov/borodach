@@ -5,9 +5,30 @@
   color: #0d8c3e;
 }
 
+.array-of-the-date-month {
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
+  border: 1px solid #E6E7E8;
+
+  li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    a {
+      color:  #6b6b6b; 
+    }
+  }
+
+  .current-month {
+    background-color: #0d8c3e;
+    a {
+      color: #fff;
+    }
+  }
+}
+
 .schedulle-table {
-  border: 2px solid #0d8c3e;
-  width: 55% !important;
+  border: 1px solid #E6E7E8;
+  box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
 
   thead {
     color: #0d8c3e;
@@ -17,9 +38,10 @@
     }
 
   tbody td {
-    border: 1px solid #0d8c3e;
-     width: 40px !important;
-     min-width: 40px !important;
+    border: 1px solid #E6E7E8;
+    width: 40px !important;
+    min-width: 40px !important;
+    color:  #6b6b6b; 
   }
 
   .btn {
@@ -59,14 +81,5 @@
 
   .in-tbl {
     padding: 0;
-  }
-
-
-}
-
-.current-month {
-  background-color: #0d8c3e;
-  a {
-    color: #fff;
   }
 }

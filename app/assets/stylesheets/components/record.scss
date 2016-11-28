@@ -1,0 +1,75 @@
+.array-of-the-date {
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
+  padding: 5px;
+  border: 1px solid #E6E7E8;
+
+  li {
+    a {
+      color:  #6b6b6b; 
+    }
+  }
+
+  .current-day {
+    background-color: #0d8c3e;
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.record-info {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #E6E7E8;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 0 !important;
+  background-color: #fff;
+  color: #6b6b6b;
+  font-size: 1.1rem;
+
+  &:hover {
+    background-color: #0d8c3e;
+  }
+}
+
+.dinner {
+  background-color: #872929 !important;
+  color: #fff;
+}
+
+.closed-record {
+  background-color: #0d8c3e !important;
+  color: #fff;
+
+  &:hover {
+    background-color: #E6E7E8;
+  }
+}
+
+.client-added {
+  background-color: #499dfc !important;
+  color: #fff;
+}
+
+.record-info:last-child {
+  border-bottom: none;
+}
+
+.client-info {
+  float: none !important;
+  margin-top: 4px;
+}
+
+.time {
+  font-size: 0.75rem;
+  padding-left: 3px;
+
+  .hour {
+
+  }
+  .minute {
+
+  }
+}
