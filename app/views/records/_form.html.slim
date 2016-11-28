@@ -6,12 +6,30 @@ button class="button record-info #{RecordPolicy.new(record).set_status_class}" d
       = record.time_end
   .client-info.large-11.medium-14.small-11.columns
     = record.decorate.client_info
-div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown="" 
+
+div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown=""
+  div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.record_number
   = simple_form_for [work_day, record] do |f|
     .row
-      .medium-6.columns
-        label = f.input :client_name
-        = f.input :client_added, as: :hidden, input_html: { value: true }
-      .medium-6.columns
-        label = f.input :client_phone
-        = f.submit
+      .form-input
+        .medium-4.columns
+          = f.input :time_start
+        .medium-4.columns
+          = f.input :time_end
+        .medium-4.columns
+          = f.input :discount
+        .medium-12.columns
+          label = f.input :client_name
+          = f.input :client_added, as: :hidden, input_html: { value: true }
+          label = f.input :client_phone
+        .medium-6.columns
+          = f.input :price
+        .medium-6.columns
+          = f.label :payment_method
+          = f.select :payment_method,  ["Cash", "Cashless"]
+        .medium-4.columns
+          = link_to "Cancel", record_clear_path(record)
+        .medium-4.columns
+          = f.button :submit, "Save"
+        .medium-4.columns
+          = link_to "Close", closed_record_path(record)

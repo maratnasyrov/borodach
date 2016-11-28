@@ -16,9 +16,13 @@ Rails.application.routes.draw do
   resources :days do
     resources :work_days
   end
+
   resources :work_days do
     resources :records
   end
+
+  match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
+  match 'closed_record/:id', to: 'records#closed_record', as: :closed_record, via: [:get, :post]
 
   get 'fill_schedule', to: 'work_days#fill_schedule'
   

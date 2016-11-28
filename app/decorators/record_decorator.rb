@@ -13,4 +13,8 @@ class RecordDecorator < ApplicationDecorator
       "#{object.client_phone}"
     end
   end
+
+  def record_number
+    "Record number: #{object.id}"
+  end
 end

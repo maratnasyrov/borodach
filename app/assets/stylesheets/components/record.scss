@@ -73,3 +73,22 @@
 
   }
 }
+
+.dropdown-pane {
+  width: 332px; 
+  padding: 0;
+
+  .new-record {
+    padding: 10px;
+    text-align: center;
+    background-color: #0d8c3e;
+    color: #fff;
+  }
+  .form-input {
+    padding: 10px;
+  }
+
+  button {
+    background-color: red;
+  }
+}

@@ -18,4 +18,8 @@ class RecordPolicy
       'closed-record'
     end
   end
+
+  def status_closed?
+    record.closed_record == true ? false : true
+  end 
 end
