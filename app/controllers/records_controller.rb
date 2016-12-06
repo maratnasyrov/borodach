@@ -26,13 +26,43 @@ class RecordsController < ApplicationController
   private
 
   def check_status(record, params, month, day)
-    if RecordPolicy.new(record).status_closed?
-      record.update_attributes(params)
-      price_time_update(record)
+    if RecordPolicy.new(record).status_closed?  
+      start_time = params["start_time(4i)"]
+      update_records(record, start_time, params)
 
       redirect_to month_day_path(month, day)
     else
       redirect_to month_day_path(month, day)
+    end
+  end
+
+  def update_records(record, start_time, params)
+    record_id = 0
+
+    if start_time.to_i < record.start_time.hour
+      flag = record.start_time.hour - start_time.to_i
+      record_id = record.id - flag
+    elsif start_time.to_i > record.start_time.hour
+      flag = start_time.to_i - record.start_time.hour
+      record_id = record.id + flag
+    else
+      record_id = record.id
+    end
+
+    record_find = work_day.records.all.find_by(id: record_id)
+
+    if record.start_time.hour != start_time.to_i 
+      record_find.update_attributes(params)
+
+      if !record.record_services.all.empty?
+        record.record_services.all.each do |record_service|
+          record_service.update_attributes(record_id: record_find.id)
+        end
+      end
+
+      record.update_attributes(clear_params)
+    else
+      record.update_attributes(params)
     end
   end
 
