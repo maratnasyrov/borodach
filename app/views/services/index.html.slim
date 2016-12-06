@@ -1,0 +1,17 @@
+= render 'new'
+.row
+  table
+    thead.services
+      tr
+        th.part Name
+        th.part Price
+        th.part Time
+      tbody
+        - services.each do |service|
+          tr.services
+            td.part-name
+              = service.name
+            td.part
+              = service.price
+            td.part
+              = service.time

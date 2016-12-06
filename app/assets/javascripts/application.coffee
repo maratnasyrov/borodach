@@ -11,5 +11,8 @@
 #= require skim
 #= require_tree ../templates
 #= require_tree .
+#= require record_services
+#= require fragments
+#= require services
 
 $(document).foundation()

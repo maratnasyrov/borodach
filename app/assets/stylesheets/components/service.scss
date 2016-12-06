@@ -1,0 +1,63 @@
+.service-form, .form-title {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
+  border: 1px solid #E6E7E8;
+
+  .btn {
+    padding-left: 15px;
+  }
+}
+
+.form-title {
+  text-align: left;
+  font-size: 1.75rem;
+  color: #0d8c3e;
+}
+
+.btn-form {
+  background-color: #0d8c3e;
+  padding: 10px;
+  color: #fff;
+  border: 1px solid #0d8c3e;
+}
+
+.services {
+  background-color: #fff;
+  color: #6b6b6b;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
+  border: 1px solid #E6E7E8;
+  padding: 10px;
+
+  .part {
+    text-align: center;
+    border-left: 1px solid #E6E7E8;
+  }
+  .part-name {
+    padding-left: 35px;
+  }
+}
+
+.service-part {
+  padding: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .part-name, .part-time, .part-price, .part-delete {
+    font-size: 0.9rem;
+    padding: 3px;
+    text-align: center;
+    background-color: #fff;
+    color: #6b6b6b;
+    border-left: 1px solid #cacaca;
+    border-top: 1px solid #cacaca;
+    border-bottom: 1px solid #cacaca;
+  }
+  .part-delete {
+    border-right: 1px solid #cacaca;
+  }
+}
+
+.delete-service {
+  color: #872929;
+}

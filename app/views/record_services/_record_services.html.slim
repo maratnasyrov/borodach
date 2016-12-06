@@ -1,0 +1,3 @@
+.record-service data-fragment-id="record-service-#{record.id}"
+  - record.record_services.all.each do |record_service|
+    = render 'record_services/record_service', record_service: record_service

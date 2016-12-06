@@ -1,0 +1,10 @@
+p
+  a data-open="modal-#{record.id}" Add services 
+div id="modal-#{record.id}" class="reveal" data-reveal="" 
+  .modal-title Add service
+  = simple_form_for [record, record_service] do |f|
+  = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+    = f.input :service_id, collection: Service.all, selected: Service.all.first
+    = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form"
+  button.close-button aria-label=("Close modal") data-close="" type="button"  id="close-#{record.id}"
+    span aria-hidden="true"  &times;

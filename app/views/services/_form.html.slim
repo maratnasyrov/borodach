@@ -1,0 +1,10 @@
+= simple_form_for service, html: { class: "service-form" } do |f|
+  .medium-12
+    .medium-9.columns
+      = f.input :name
+    .medium-2.columns
+      = f.input :price
+    .medium-1.columns 
+      = f.input :time
+  .medium-12.btn
+    = f.button :submit, class: "btn-form"

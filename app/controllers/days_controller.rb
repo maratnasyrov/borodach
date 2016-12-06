@@ -1,5 +1,16 @@
 class DaysController < ApplicationController
+  expose(:year) { Year.find_by number: Date.today.year }
+  expose(:next_year) { Year.find_by number: year .number + 1 }
+  expose(:last_year) do
+    if year.number != Year.all.first.number
+      Year.find_by number: year.number  - 1 
+    else
+      Year.find_by number: year.number
+    end
+  end
   expose(:month)
+
+  expose(:year_search) { Year.year_search(month.year_id).first }
 
   expose(:days)
   expose(:day, attributes: :days_params)
@@ -10,6 +21,9 @@ class DaysController < ApplicationController
   expose(:masters) { Master.all }
 
   expose(:record)
+
+  expose(:record_services) { RecordServices.all }
+  expose(:record_service) { RecordService.new() }
   
   def show_current_date
     current_year = Date.today.year

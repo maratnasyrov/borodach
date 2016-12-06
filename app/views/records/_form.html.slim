@@ -1,9 +1,9 @@
 button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
   .time.large-1.medium-1.small-1.columns
     .hour
-      = record.time_start
+      = record.start_time.strftime( "%H:%M" )
     .minute
-      = record.time_end
+      = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
   .client-info.large-11.medium-14.small-11.columns
     = record.decorate.client_info
 
@@ -12,21 +12,25 @@ div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" dat
   = simple_form_for [work_day, record] do |f|
     .row
       .form-input
-        .medium-4.columns
-          = f.input :time_start
-        .medium-4.columns
-          = f.input :time_end
-        .medium-4.columns
-          = f.input :discount
+        .time
+          center
+            .medium-6.columns
+              = f.input :start_time, start_hour: 9, end_hour: 20, hour_step: 1, minute_step: 15
+            .medium-6.columns
+              = f.input :end_time, start_hour: 10, end_hour: 20, hour_step: 1, minute_step: 15
         .medium-12.columns
           label = f.input :client_name
           = f.input :client_added, as: :hidden, input_html: { value: true }
           label = f.input :client_phone
-        .medium-6.columns
-          = f.input :price
-        .medium-6.columns
+          = render "record_services/record_services", record: record
+          = render "record_services/form", record: record
+        .medium-4.columns
+          = f.input :price, input_html: { id: "price-#{record.id}" }
+        .medium-5.columns
           = f.label :payment_method
           = f.select :payment_method,  ["Cash", "Cashless"]
+        .medium-3.columns
+          = f.input :discount
         .medium-4.columns
           = link_to "Cancel", record_clear_path(record)
         .medium-4.columns

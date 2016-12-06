@@ -4,8 +4,8 @@ class CreateRecords < ActiveRecord::Migration
       t.string :client_name
       t.string :client_phone
       t.string :payment_method
-      t.string :time_start
-      t.string :time_end
+      t.time :start_time
+      t.time :end_time
       t.string :comment
       t.integer :discount
       t.integer :price

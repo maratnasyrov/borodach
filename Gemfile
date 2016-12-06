@@ -43,6 +43,7 @@ gem "responders"
 gem "rollbar"
 gem "seedbank"
 gem "stackprof"
+gem "fragments.js", github: "fs/fragments.js"
 
 group :staging, :production do
   gem "newrelic_rpm"

@@ -1,12 +1,19 @@
 .row
   ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
-    - Month.all_month_in_year.each do |month_part|
+    .year = year_show.number
+    li.pagination-previous
+      = link_to month_path(last_year.months.last)
+        span.show-for-sr page
+    - Month.year_detect(month.year_id).each do |month_part|
       - if  month.id == month_part.id
         li.current-month
           = link_to month_part.name_of_the_month, month_path(month_part)
       - else
         li
           = link_to month_part.name_of_the_month, month_path(month_part)
+    li.pagination-next
+      = link_to month_path(next_year.months.first)
+        span.show-for-sr page
   center
     table.schedulle-table
       thead

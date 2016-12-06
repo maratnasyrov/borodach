@@ -26,11 +26,13 @@ namespace :sync do
         'November',
         'December' 
       ]
+      i = 1
       name_of_the_months.each do |month|
-        month = Month.new(name_of_the_month: month, year_id: year.id)
+        month = Month.new(name_of_the_month: month, year_id: year.id, number: i)
         success = month.save
 
         create_days(month, year.number) if success
+        i += 1
       end
     end
 
