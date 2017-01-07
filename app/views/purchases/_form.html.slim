@@ -1,0 +1,12 @@
+= simple_form_for purchase, html: { class: "service-form" } do |f|
+  .medium-12
+    .medium-6.columns
+      = f.input :name
+    .medium-2.columns
+      = f.input :price
+    .medium-2.columns 
+      = f.input :initial_cost
+    .medium-2.columns 
+      = f.input :bulk
+  .medium-12.btn
+    = f.button :submit, class: "btn-form"

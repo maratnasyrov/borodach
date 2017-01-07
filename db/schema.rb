@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206104921) do
+ActiveRecord::Schema.define(version: 20161227103644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(version: 20161206104921) do
   create_table "days", force: :cascade do |t|
     t.integer "number_of_the_day", null: false
     t.integer "month_id"
+  end
+
+  create_table "finance_days", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "finances", force: :cascade do |t|
+    t.integer  "masters_id"
+    t.integer  "days_id"
+    t.boolean  "cash_type",    default: false, null: false
+    t.integer  "price",                        null: false
+    t.string   "comment"
+    t.string   "client_name"
+    t.string   "client_phone"
+    t.boolean  "service_type",                 null: false
+    t.integer  "service_id",                   null: false
+    t.boolean  "finance_type", default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "masters", force: :cascade do |t|
@@ -32,6 +52,32 @@ ActiveRecord::Schema.define(version: 20161206104921) do
     t.string  "name_of_the_month", null: false
     t.integer "year_id"
     t.integer "number"
+  end
+
+  create_table "purchase_histories", force: :cascade do |t|
+    t.integer  "purchase_id"
+    t.integer  "number_changes", null: false
+    t.integer  "price",          null: false
+    t.string   "seller"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.string   "name",         null: false
+    t.integer  "price",        null: false
+    t.integer  "number"
+    t.integer  "initial_cost"
+    t.integer  "bulk",         null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "record_purchases", force: :cascade do |t|
+    t.integer  "record_id"
+    t.integer  "purchase_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "record_services", force: :cascade do |t|

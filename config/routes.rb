@@ -23,8 +23,26 @@ Rails.application.routes.draw do
 
   resources :services
 
+  resources :purchases
+
+  resources :records do
+    resources :record_purchases
+  end
+
   resources :records do
     resources :record_services
+  end
+
+  resources :purchases do
+    resources :purchase_histories
+  end
+
+  resources :masters do
+    resources :finances
+  end
+
+  resources :days do
+    resources :finances
   end
 
   match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
@@ -33,4 +51,5 @@ Rails.application.routes.draw do
   get 'fill_schedule', to: 'months#fill_schedule'
   
   get 'now', to: 'days#show_current_date'
+  get 'finance_now', to: 'finances#show_current_finance_day'
 end

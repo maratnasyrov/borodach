@@ -1,0 +1,2 @@
+class FinanceDaysController < ApplicationController
+end

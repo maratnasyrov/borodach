@@ -1,0 +1,20 @@
+.row
+  .form-title = purchase.name
+  table
+    thead.purchases
+      tr
+        th.part Number
+        th.part Price
+        th.part Seller
+        th.part Update time
+    tbody
+      - purchase.purchase_history.sort_by_date.all.each do |purchase_history|
+        tr.purchases
+          td.part
+            = purchase_history.number_changes
+          td.part
+            = purchase_history.price
+          td.part
+            = purchase_history.seller
+          td.part
+            = purchase_history.created_at

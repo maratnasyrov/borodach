@@ -18,7 +18,7 @@
     table.schedulle-table
       thead
         tr
-          th Masters
+          th Мастер
           - month.days.first(15).each do |day|
               th = day.number_of_the_day
 
@@ -26,8 +26,7 @@
         - Master.all.each do |master|
           tr
             td
-              = master.name
-              = master.last_name
+              = link_to master.decorate.master_info, master_path(master)
             
             - month.days.first(15).each do |day|
               td.in-tbl
@@ -42,7 +41,7 @@
     table.schedulle-table
       thead
         tr
-          th Masters
+          th Мастер
           - month.days.last(16).each do |day|
             th = day.number_of_the_day
 
@@ -50,8 +49,7 @@
         - Master.all.each do |master|
           tr
             td
-              = master.name
-              = master.last_name
+              = link_to master.decorate.master_info, master_path(master)
 
             - month.days.last(16).each do |day|
               td.in-tbl

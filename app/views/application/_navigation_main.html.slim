@@ -1,5 +1,9 @@
 .top-bar-left
   ul.menu
-    li = link_to "Rails Base example site", root_path
     - if user_signed_in?
-      = active_link_to "Home", root_path, active: :exclusive, wrap_tag: :li
+      = active_link_to "Расписание", now_path, active: [['months', 'days'], ['show']], wrap_tag: :li
+      = active_link_to "График", fill_schedule_path, active: [['months'], ['show']], wrap_tag: :li
+      = active_link_to "Финансы", finance_now_path, active: :exclusive, wrap_tag: :li
+      = active_link_to "Персонал", masters_path, active: :exclusive, wrap_tag: :li
+      = active_link_to "Услуги", services_path, active: :exclusive, wrap_tag: :li
+      = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li

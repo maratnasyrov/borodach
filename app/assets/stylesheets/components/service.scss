@@ -22,7 +22,7 @@
   border: 1px solid #0d8c3e;
 }
 
-.services {
+.services, .purchases {
   background-color: #fff;
   color: #6b6b6b;
   box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
@@ -38,7 +38,7 @@
   }
 }
 
-.service-part {
+.service-part, .purchase-part {
   padding: 2px;
   padding-left: 15px;
   padding-right: 15px;
@@ -58,6 +58,6 @@
   }
 }
 
-.delete-service {
+.delete-service, .delete-purchase {
   color: #872929;
 }

@@ -24,6 +24,9 @@ class DaysController < ApplicationController
 
   expose(:record_services) { RecordServices.all }
   expose(:record_service) { RecordService.new() }
+
+  expose(:record_purchases) { RecordPurchases.all }
+  expose(:record_purchase) { RecordPurchase.new() }
   
   def show_current_date
     current_year = Date.today.year

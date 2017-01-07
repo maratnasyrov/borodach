@@ -1,5 +1,5 @@
 class MastersController < ApplicationController
-  expose(:masters)
+  expose(:masters) { Master.all }
   expose(:master)
 
   def create

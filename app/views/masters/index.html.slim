@@ -1,0 +1,14 @@
+= render 'new'
+.row
+  table
+    thead.purchases
+      tr
+        th.part Name
+        th.part
+      tbody
+        - masters.each do |master|
+          tr.purchases
+            td.part
+              = link_to "#{master.name} #{master.last_name}", master_path(master)
+            td.part-delete
+              = link_to 'X',  master_path(master),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к многочисленным ошибкам. Не рекомендуется удалять мастера, без ведома разработчика!' }

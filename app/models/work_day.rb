@@ -1,6 +1,7 @@
 class WorkDay < ActiveRecord::Base
   belongs_to :masters
   belongs_to :days
+  belongs_to :finances
   has_many :records, dependent: :destroy
 
   def create_records

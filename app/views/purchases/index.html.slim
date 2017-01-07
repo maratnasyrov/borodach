@@ -1,0 +1,28 @@
+= render 'new'
+.row
+  table
+    thead.purchases
+      tr
+        th.part Name
+        th.part Number
+        th.part Bulk
+        th.part Initial Cost
+        th.part Price
+        th.part
+      tbody
+        - purchases.sort_by_name.each do |purchase|
+          tr.purchases
+            td.part-name
+              = link_to(purchase.name, purchase_path(purchase))
+            td.part-purchases
+              button.button data-toggle="purchase-#{purchase.id}" type="button"  = purchase.number
+              div id="purchase-#{purchase.id}" class="dropdown-pane top purchase-dropdown" data-dropdown="" 
+                = render "purchase_history/form", purchase: purchase
+            td.part
+              = purchase.bulk
+            td.part
+              = purchase.initial_cost
+            td.part
+              = purchase.price
+            td.part-delete
+              = link_to 'X',  purchase_path(purchase),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке финансов в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }

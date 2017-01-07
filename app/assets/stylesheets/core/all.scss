@@ -1,3 +1,25 @@
 @import "settings";
 
 @include foundation-everything();
+
+.top-bar {
+  box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.2);
+  .menu {
+    background-color: #fff;
+
+    li {
+      a {
+        color: #6b6b6b;
+        border-right: 1px solid #E6E7E8;
+      }
+    }
+  }
+}
+
+.menu .active {
+  a {
+    background-color: #0d8c3e;
+    color: #fff !important;
+  }
+}
+

@@ -19,7 +19,22 @@ class RecordPolicy
     end
   end
 
+  def check_status?
+    if status_closed? == false
+      false
+    elsif status_added? == true
+      true
+    else
+      false
+    end
+  end
+
+
   def status_closed?
     record.closed_record == true ? false : true
-  end 
+  end
+
+  def status_added?
+    record.client_added == true ? true : false
+  end
 end

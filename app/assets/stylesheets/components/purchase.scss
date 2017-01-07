@@ -1,0 +1,35 @@
+.purchases {
+  .part-purchases {
+    width: 150px;
+    border-left: 1px solid #E6E7E8;
+    padding: 0;
+  }
+  button {
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .purchase-number {
+    width: 150px;
+
+    .link {
+      .link-number {
+        color: #fff;
+        background-color: #0d8c3e;
+        border: none;
+        margin-bottom: 10px;
+        float: right;
+        padding: 5px 10px 5px 10px;
+      }
+    }
+  }
+
+  .purchase-dropdown {
+    width: 149px;
+    padding-top: 10px;
+  }
+
+  .purchase-number {
+    padding-right: 7px;
+    padding-left: 5px;
+  }
+}

@@ -19,3 +19,32 @@
   text-align: center;
   font-size: 1.5rem;
 }
+
+.title-type {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.part-delete {
+  text-align: center;
+  border-left: 1px solid #E6E7E8;
+
+  a {
+    color: #872929;
+  }
+}
+
+.dinner-checkbox {
+  float: left;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  label{
+    color: #fff;
+  }
+}
