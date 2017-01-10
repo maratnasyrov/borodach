@@ -176,7 +176,9 @@ class RecordsController < ApplicationController
   end
 
   def create_finances(master, record, price, service_id, service_type)
-    if record.payment_method.eql?("card")
+    finance_day = FinanceDay.all.find_by(day_id: day.id)
+
+    if record.payment_method.eql?("Card")
       payment_method = true
     else
       payment_method = false
@@ -185,15 +187,17 @@ class RecordsController < ApplicationController
     type = true
 
     finance = Finance.create(
-      masters_id: master.id,
-      days_id: day.id,
+      master_id: master.id,
+      day_id: day.id,
       price: price,
       finance_type: type,
       client_name: record.client_name,
       client_phone: record.client_phone,
       service_id: service_id,
       service_type: service_type,
-      cash_type: payment_method)
+      cash_type: payment_method,
+      finance_day_id: finance_day.id,
+      record_id: record.id)
     finance.save
   end
 

@@ -1,0 +1,15 @@
+= simple_form_for finance, html: { class: "service-form" } do |f|
+  = f.input :day_id, input_html: { value: day.id }, as: :hidden
+  = f.input :finance_day_id, input_html: { value: finance_day.id }, as: :hidden
+  .medium-12
+    = f.input :price, label: false, placeholder: "Сумма"
+  .medium-12
+    = f.input :service_id, collection: Cost.all, prompt: "Список только для расхода", label: false
+  .medium-12
+    = f.select :finance_type, ["Расход", "Приход"], selected: "Расход"
+  .medium-12
+    = f.select :cash_type, ["Наличные", "Безнал"], selected: "Наличные"
+  .medium-12
+    = f.text_area :comment, label: false, placeholder: "Комментарий", as: :string
+  .medium-12.btn
+    = f.button :submit, class: "btn-form"

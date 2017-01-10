@@ -1,21 +1,40 @@
 class FinancesController < ApplicationController
   expose(:finance)
+  expose(:day)
+  expose(:finance_day)
 
   def create
+    cash_params = params["finance"]["cash_type"]
+    finance_type_params = params["finance"]["finance_type"]
+
+    if cash_params.eql?("Наличные")
+      params["finance"]["cash_type"] = "false"
+    else
+      params["finance"]["cash_type"] = "true"
+    end
+
+    if finance_type_params.eql?("Приход")
+      params["finance"]["finance_type"] = "true"
+    else
+      params["finance"]["finance_type"] = "false"
+    end
+
     finance = Finance.create(finances_params)
-    finance.save
+    success = finance.save
+
+    day = Day.find_by id: finance.day_id
+    finance_day = FinanceDay.find_by id: finance.finance_day_id
+
+    redirect_to day_finance_day_path(day, finance_day) if success
   end
 
-  def show_current_finance_day
-    current_year = Date.today.year
-    current_month = Date::MONTHNAMES[Date.today.month]
-    current_day = Date.today.day
+  def destroy
+    day = Day.find_by id: finance.day_id
+    finance_day = FinanceDay.find_by id: finance.finance_day_id
 
-    year = Year.find_by number: current_year
-    month = Month.find_by name_of_the_month: current_month, year_id: year.id
-    day = Day.find_by number_of_the_day: current_day, month_id: month.id
+    success = finance.destroy
 
-    redirect_to day_finance_path(day)
+    redirect_to day_finance_day_path(day, finance_day) if success
   end
 
   private
@@ -29,6 +48,10 @@ class FinancesController < ApplicationController
       :client_phone,
       :service_id,
       :service_type,
-      :cash_type)
+      :cash_type,
+      :day_id,
+      :finance_day_id,
+      :finance_type,
+      :comment)
   end
 end

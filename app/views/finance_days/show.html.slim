@@ -1,0 +1,80 @@
+.add-finance-btn
+  button.button data-toggle="example-dropdown2" type="button"  +
+  #example-dropdown2.center.dropdown-pane.right data-dropdown="" 
+    = render "finances/form", day: day, finance_day: finance_day
+.row
+  h3 = day.decorate.show_all_consumption
+  h3 = day.decorate.show_all_coming
+  h3 = day.decorate.show_all_card_transaction
+
+  - day.work_days.all.each do |work_day|
+    .master-info.medium-10.columns = Master.find_by(id: work_day.master_id).decorate.master_info
+    .sum.medium-2.columns = work_day.decorate.show_work_day_price
+    table
+      thead.finances
+        tr
+          th.part Время записи
+          th.part Имя клиента
+          th.part Основание
+          th.part Расшифровка 
+          th.part Вид проводки
+          th.part Приход
+          th.part Время оформления
+        tbody
+        - work_day.records.all.each do |record|
+          - record.finances.all.each do |finance|
+            tr
+              td.part = record.decorate.show_time
+              td.part = finance.client_name
+              td.part
+                - if finance.service_type.eql?(true)
+                  | Услуга
+                - else
+                  | Продажа
+              td.part = finance.decorate.show_service_type
+              td.part
+                - if finance.cash_type.eql?(true)
+                  | Безнал
+                - else
+                  | Наличные
+              td.part = finance.price
+              td.part = finance.created_at
+  table
+      thead.finances
+        tr
+          th.part Расшифровка
+          th.part Приход
+          th.part Расход
+          th.part Вид проводки
+          th.part Время оформления
+          th.part Комментарий
+          th.part
+        tbody
+        - day.finances.all.each do |finance|
+          tr
+            - if finance.finance_type == false
+              td.part = Cost.find_by(id: finance.service_id).name
+              td.part
+              td.part = finance.price
+              td.part
+                - if finance.cash_type.eql?(true)
+                  | Безнал
+                - else
+                  | Наличные
+              td.part= finance.created_at
+              td.part = finance.comment
+              td.part-delete = link_to 'X',  finance_path(finance),  method: :delete, data: { confirm: 'Вы уверенны?' }
+            - elsif finance.finance_type == true && finance.record_id.nil?
+              td.part = Cost.find_by(id: finance.service_id).name
+              td.part= finance.price
+              td.part
+              td.part
+                - if finance.cash_type.eql?(true)
+                  | Безнал
+                - else
+                  | Наличные
+              td.part = finance.created_at
+              td.part = finance.comment
+              td.part-delete = link_to 'X',  finance_path(finance),  method: :delete, data: { confirm: 'Вы уверенны?' }
+            end
+        end

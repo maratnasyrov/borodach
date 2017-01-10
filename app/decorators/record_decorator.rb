@@ -39,4 +39,12 @@ class RecordDecorator < ApplicationDecorator
 
     "Price: #{price}"
   end
+
+  def show_time
+    if object.start_time.min == 0
+      "#{object.start_time.hour}:0#{object.start_time.min}"
+    else
+      "#{object.start_time.hour}:#{object.start_time.min}"
+    end
+  end
 end

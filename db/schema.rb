@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227103644) do
+ActiveRecord::Schema.define(version: 20170110010639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "costs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "days", force: :cascade do |t|
     t.integer "number_of_the_day", null: false
@@ -22,23 +28,27 @@ ActiveRecord::Schema.define(version: 20161227103644) do
   end
 
   create_table "finance_days", force: :cascade do |t|
+    t.integer  "day_id"
+    t.integer  "month_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "finances", force: :cascade do |t|
-    t.integer  "masters_id"
-    t.integer  "days_id"
-    t.boolean  "cash_type",    default: false, null: false
-    t.integer  "price",                        null: false
+    t.integer  "master_id"
+    t.integer  "day_id"
+    t.boolean  "cash_type",      default: false, null: false
+    t.integer  "price",                          null: false
     t.string   "comment"
     t.string   "client_name"
     t.string   "client_phone"
-    t.boolean  "service_type",                 null: false
-    t.integer  "service_id",                   null: false
-    t.boolean  "finance_type", default: false, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.boolean  "service_type"
+    t.integer  "service_id"
+    t.boolean  "finance_type",   default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "finance_day_id"
+    t.integer  "record_id"
   end
 
   create_table "masters", force: :cascade do |t|

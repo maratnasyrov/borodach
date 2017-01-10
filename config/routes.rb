@@ -42,8 +42,12 @@ Rails.application.routes.draw do
   end
 
   resources :days do
-    resources :finances
+    resources :finance_days
   end
+
+  resources :finances
+
+  resources :costs
 
   match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
   match 'closed_record/:id', to: 'records#closed_record', as: :closed_record, via: [:get, :post]
@@ -51,5 +55,5 @@ Rails.application.routes.draw do
   get 'fill_schedule', to: 'months#fill_schedule'
   
   get 'now', to: 'days#show_current_date'
-  get 'finance_now', to: 'finances#show_current_finance_day'
+  get 'finance_now', to: 'finance_days#show_current_finance_day'
 end

@@ -1,13 +1,11 @@
 class FinanceDecorator < ApplicationDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
+  def show_service_type
+    if object.service_type.eql?(true)
+      "#{Service.find_by(id: object.service_id).name}"
+    else
+      "#{Purchase.find_by(id: object.service_id).name}"
+    end
+  end
 end

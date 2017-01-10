@@ -1,0 +1,17 @@
+.row
+  center
+    .medium-6
+      = render 'new'
+      .row
+        table
+          thead.purchases
+            tr
+              th.part Name
+              th.part
+            tbody
+              - costs.each do |cost|
+                tr.cost
+                  td.part-name
+                    = link_to(cost.name, cost_path(cost))
+                  td.part-delete
+                    = link_to 'X',  cost_path(cost),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке!' }
