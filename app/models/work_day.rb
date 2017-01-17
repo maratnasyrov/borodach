@@ -16,15 +16,15 @@ class WorkDay < ActiveRecord::Base
         Record.create(
           client_name: "Обед",
           work_day_id: id,
-          start_time: time_start.change(hour: hour_start + 3),
-          end_time: time_start.change(hour: hour_start + 4),
+          start_time: time_start.change(hour: hour_start ),
+          end_time: time_start.change(hour: hour_start + 1),
           dinner: true
         )
       else
         Record.create(
           work_day_id: id,
-          start_time: time_start.change(hour: hour_start + 3),
-          end_time: time_start.change(hour: hour_start + 4)
+          start_time: time_start.change(hour: hour_start),
+          end_time: time_start.change(hour: hour_start + 1)
         )
       end
       hour_start += 1
