@@ -48,6 +48,7 @@ gem "fragments.js", github: "fs/fragments.js"
 group :staging, :production do
   gem "newrelic_rpm"
   gem "rails_stdout_logging"
+  gem 'rails_12factor'
 end
 
 group :test do
