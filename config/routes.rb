@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   root to: "pages#home"
 
+  resources :users
+  
   resources :years do
     resources :months
   end
@@ -56,4 +58,5 @@ Rails.application.routes.draw do
   
   get 'now', to: 'days#show_current_date'
   get 'finance_now', to: 'finance_days#show_current_finance_day'
+  get 'show_settings', to: 'application#show_settings'
 end

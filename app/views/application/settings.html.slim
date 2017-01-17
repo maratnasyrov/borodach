@@ -1,0 +1,15 @@
+.row
+  center
+    .medium-6
+      .form-title Все настройки
+      table
+        thead.purchases
+          tr
+            th.part Выберите настройку
+        tbody
+          tr.cost
+            td.part-name
+              = link_to("Добавить новую категорию расхода", costs_path)
+          tr.cost
+            td.part-name
+              = link_to("Настройки доступов и пользователей", users_path)

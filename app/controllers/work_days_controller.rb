@@ -20,7 +20,7 @@ class WorkDaysController < ApplicationController
     month = Month.find_by(id: day.month_id)
     year = Year.find_by(id: month.year_id)
 
-    finance_day= FinanceDay.create(days_id: day.id, months_id: month.id)
+    finance_day= FinanceDay.create(day_id: day.id, month_id: month.id)
     finance_day.save
 
     work_day.create_records if success

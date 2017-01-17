@@ -33,4 +33,8 @@ class DayDecorator < ApplicationDecorator
 
     "#{overall_card_transaction}"
   end
+
+  def show_total
+    show_all_coming.to_i - show_all_card_transaction.to_i - show_all_consumption.to_i
+  end
 end

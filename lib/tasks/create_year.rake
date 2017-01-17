@@ -2,6 +2,7 @@ namespace :sync do
   task create_calendar: [:environment] do
     def update_calendar
       Year.last.nil? ? create_year(Time.now.year) : create_year(Year.last.number + 1)
+      Cost.create(name: "Другое") if Cost.all.empty?
     end
 
     def create_year(year_number)

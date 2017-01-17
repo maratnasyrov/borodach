@@ -1,11 +1,47 @@
 .add-finance-btn
-  button.button data-toggle="example-dropdown2" type="button"  +
-  #example-dropdown2.center.dropdown-pane.right data-dropdown="" 
+  button.button data-toggle="finance-day-dropdown" type="button"  +
+  #finance-day-dropdown.center.dropdown-pane.right data-dropdown="" 
     = render "finances/form", day: day, finance_day: finance_day
+
 .row
-  h3 = day.decorate.show_all_consumption
-  h3 = day.decorate.show_all_coming
-  h3 = day.decorate.show_all_card_transaction
+  ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
+    .year = year_search.number
+    li.pagination-previous
+      = link_to day_finance_day_path(last_year.months.last.days.last, finance_day)
+        span.show-for-sr page
+    - Month.year_detect(month.year_id).each do |month_part|
+      - if  month.id == month_part.id
+        li.current-month
+          = link_to month_part.name_of_the_month, day_finance_day_path(month_part.days.first, finance_day)
+      - else
+        li
+          = link_to month_part.name_of_the_month, day_finance_day_path(month_part.days.first, finance_day)
+    li.pagination-next
+      = link_to day_finance_day_path(next_year.months.first.days.first, finance_day)
+        span.show-for-sr page
+  ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
+    - month.days.all.each do |day_part|
+      - if  day.id == day_part.id
+        li.current-day
+          = link_to day_part.number_of_the_day, day_finance_day_path(day_part, finance_day)
+      - else
+        li
+          = link_to day_part.number_of_the_day, day_finance_day_path(day_part, finance_day)
+
+.row
+  table
+    thead.finances
+      tr
+        td.part Приход
+        td.part Расход
+        td.part Безнал
+        td.part Наличные
+      tbody
+        tr
+          td.part = day.decorate.show_all_coming
+          td.part = day.decorate.show_all_consumption
+          td.part = day.decorate.show_all_card_transaction
+          td.part = day.decorate.show_total
 
   - day.work_days.all.each do |work_day|
     .master-info.medium-10.columns = Master.find_by(id: work_day.master_id).decorate.master_info
@@ -65,8 +101,12 @@
               td.part = finance.comment
               td.part-delete = link_to 'X',  finance_path(finance),  method: :delete, data: { confirm: 'Вы уверенны?' }
             - elsif finance.finance_type == true && finance.record_id.nil?
-              td.part = Cost.find_by(id: finance.service_id).name
-              td.part= finance.price
+              - if !Cost.find_by(id: finance.service_id).nil?
+                td.part = Cost.find_by(id: finance.service_id).name
+              - else
+                td.part
+              end
+              td.part = finance.price
               td.part
               td.part
                 - if finance.cash_type.eql?(true)

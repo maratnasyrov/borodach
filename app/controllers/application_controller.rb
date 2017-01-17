@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
 
   responders :flash
   respond_to :html
+
+  def show_settings
+    render "settings"
+  end
 end
