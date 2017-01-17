@@ -1,4 +1,4 @@
-namespace :sync do
+namespace :create_year do
   task create_calendar: [:environment] do
     def update_calendar
       Year.last.nil? ? create_year(Time.now.year) : create_year(Year.last.number + 1)
