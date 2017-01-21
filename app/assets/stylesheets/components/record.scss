@@ -107,3 +107,34 @@
   border-top: 1px dashed #cacaca;
   font-size: 0.9rem;
 }
+
+.btn-form-record {
+  padding: 16px;
+
+  .btn-save {
+    float: right;
+    font-size: 1rem;
+    padding: 12px 28px 12px 28px;
+    background-color: #0d8c3e;
+  }
+
+  .btn-clear {
+    float: left;
+    font-size: 1rem;
+    padding: 9px 35px 9px 35px;
+    background-color: #872929;
+    color: #fff;
+  }
+}
+
+.discount-label {
+  padding-left: 16px;
+
+  .discount-btn {
+    font-size: 0.9rem;
+    background-color: #499dfc;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    color: #fff;
+  }
+}

@@ -15,7 +15,7 @@ class RecordDecorator < ApplicationDecorator
   end
 
   def record_number
-    "Record number: #{object.id}"
+    "Номер записи: #{object.id}"
   end
 
   def record_services_price
