@@ -22,6 +22,18 @@
       - else
         li
           = link_to day_part.number_of_the_day, month_day_path(month, day_part)
+  - if !day.pre_records.empty?
+    ul.vertical.menu.pre-record data-accordion-menu="" 
+      li
+        a href="#"  Предварительные записи
+        ul.menu.vertical.nested
+          - day.pre_records.all.each do |pre_record|
+            = link_to 'x',  day_pre_record_path(Day.find_by(id: pre_record.day_id), pre_record),  method: :delete, data: { confirm: 'Вы уверены?' }, class: "delete-pre-record"
+            li
+              a href="#" = pre_record.decorate.info
+              ul.menu.vertical.nested
+                li.detailed-info
+                  = pre_record.decorate.detailed_info
   .columns
     .row
       - work_days.each do |work_day|

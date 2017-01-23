@@ -138,3 +138,31 @@
     color: #fff;
   }
 }
+
+.pre-record {
+  background-color: #fff;
+  position: absolute;
+  width: 260px;
+  right: 20px;
+  top: 105px;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
+
+  a {
+    color: #0d8c3e;
+    width: 244px;
+  }
+
+  li {
+    color: #6b6b6b;
+  }
+}
+
+.is-accordion-submenu-parent > a::after {
+  border-color: #0d8c3e transparent transparent;
+}
+
+.delete-pre-record {
+  text-align: right;
+  padding-right: 18px;
+  color: #872929 !important;
+}

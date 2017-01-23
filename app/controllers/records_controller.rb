@@ -6,6 +6,7 @@ class RecordsController < ApplicationController
   expose(:record_services) { record.record_services }
   expose(:record_purchases) { record.record_purchases }
   expose(:finance)
+  expose(:pre_record) { PreRecord.new() }
 
   def update
     price_params = params["record"]

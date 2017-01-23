@@ -47,6 +47,14 @@ Rails.application.routes.draw do
     resources :finance_days
   end
 
+  resources :days do
+    resources :pre_records
+  end
+
+  resources :records do
+    resources :pre_records
+  end
+
   resources :finances
 
   resources :costs
