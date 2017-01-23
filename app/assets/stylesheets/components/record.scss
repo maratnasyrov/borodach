@@ -157,6 +157,18 @@
   }
 }
 
+.btn-form-pre-record {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  background-color: #499dfc;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  color: #fff;
+  border: none;
+}
+
 .is-accordion-submenu-parent > a::after {
   border-color: #0d8c3e transparent transparent;
 }
@@ -165,4 +177,23 @@
   text-align: right;
   padding-right: 18px;
   color: #872929 !important;
+}
+
+.accordion-title:hover, .accordion-title:focus {
+  background-color: #499dfc;
+  color: #fff;
+}
+
+.accordion {
+  border: 1px solid #cacaca;
+  border-bottom: none;
+
+  .accordion-title {
+    font-size: 0.9rem;
+    padding: 0.9rem;
+  }
+
+  .accordion-item:last-child {
+    border-bottom: 1px solid #cacaca;
+  }
 }
