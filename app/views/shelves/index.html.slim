@@ -1,0 +1,23 @@
+  .row
+    center
+      .medium-7
+        = render 'new'
+        .row
+          table
+            thead.shelves
+              tr
+                th.part Наименование
+                th.part Количество (гр.)
+                th.part Количество (шт.)
+                th.part
+              tbody
+                - shelves.each do |shelf|
+                  tr.shelves
+                    td.part-name
+                      = link_to(shelf.name, shelf_path(shelf))
+                    td.part
+                      = shelf.bulk
+                    td.part
+                      = shelf.number
+                    td.part-delete
+                      = link_to 'X',  shelf_path(shelf),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке склада в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }

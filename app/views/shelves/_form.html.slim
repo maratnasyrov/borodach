@@ -1,0 +1,8 @@
+= simple_form_for shelf, html: { class: "shelf-form" } do |f|
+  .medium-12
+    .medium-8.columns
+      = f.input :purchase_id, collection: Purchase.all, selected: Purchase.all.first.name, label: false
+    .medium-4.columns 
+      = f.input :number, label: false, placeholder: "Количество"
+  .medium-12.btn
+    = f.button :submit, "Добавить товар", class: "btn-form"
