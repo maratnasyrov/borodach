@@ -46,6 +46,13 @@ div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" dat
                       = render "record_purchases/form", record: record
                     = render "record_purchases/record_purchases", record: record
               li.accordion-item data-accordion-item="" 
+                a id="record-label-shelf-#{record.id}" class="accordion-title" aria-controls="record-shelf-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Расходный материал
+                div id="accordion-shelf-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-shelf-#{record.id}" data-tab-content="" role="tabpanel" 
+                  - if RecordPolicy.new(record).status_added?
+                    - if RecordPolicy.new(record).status_closed?
+                      = render "record_shelves/form", record: record
+                    = render "record_shelves/record_shelves", record: record
+              li.accordion-item data-accordion-item="" 
                 a id="record-label-#{record.id}" class="accordion-title" aria-controls="record-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Предварительная запись
                 div id="accordion-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-#{record.id}" data-tab-content="" role="tabpanel" 
                   = render "pre_records/form", record: record, day: day

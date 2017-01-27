@@ -3,11 +3,11 @@
   table
     thead.purchases
       tr
-        th.part Name
-        th.part Number
-        th.part Bulk
-        th.part Initial Cost
-        th.part Price
+        th.part Наименование
+        th.part Кол-во (уп./шт.)
+        th.part Кол-во (гр./шт.)
+        th.part Оптовая цена
+        th.part Цена продажи
         th.part
       tbody
         - purchases.sort_by_name.each do |purchase|

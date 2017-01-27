@@ -1,0 +1,12 @@
+.row
+  div id="#{Record.find_by(id: record_shelf.record_id).id}-#{record_shelf.id}" class="service-part"
+    .medium-9.small-9.columns.part-name
+      = Shelf.find_by(id: record_shelf.shelf_id).name
+    .medium-2.small-2.columns.part-time
+      = record_shelf.number
+    .medium-1.small-1.columns.part-delete
+      = link_to 'X', [Record.find_by(id: record_shelf.record_id), record_shelf],
+        data: { remote: true, behavior: "fragments" },
+        method: :delete,
+        class: "delete-service",
+        id: "delete-#{Record.find_by(id: record_shelf.record_id).id}-#{record_shelf.id}"

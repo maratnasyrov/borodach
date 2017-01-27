@@ -7,17 +7,21 @@
             thead.shelves
               tr
                 th.part Наименование
-                th.part Количество (гр.)
-                th.part Количество (шт.)
+                th.part Кол-во (гр./шт.)
+                th.part Кол-во (шт./упак.)
                 th.part
               tbody
                 - shelves.each do |shelf|
                   tr.shelves
                     td.part-name
-                      = link_to(shelf.name, shelf_path(shelf))
-                    td.part
-                      = shelf.bulk
+                      = link_to(shelf.name, edit_shelf_path(shelf))
+                    - if shelf.bulk < 15
+                      td.part-bulk-min
+                        = shelf.bulk
+                    - else
+                      td.part-bulk
+                        = shelf.bulk
                     td.part
                       = shelf.number
                     td.part-delete
-                      = link_to 'X',  shelf_path(shelf),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке склада в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }
+                      = link_to 'X',  shelf_path(shelf),  method: :delete, data: { confirm: "Внимание! #{shelf.name} еще не закончился, осталось #{shelf.bulk} грамм. Удаление невозможно!" }

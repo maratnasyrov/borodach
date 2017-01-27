@@ -99,6 +99,7 @@ class RecordsController < ApplicationController
 
       purchases = record.record_purchases.all
       record_services = record.record_services.all
+      shelves = record.record_shelves.all
 
       if !record_services.empty?
         record_services.each do |record_service|
@@ -124,6 +125,15 @@ class RecordsController < ApplicationController
               seller: master.name
             )   
           end
+        end
+      end
+
+      if !shelves.empty?
+        shelves.each do |shelf|
+          shelf_flag = Shelf.all.find_by(id: shelf.shelf_id)
+          flag_number = shelf_flag.number
+
+          shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number) if shelf_flag.bulk > 0
         end
       end
 
@@ -165,12 +175,24 @@ class RecordsController < ApplicationController
           end
         end
 
+        if !record.record_shelves.all.empty?
+          record.record_shelves.all.each do |record_shef|
+            record_shef.update_attributes(record_id: record_find.id)
+          end
+        end
+
         record.update_attributes(clear_params)
       elsif record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
         record.update_attributes(params)
       end
     else
-      record.update_attributes(params)
+      success = record.update_attributes(params)
+
+      {"Daily moisturizing shampoo" => 10, "Полотенца" => 2, "Лезвия" => 1, "Воротнички" => 1}.each do |name, number|
+        sucess = shelf = Shelf.all.find_by name: name
+
+        RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number) if sucess
+      end
     end
 
     redirect_to month_day_path(month, day)

@@ -1,10 +1,10 @@
 .row
   div id="#{Record.find_by(id: record_purchase.record_id).id}-#{record_purchase.id}" class="purchase-part"
-    .medium-9.columns.part-name
+    .medium-9.small-9.columns.part-name
       = Purchase.find_by(id: record_purchase.purchase_id).name
-    .medium-2.columns.part-time
+    .medium-2.small-2.columns.part-time
       = Purchase.find_by(id: record_purchase.purchase_id).price
-    .medium-1.columns.part-delete
+    .medium-1.small-1.columns.part-delete
       = link_to 'X', [Record.find_by(id: record_purchase.record_id), record_purchase],
         data: { remote: true, behavior: "fragments" },
         method: :delete,

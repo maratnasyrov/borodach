@@ -1,10 +1,10 @@
 = simple_form_for service, html: { class: "service-form" } do |f|
   .medium-12
     .medium-9.columns
-      = f.input :name
+      = f.input :name, label: false, placeholder: "Наименование"
     .medium-2.columns
-      = f.input :price
+      = f.input :price, label: false, placeholder: "Цена"
     .medium-1.columns 
-      = f.input :time
+      = f.input :time, label: false, placeholder: "Время"
   .medium-12.btn
-    = f.button :submit, class: "btn-form"
+    = f.button :submit, "Добавить услугу", class: "btn-form"

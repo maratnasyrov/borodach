@@ -1,6 +1,6 @@
 class ShelvesController < ApplicationController
   expose(:shelves) { Shelf.all }
-  expose(:shelf)
+  expose(:shelf, attributes: :shelf_params)
 
   def create
     find_purchase = Purchase.all.find_by(id: shelf_params["purchase_id"].to_i)
@@ -24,6 +24,16 @@ class ShelvesController < ApplicationController
       end
 
       redirect_to shelves_path if succes_number_change
+    else
+      redirect_to shelves_path
+    end
+  end
+
+  def destroy
+    if shelf.bulk <= 0
+      success = shelf.destroy
+
+      redirect_to shelves_path if success
     else
       redirect_to shelves_path
     end

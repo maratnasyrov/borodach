@@ -55,6 +55,10 @@ Rails.application.routes.draw do
     resources :pre_records
   end
 
+  resources :records do
+    resources :record_shelves
+  end
+
   resources :finances
 
   resources :costs

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125074327) do
+ActiveRecord::Schema.define(version: 20170125144827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,14 @@ ActiveRecord::Schema.define(version: 20170125074327) do
     t.integer  "service_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "record_shelves", force: :cascade do |t|
+    t.integer  "record_id"
+    t.integer  "shelf_id"
+    t.integer  "number",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "records", force: :cascade do |t|

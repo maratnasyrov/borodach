@@ -1,12 +1,12 @@
 .row
   div id="#{Record.find_by(id: record_service.record_id).id}-#{record_service.id}" class="service-part"
-    .medium-7.columns.part-name
+    .medium-7.small-7.columns.part-name
       = Service.find_by(id: record_service.service_id).name
-    .medium-2.columns.part-time
+    .medium-2.small-2.columns.part-time
       = Service.find_by(id: record_service.service_id).time
-    .medium-2.columns.part-price
+    .medium-2.small-2.columns.part-price
       = Service.find_by(id: record_service.service_id).price
-    .medium-1.columns.part-delete
+    .medium-1.small-1.columns.part-delete
       = link_to 'X', [Record.find_by(id: record_service.record_id), record_service],
         data: { remote: true, behavior: "fragments" },
         method: :delete,

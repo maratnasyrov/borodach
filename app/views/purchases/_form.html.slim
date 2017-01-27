@@ -1,12 +1,12 @@
 = simple_form_for purchase, html: { class: "service-form" } do |f|
   .medium-12
     .medium-6.columns
-      = f.input :name
+      = f.input :name, label: false, placeholder: "Наименование"
     .medium-2.columns
-      = f.input :price
+      = f.input :price, label: false, placeholder: "Цена продажи"
     .medium-2.columns 
-      = f.input :initial_cost
+      = f.input :initial_cost, label: false, placeholder: "Оптовая цена"
     .medium-2.columns 
-      = f.input :bulk
+      = f.input :bulk, label: false, placeholder: "Кол-во (шт./гр.)"
   .medium-12.btn
-    = f.button :submit, class: "btn-form"
+    = f.button :submit, "Добавить товар", class: "btn-form"

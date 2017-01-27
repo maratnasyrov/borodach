@@ -7,9 +7,11 @@
         = active_link_to "Финансы", finance_now_path, active: :exclusive, wrap_tag: :li
         = active_link_to "Персонал", masters_path, active: :exclusive, wrap_tag: :li
         = active_link_to "Услуги", services_path, active: :exclusive, wrap_tag: :li
+        = active_link_to "Расходы", shelves_path, active: :exclusive, wrap_tag: :li
         = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li
       - elsif UserPolicy.new(current_user).booker?
         = active_link_to "Финансы", finance_now_path, active: :exclusive, wrap_tag: :li
+        = active_link_to "Расходы", shelves_path, active: :exclusive, wrap_tag: :li
         = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li
       - elsif UserPolicy.new(current_user).master?
         = active_link_to "Расписание", now_path, active: [['months', 'days'], ['show']], wrap_tag: :li
