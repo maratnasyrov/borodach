@@ -23,8 +23,10 @@ class RecordsController < ApplicationController
       update_time(record, record_params, month, day)
     elsif price.empty?
       update_time(record, record_params, month, day)
+    elsif check_price(record) == price.to_i
+      closed_record(record) 
     else
-      closed_record(record)
+      redirect_to month_day_path(month, day)
     end
   end
 
@@ -70,6 +72,7 @@ class RecordsController < ApplicationController
 
       purchases = record.record_purchases.all
       services = record.record_services.all
+      shelves = record.record_shelves.all
 
       if !purchases.empty?
         purchases.each do |purchase|
@@ -80,6 +83,12 @@ class RecordsController < ApplicationController
       if !services.empty?
         services.each do |service|
           service.destroy
+        end
+      end
+
+      if !shelves.empty?
+        shelves.each do |shelf|
+          shelf.destroy
         end
       end
 
@@ -143,6 +152,22 @@ class RecordsController < ApplicationController
     end
   end
 
+  def check_price(record)
+    price = 0
+
+    record.record_services.all.each do |record_service|
+      service = Service.all.find_by(id: record_service.service_id)
+      price += service.price
+    end
+
+    record.record_purchases.all.each do |record_purchase|
+      purchase = Purchase.all.find_by(id: record_purchase.purchase_id)
+      price += purchase.price
+    end
+
+    return price
+  end
+
   def update_records(record, start_time, end_time, params)
     if record.start_time.hour != start_time.to_i
       record_id = 0
@@ -191,7 +216,7 @@ class RecordsController < ApplicationController
       {"Daily moisturizing shampoo" => 10, "Полотенца" => 2, "Лезвия" => 1, "Воротнички" => 1}.each do |name, number|
         sucess = shelf = Shelf.all.find_by name: name
 
-        RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number) if sucess
+        RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number, day_id: day.id) if sucess
       end
     end
 

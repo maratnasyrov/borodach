@@ -1,5 +1,7 @@
 class RecordShelvesController < ApplicationController
   expose(:record)
+  expose(:work_day) { WorkDay.find_by id: record.work_day_id }
+  expose(:day) { Day.find_by id: work_day.day_id }
   
   expose(:record_shelves)
   expose(:record_shelf, attributes: :record_shelf_params)
@@ -26,6 +28,6 @@ class RecordShelvesController < ApplicationController
   end
 
   def record_shelf_params
-    params.require(:record_shelf).permit(:record_id, :shelf_id, :number).merge(record_id: record.id)
+    params.require(:record_shelf).permit(:record_id, :shelf_id, :number, :day_id).merge(record_id: record.id, day_id: day.id)
   end
 end

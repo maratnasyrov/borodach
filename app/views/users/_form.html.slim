@@ -1,14 +1,9 @@
 = simple_form_for user, html: { class: "service-form" }do |f|
   .medium-12
-    .medium-6.columns
-      = f.input :full_name, required: true, autofocus: true
-    .medium-6.columns
-      = f.input :email, required: true
-  .medium-12
-    .medium-6.columns
-      = f.input :password, required: true
-    .medium-6.columns
-      = f.input :password_confirmation, required: true
+    = f.input :full_name, required: true, autofocus: true, label: false, placeholder: "Фамилия Имя Отчество"
+    = f.input :email, required: true, label: false, placeholder: "Email"
+    = f.input :password, required: true, label: false, placeholder: "Пароль"
+    = f.input :password_confirmation, required: true, label: false, placeholder: "Подтверждение пароля"
   .medium-12
     = f.select :role, ["Администратор", "Мастер", "Бухгалтер склада", "Управляющий", "Директор"], required: true
   = f.button :submit, "Добавить нового пользователя", class: "btn-form"

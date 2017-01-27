@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170125144827) do
   create_table "record_shelves", force: :cascade do |t|
     t.integer  "record_id"
     t.integer  "shelf_id"
+    t.integer  "day_id"
     t.integer  "number",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
