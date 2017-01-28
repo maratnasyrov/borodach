@@ -32,7 +32,11 @@ class WorkDaysController < ApplicationController
     day = Day.find_by(id: work_day.day_id)
     month = Month.find_by(id: day.month_id)
 
-    success = work_day.destroy
-    redirect_to month_path(month) if success
+    if WorkDayPolicy.new(work_day).smth_records_added?
+      success = work_day.destroy
+      redirect_to month_path(month) if success
+    else
+      redirect_to month_path(month)
+    end
   end
 end

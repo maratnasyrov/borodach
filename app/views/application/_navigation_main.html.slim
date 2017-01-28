@@ -15,6 +15,7 @@
         = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li
       - elsif UserPolicy.new(current_user).master?
         = active_link_to "Расписание", now_path, active: [['months', 'days'], ['show']], wrap_tag: :li
+        = active_link_to "График", fill_schedule_path, active: [['months'], ['show']], wrap_tag: :li
       end
       - if UserPolicy.new(current_user).superadmin?
         = active_link_to "Настройки", show_settings_path, active: :exclusive, wrap_tag: :li

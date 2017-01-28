@@ -22,7 +22,8 @@
       - else
         li
           = link_to day_part.number_of_the_day, month_day_path(month, day_part)
-  - if !day.pre_records.empty?
+          
+  - if !day.pre_records.empty? && UserPolicy.new(current_user).all_rights?
     ul.vertical.menu.pre-record data-accordion-menu="" 
       li
         a href="#"  Предварительные записи
@@ -37,8 +38,9 @@
   .columns
     .row
       - work_days.each do |work_day|
-        .records
-          .large-4.medium-4.columns.work-day-info
-            .master-info = day.find_master(work_day.master_id)
-            - work_day.records.all_records.each do |record|
-              = render "records/form", work_day: work_day, record: record
+        - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).all_rights?
+          .records
+            .large-4.medium-4.columns.work-day-info
+                .master-info = day.find_master(work_day.master_id)
+                - work_day.records.all_records.each do |record|
+                  = render "records/form", work_day: work_day, record: record

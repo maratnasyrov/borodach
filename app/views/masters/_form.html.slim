@@ -1,4 +1,19 @@
 = simple_form_for master, html: { class: "master-form" } do |f|
-  = f.input :name, label: false, placeholder: "Имя"
-  = f.input :last_name, label: false, placeholder: "Фамилия"
-  = f.button :submit
+  .medium-6.columns
+    = f.label "ФИО и телефон"
+    = f.input :name, label: false, placeholder: "Имя"
+    = f.input :last_name, label: false, placeholder: "Фамилия"
+    = f.input :phone, label: false, placeholder: "Телефон"
+  .medium-6.columns
+    = f.input :birthday, label: "День рождения", placeholder: "Дата рождения", start_year: 1980, end_year: 2007
+  .medium-12
+    .medium-6.columns
+      = f.text_area :about_master, label: false, placeholder: "О мастере"
+    - if UserPolicy.new(current_user).superadmin?
+      .medium-6.columns
+        = f.collection_select :user_id, users, :id, :full_name
+    .medium-6.columns
+      = f.input :master_active, label: "Мастер активен"
+      = f.input :online_record, label: "Онлайн записи"
+  center
+    = f.button :submit, "Сохранить"

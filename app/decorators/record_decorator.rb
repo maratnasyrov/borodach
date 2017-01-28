@@ -1,15 +1,15 @@
 class RecordDecorator < ApplicationDecorator
   delegate_all
 
-  def client_info
+  def client_info(current_user)
     client_name_check = !object.client_name.eql?('') && !object.client_name.nil?
     client_phone_check = !object.client_phone.eql?('') && !object.client_phone.nil?
     
-    if client_phone_check && client_name_check
+    if client_phone_check && client_name_check && UserPolicy.new(current_user).all_rights?
       "#{object.client_name}, #{object.client_phone}"
     elsif client_name_check
       "#{object.client_name}"
-    elsif client_phone_check
+    elsif client_phone_check && UserPolicy.new(current_user).all_rights?
       "#{object.client_phone}"
     end
   end
