@@ -1,3 +1,3 @@
 .record-shelf data-fragment-id="record-shelf-#{record.id}"
   - record.record_shelves.all.each do |record_shelf|
-    = render 'record_shelves/record_shelf', record_shelf: record_shelf
+    = render 'record_shelves/record_shelf', record_shelf: record_shelf, record: record

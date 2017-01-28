@@ -1,4 +1,4 @@
 .record-service data-fragment-id="record-purchase-#{record.id}"
   - record.record_purchases.all.each do |record_purchase|
-    = render 'record_purchases/record_purchase', record_purchase: record_purchase
+    = render 'record_purchases/record_purchase', record_purchase: record_purchase, record: record
   .price = record.decorate.record_purchases_price

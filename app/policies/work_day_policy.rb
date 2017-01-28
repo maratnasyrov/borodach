@@ -9,7 +9,7 @@ class WorkDayPolicy
     bool = true
     
     work_day.records.all.each do |record|
-      if !record.client_added?
+      if !record.client_added? && !record.closed_record?
         bool = true
       else
         bool = false

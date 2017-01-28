@@ -44,7 +44,7 @@
   padding-right: 15px;
   margin-top: 5px; 
 
-  .part-name, .part-time, .part-price, .part-delete {
+  .part-name, .part-time, .part-price, .part-delete, .part-closed  {
     font-size: 0.9rem;
     padding: 3px;
     text-align: center;
@@ -54,8 +54,12 @@
     border-top: 1px solid #cacaca;
     border-bottom: 1px solid #cacaca;
   }
-  .part-delete {
+  .part-delete, .part-closed {
     border-right: 1px solid #cacaca;
+  }
+
+  .part-closed {
+    color: #0d8c3e;
   }
 }
 
