@@ -1,6 +1,9 @@
   .row
     center
       .medium-7
+        .row
+          .link-to-shelfs
+            = link_to "Посмотреть расходы по материалам за #{day.number_of_the_day} число", day_shelf_histories_path(day)
         = render 'new'
         .row
           table

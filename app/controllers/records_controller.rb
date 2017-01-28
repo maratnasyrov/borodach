@@ -142,7 +142,14 @@ class RecordsController < ApplicationController
           shelf_flag = Shelf.all.find_by(id: shelf.shelf_id)
           flag_number = shelf_flag.number
 
-          shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number) if shelf_flag.bulk > 0
+          success = shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number) if shelf_flag.bulk > 0
+
+          ShelfHistory.create(
+              shelf_id: shelf_flag.id,
+              number_changes: shelf.number,
+              day_id: day.id,
+              master_id: master.id
+            ) if success
         end
       end
 

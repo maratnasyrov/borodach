@@ -1,0 +1,40 @@
+.row
+  ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
+    .year = year_search.number
+    li.pagination-previous
+      = link_to day_shelf_histories_path(last_year.months.last.days.last)
+        span.show-for-sr page
+    - Month.year_detect(month.year_id).each do |month_part|
+      - if  month.id == month_part.id
+        li.current-month
+          = link_to month_part.name_of_the_month, day_shelf_histories_path(month_part.days.first)
+      - else
+        li
+          = link_to month_part.name_of_the_month, day_shelf_histories_path(month_part.days.first)
+    li.pagination-next
+      = link_to day_shelf_histories_path(next_year.months.first.days.first)
+        span.show-for-sr page
+  ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
+    - month.days.all.each do |day_part|
+      - if  day.id == day_part.id
+        li.current-day
+          = link_to day_part.number_of_the_day, day_shelf_histories_path(day_part)
+      - else
+        li
+          = link_to day_part.number_of_the_day, day_shelf_histories_path(day_part)
+
+.row
+  center
+    - work_days.each do |work_day|
+      .medium-4.columns
+        .master-info = Master.find_by(id: work_day.master_id).name
+        table
+          thead.shelves
+            tr
+              td.part Наименование
+              td.part Количество (гр./шт.)
+          tbody.shelves
+            - Master.find_by(id: work_day.master_id).decorate.show_shelf_history.each do |shelf_name, number_changes|
+              tr
+                td.part-name = shelf_name
+                td.part = number_changes

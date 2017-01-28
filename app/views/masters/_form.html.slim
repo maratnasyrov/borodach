@@ -1,4 +1,4 @@
 = simple_form_for master, html: { class: "master-form" } do |f|
-  = f.input :name
-  = f.input :last_name
+  = f.input :name, label: false, placeholder: "Имя"
+  = f.input :last_name, label: false, placeholder: "Фамилия"
   = f.button :submit

@@ -19,4 +19,7 @@
               td.part = link_to user.full_name, user_path(user)
               td.part = user.role
               td.part = link_to "Редактировать", edit_user_path(user)
-              td.part = link_to 'X',  user_path(user),  method: :delete, data: { confirm: "Вы действительно хотите удалить пользователя #{user.full_name}!" }
+              - if !UserPolicy.new(user).superadmin?
+                td.part = link_to 'X',  user_path(user),  method: :delete, data: { confirm: "Вы действительно хотите удалить пользователя #{user.full_name}!" }
+              - else
+                td.part

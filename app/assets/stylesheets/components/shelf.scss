@@ -13,9 +13,12 @@
 .shelves {
   .part-name {
     width: 100px;
+    text-align: left;
+    color: #6b6b6b;
   }
   .part {
     width: 30px;
+    color: #6b6b6b;
   }
 
   .part-bulk-min {
@@ -29,4 +32,12 @@
     text-align: center;
     color: #fff;
   }
+}
+
+.link-to-shelfs {
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 2px;
+  margin-top: 1px;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
 }

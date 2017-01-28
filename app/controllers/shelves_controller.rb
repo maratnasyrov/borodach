@@ -1,6 +1,9 @@
 class ShelvesController < ApplicationController
   expose(:shelves) { Shelf.all }
   expose(:shelf, attributes: :shelf_params)
+  expose(:year) { Year.find_by number: Date.today.year }
+  expose(:month) { Month.find_by name_of_the_month: Date::MONTHNAMES[Date.today.month], year_id: year.id }
+  expose(:day) { Day.find_by number_of_the_day: Date.today.mday, month_id: month.id  }
 
   def create
     find_purchase = Purchase.all.find_by(id: shelf_params["purchase_id"].to_i)
