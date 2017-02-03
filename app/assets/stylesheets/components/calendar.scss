@@ -1,3 +1,19 @@
+ul.accordion.months  {
+  a.accordion-title {
+    color: #6b6b6b;
+    font-size: 1rem;
+
+    &:hover, &:focus {
+      background-color: #6b6b6b;
+      color: #fff;
+    }
+  }
+
+  li.accordion-item {
+    border: none;
+  }
+}
+
 .month-calendar {
   padding: 0;
 }
@@ -55,21 +71,5 @@
         }
       }
     }
-  }
-}
-
-ul.accordion.months  {
-  a.accordion-title {
-    color: #6b6b6b;
-    font-size: 1rem;
-
-    &:hover, &:focus {
-      background-color: #6b6b6b;
-      color: #fff;
-    }
-  }
-
-  li.accordion-item {
-    border: none;
   }
 }
