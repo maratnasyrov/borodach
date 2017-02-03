@@ -1,10 +1,16 @@
 class RecordsController < ApplicationController
   expose(:work_day)
   expose(:record) 
+  expose(:record_previous) { Record.find_by id: record.id-1 }
+  expose(:record_next) { Record.find_by id: record.id+1 }
   expose(:day) { Day.find_by(id: work_day.day_id)  }
   expose(:month) { Month.find_by(id: day.month_id) }
   expose(:record_services) { record.record_services }
+  expose(:record_service) { RecordService.new() }
   expose(:record_purchases) { record.record_purchases }
+  expose(:record_purchase) { RecordPurchase.new() }
+  expose(:record_shelves) { record.record_purchases }
+  expose(:record_shelf) { RecordShelf.new() }
   expose(:finance)
   expose(:pre_record) { PreRecord.new() }
 
@@ -67,6 +73,9 @@ class RecordsController < ApplicationController
   end
 
   def clear_status(record, params, month, day)
+    work_day_flag = WorkDay.find_by(id: record.work_day_id)
+    user_policy = UserPolicy.new(current_user)
+
     if RecordPolicy.new(record).status_closed? 
       record.update_attributes(params)
 
@@ -92,14 +101,26 @@ class RecordsController < ApplicationController
         end
       end
 
-      redirect_to month_day_path(month, day)
+      if user_policy.all_rights?
+        redirect_to month_day_path(month, day)
+      elsif user_policy.master?
+        redirect_to work_day_record_path(work_day_flag, record)
+      end
     else
-      redirect_to month_day_path(month, day)
+      if user_policy.all_rights?
+        redirect_to month_day_path(month, day)
+      elsif user_policy.master?
+        redirect_to work_day_record_path(work_day_flag, record)
+      end
     end
   end
 
   def closed_status(record, parametrs, month, day)
-    if RecordPolicy.new(record).status_closed?
+    record_policy = RecordPolicy.new(record)
+    user_policy = UserPolicy.new(current_user)
+    work_day_flag = WorkDay.find_by(id: record.work_day_id)
+
+    if record_policy.status_closed?
       record.update_attributes(parametrs)
       record.update_attributes(closed_record: true)
 
@@ -153,9 +174,25 @@ class RecordsController < ApplicationController
         end
       end
 
-      redirect_to month_day_path(month, day)
+      if user_policy.all_rights?
+        redirect_to month_day_path(month, day)
+      elsif user_policy.master?
+        if !record_next.eql?(nil)
+          redirect_to work_day_record_path(work_day_flag, record_next)
+        else
+          redirect_to work_day_record_path(work_day_flag, record)
+        end
+      end
     else
-      redirect_to month_day_path(month, day)
+      if user_policy.all_rights?
+        redirect_to month_day_path(month, day)
+      elsif user_policy.master?
+        if !record_next.eql?(nil)
+          redirect_to work_day_record_path(work_day_flag, record_next)
+        else
+          redirect_to work_day_record_path(work_day_flag, record)
+        end
+      end
     end
   end
 
@@ -176,6 +213,10 @@ class RecordsController < ApplicationController
   end
 
   def update_records(record, start_time, end_time, params)
+    work_day_flag = WorkDay.find_by(id: record.work_day_id)
+    record_policy = RecordPolicy.new(record)
+    user_policy = UserPolicy.new(current_user)
+
     if record.start_time.hour != start_time.to_i
       record_id = 0
 
@@ -227,7 +268,11 @@ class RecordsController < ApplicationController
       end
     end
 
-    redirect_to month_day_path(month, day)
+    if user_policy.all_rights?
+      redirect_to month_day_path(month, day)
+    elsif user_policy.master?
+      redirect_to work_day_record_path(work_day_flag, record)
+    end
   end
 
   def create_finances(master, record, price, service_id, service_type)

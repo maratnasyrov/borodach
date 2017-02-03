@@ -1,0 +1,16 @@
+center
+  .row
+    .medium-5
+      .online-title Записаться к мастеру
+      ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+        - two_month.each do |month|
+          - if month.id == two_month.first.id
+            li.accordion-item.is-active data-accordion-item="" 
+              a id="current-month" class="accordion-title" aria-controls="current-month-label" aria-expanded="true" aria-selected="true" href="#" role="tab" = month.name_of_the_month
+              div id="current-month-label" class="accordion-content month-calendar" aria-hidden="false" aria-labelledby="current-month" data-tab-content="" role="tabpanel" style=("display: block;")
+                = render "days", month: month
+          -else
+            li.accordion-item data-accordion-item="" 
+              a id="next-month" class="accordion-title" aria-controls="next-month-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = month.name_of_the_month
+              div id="next-month-label" class="accordion-content month-calendar" aria-hidden="true" aria-labelledby="next-month" data-tab-content="" role="tabpanel" 
+                = render "days", month: month

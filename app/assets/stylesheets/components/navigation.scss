@@ -1,4 +1,6 @@
 .top-bar {
+  background-color: #fff;
+  
   @include breakpoint(small only) {
     &-menu {
       flex-direction: column;

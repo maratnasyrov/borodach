@@ -36,7 +36,7 @@
 
 .dinner {
   background-color: #872929 !important;
-  color: #fff;
+  color: #fff !important;
 }
 
 .closed-record {
@@ -195,5 +195,50 @@
 
   .accordion-item:last-child {
     border-bottom: 1px solid #cacaca;
+  }
+}
+
+.record-form {
+  background-color: #fff;
+  border: 1px solid #cacaca;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
+
+  .previous, .next {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    a { 
+      padding: 10px;
+      background-color: #2199e8;
+      border-radius: 20px;
+      color: #fff;
+
+      &:hover {
+        background-color: #1a679a;
+      }
+    }
+  }
+
+  .dinner-checkbox {
+    float: left;
+    position: absolute;
+    top: 65px;
+    left: -185px;
+  }
+
+  .dropdown-title {
+    padding: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: #6b6b6b;
+  }
+
+  .record-form-body {
+    padding: 20px; 
+
+    .accordion-title {
+      text-align: left;
+    }
   }
 }
