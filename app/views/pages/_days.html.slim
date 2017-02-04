@@ -12,30 +12,25 @@ table.calendar
     tr.week
       - month.decorate.first_week.each do |first_week_day|
         td.part-day-number
-          center
-            - if first_week_day != nil
-              .day = link_to first_week_day.number_of_the_day, "#", class: "day-link"
+          - if first_week_day != nil
+            .day = link_to first_week_day.number_of_the_day, "#", class: "day-link"
     tr.week
       - month.decorate.second_week.each do |second_week_day|
-        td.part-day-number
-          center 
-            - if second_week_day != nil
-              .day = link_to second_week_day.number_of_the_day, "#", class: "day-link"
+        td.part-day-number 
+          - if second_week_day != nil
+            .day = link_to second_week_day.number_of_the_day, "#", class: "day-link"
     tr.week
       - month.decorate.third_week.each do |third_week_day|
-        td.part-day-number
-          center 
-            - if third_week_day != nil
-              .day = link_to third_week_day.number_of_the_day, "#", class: "day-link"
+        td.part-day-number 
+          - if third_week_day != nil
+            .day = link_to third_week_day.number_of_the_day, "#", class: "day-link"
     tr.week
       - month.decorate.fourth_week.each do |fourth_week_day|
         td.part-day-number 
-          center
-            - if fourth_week_day != nil
-              .day = link_to fourth_week_day.number_of_the_day, "#", class: "day-link"
+          - if fourth_week_day != nil
+            .day = link_to fourth_week_day.number_of_the_day, "#", class: "day-link"
     tr.week
       - month.decorate.fifth_week.each do |fifth_week_day|
-        td.part-day-number
-          center 
-            - if fifth_week_day != nil
-              .day = link_to fifth_week_day.number_of_the_day, "#", class: "day-link"
+        td.part-day-number 
+          - if fifth_week_day != nil
+            .day = link_to fifth_week_day.number_of_the_day, "#", class: "day-link"
