@@ -1,4 +1,6 @@
 class WorkDaysController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
+
   expose(:work_days) {WorkDay.all}
   expose(:work_day)
 

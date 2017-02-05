@@ -15,11 +15,15 @@
         = record.start_time.strftime( "%H:%M" )
       .minute
         = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
-    .client-info.large-11.medium-14.small-11.columns
+    .client-info.large-9.medium-9.small-9.columns
       = record.decorate.client_info(current_user)
+    .online-status.large-2.medium-1.small-1.columns 
+      - if record.online.eql?(true)
+        span.badge.success ✔
 
   div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown=""
-    div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.record_number
+    div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}"
+      = record.decorate.record_number
     = simple_form_for [work_day, record] do |f|
       .row
         .form-input

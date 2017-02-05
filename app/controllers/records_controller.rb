@@ -1,4 +1,6 @@
 class RecordsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:edit, :update, :status_online]
+
   expose(:work_day)
   expose(:record) 
   expose(:record_previous) { Record.find_by id: record.id-1 }
@@ -48,6 +50,12 @@ class RecordsController < ApplicationController
     day_flag = find_day(record)
 
     closed_status(record, record_params, month_flag, day_flag)
+  end
+
+  def status_online
+    record.update_attributes(status_online_params)
+
+    redirect_to success_path
   end
 
   private
@@ -268,7 +276,9 @@ class RecordsController < ApplicationController
       end
     end
 
-    if user_policy.all_rights?
+    if current_user.eql?(nil)
+      redirect_to edit_work_day_record_path(work_day, record)
+    elsif user_policy.all_rights?
       redirect_to month_day_path(month, day)
     elsif user_policy.master?
       redirect_to work_day_record_path(work_day_flag, record)
@@ -311,6 +321,12 @@ class RecordsController < ApplicationController
     record.update_attributes(price_params(price))
   end
 
+  def status_online_params
+    {
+      online: true
+    }
+  end
+
   def dinner_params(bool)
     if bool
       {
@@ -350,6 +366,7 @@ class RecordsController < ApplicationController
       :discount,
       :price,
       :dinner,
+      :online,
       :closed_record).merge(work_day_id: work_day.id)
   end
 

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :success_online]
 
   expose(:masters) { Master.all }
 
@@ -9,4 +9,8 @@ class PagesController < ApplicationController
 
   expose(:two_month) { [current_month, next_month] }
   expose(:masters) { Master.all }
+
+  def success_online
+    render "success_online"
+  end
 end

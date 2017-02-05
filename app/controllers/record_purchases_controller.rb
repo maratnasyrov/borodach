@@ -1,4 +1,6 @@
 class RecordPurchasesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:destroy, :create]
+
   expose(:record)
   
   expose(:record_purchases)

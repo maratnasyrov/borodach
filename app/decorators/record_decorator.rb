@@ -47,4 +47,12 @@ class RecordDecorator < ApplicationDecorator
       "#{object.start_time.hour}:#{object.start_time.min}"
     end
   end
+
+  def success_online_record
+    if object.client_name.eql?(nil)
+      "Вы успешно записались на стрижку в #{object.start_time.hour} часов. Выберите ниже нужную услугу, так же вы можете выбрать покупку."
+    else
+      "#{object.client_name.capitalize}, вы успешно записались на стрижку в #{object.start_time.hour} часов. Выберите ниже нужную вам услугу, так же вы можете выбрать покупку."
+    end
+  end
 end

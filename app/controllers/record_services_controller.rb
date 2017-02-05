@@ -1,4 +1,6 @@
 class RecordServicesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create, :destroy]
+
   expose(:record)
   
   expose(:record_services)
