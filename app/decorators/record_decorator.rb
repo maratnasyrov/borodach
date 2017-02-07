@@ -55,4 +55,7 @@ class RecordDecorator < ApplicationDecorator
       "#{object.client_name.capitalize}, вы успешно записались на стрижку в #{object.start_time.hour} часов. Выберите ниже нужную вам услугу, так же вы можете выбрать покупку."
     end
   end
+
+  def advices
+  end
 end

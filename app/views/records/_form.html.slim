@@ -40,6 +40,7 @@
           .medium-6.columns
             label = f.input :client_name, label: false, placeholder: "Имя"
             = f.input :client_added, as: :hidden, input_html: { value: true }
+            = f.input :not_show, as: :hidden, input_html: { value: true }
             
           - if RecordPolicy.new(record).status_added?
             - if UserPolicy.new(current_user).all_rights?
@@ -57,7 +58,7 @@
                   div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")
                     - if RecordPolicy.new(record).status_added?
                       - if RecordPolicy.new(record).status_closed?
-                        = render "record_services/form", record: record
+                        = render "record_services/form", record: record, class_name: "", button_name: "Добавить услугу"
                       = render "record_services/record_services", record: record
                 li.accordion-item data-accordion-item="" 
                   a id="record-label-purchase-#{record.id}" class="accordion-title" aria-controls="record-purchase-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Покупки:

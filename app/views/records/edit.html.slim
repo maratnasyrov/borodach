@@ -1,54 +1,62 @@
-- if record.online != true
+- if record.online != true && record.not_show == false
   .row
     center
       .medium-6
         .record-form
-          div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.record_number
+          div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.advices
           .time-start 
             | Выбранное время: 
             = record.decorate.show_time
           .master 
             | Мастер: 
             = Master.find_by(id: work_day.master_id).decorate.master_info
-          .record-form-body
-            = simple_form_for [work_day, record] do |f|
-              .row
-                .form-input
-                  - if RecordPolicy.new(record).status_closed?
-                    .time
-                      center
-                        .medium-6.columns
-                          .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
-                  .medium-6.columns
-                    label = f.input :client_name, label: false, placeholder: "Имя"
-                  .medium-6.columns
-                    label = f.input :client_phone, label: false, placeholder: "Телефон"
-                    = f.input :client_added, as: :hidden, input_html: { value: true }
-                  - if RecordPolicy.new(record).status_added?
-                    .medium-12.columns
-                      .confirm-title 
-                        = record.decorate.success_online_record
-                      ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
-                        li.accordion-item.is-active data-accordion-item="" 
-                          a id="record-label-service-#{record.id}" class="accordion-title" aria-controls="record-service-#{record.id}" aria-expanded="true" aria-selected="true" href="#" role="tab"  Услуги:
-                          div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")
-                            .confirm Нажмите на кнопку "Добавить услугу", после чего выберите нужные услуги, далее нажмите на крестик в правом углу всплывающего окна. Все услуги автоматически добавятся к вашей записи. 
-                            = render "record_services/record_services", record: record
-                            - if RecordPolicy.new(record).status_closed?
-                              = render "record_services/form", record: record
-                        li.accordion-item data-accordion-item="" 
-                          a id="record-label-purchase-#{record.id}" class="accordion-title" aria-controls="record-purchase-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Покупки:
-                          div id="accordion-purchase-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-purchase-#{record.id}" data-tab-content="" role="tabpanel"
-                            .confirm Нажмите на кнопку "Добавить покупку", после чего выберите товар который хотите преобрести, далее нажмите на крестик в правом углу всплывающего окна. Все товары автоматически добавятся к вашей записи.
-                            = render "record_purchases/record_purchases", record: record
-                            - if RecordPolicy.new(record).status_closed?
-                              = render "record_purchases/form", record: record
-                  - if !RecordPolicy.new(record).status_added?
-                    .btn-form-record
-                      = f.button :submit, "Продолжить", class: "btn-save"
-                  - else
-                    .confirm-title Добавление услуг и покупок необязательно, вы можете смело <b> нажать на кнопку "Записаться"</b>. 
-                    = f.input :online, as: :hidden, input_html: { value: true }
-                    .btn-form-record.online-btn = link_to "Записаться", status_online_path, class: "btn-save"
+          - if RecordPolicy.new(record).status_added?
+            .medium-12
+              .confirm-title 
+                = record.decorate.success_online_record
+            .record-form-body
+              ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+                li.accordion-item.is-active data-accordion-item="" 
+                  a id="record-label-service-#{record.id}" class="accordion-title" aria-controls="record-service-#{record.id}" aria-expanded="true" aria-selected="true" href="#" role="tab"  Услуги:
+                  div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")
+                    = render "record_services/record_services", record: record
+                    - if RecordPolicy.new(record).status_closed?
+                      = render "record_services/form_online", record: record
+                      .medium-12.all-services
+                        = render "record_services/form", button_name: "Показать весь перечень услуг", class_name: "online_services", record: record
+                li.accordion-item data-accordion-item="" 
+                  a id="record-label-purchase-#{record.id}" class="accordion-title" aria-controls="record-purchase-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Покупки:
+                  div id="accordion-purchase-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-purchase-#{record.id}" data-tab-content="" role="tabpanel"
+                    .confirm Нажмите на кнопку "Добавить покупку", после чего выберите товар который хотите преобрести, далее нажмите на крестик в правом углу всплывающего окна. Все товары автоматически добавятся к вашей записи.
+                    = render "record_purchases/record_purchases", record: record
+                    - if RecordPolicy.new(record).status_closed?
+                      = render "record_purchases/form", record: record
+              = simple_form_for [work_day, record] do |f|
+                .confirm-title Добавление услуг и покупок необязательно, вы можете смело <b> нажать на кнопку "Записаться"</b>. 
+                = f.input :online, as: :hidden, input_html: { value: true }
+                .btn-form-record.online-btn = link_to "Записаться", status_online_path, class: "btn-save"
+          - else
+            .record-form-body
+              = simple_form_for [work_day, record] do |f|
+                .row
+                  .form-input
+                    - if RecordPolicy.new(record).status_closed?
+                      .time
+                        center
+                          .medium-6.columns
+                            .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
+                    - if !RecordPolicy.new(record).status_added?
+                      .medium-6.columns
+                        label = f.input :client_name, label: false, placeholder: "Имя"
+                      .medium-6.columns
+                        label = f.input :client_phone, label: false, placeholder: "Телефон"
+                        = f.input :client_added, as: :hidden, input_html: { value: true }
+                      .btn-form-record
+                        = f.button :submit, "Продолжить", class: "btn-save"
+                    - else
+                      .confirm-title Добавление услуг и покупок необязательно, вы можете смело <b> нажать на кнопку "Записаться"</b>. 
+                      = f.input :online, as: :hidden, input_html: { value: true }
+                      = f.input :not_show, as: :hidden, input_html: { value: true }
+                      .btn-form-record.online-btn = link_to "Записаться", status_online_path, class: "btn-save"
 - else
   = render "smth_went_wrong"

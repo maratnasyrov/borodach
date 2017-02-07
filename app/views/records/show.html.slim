@@ -49,7 +49,7 @@
                           - if RecordPolicy.new(record).status_added?
                             = render "record_services/record_services", record: record
                             - if RecordPolicy.new(record).status_closed?
-                              = render "record_services/form", record: record
+                              = render "record_services/form", record: record, class_name: "", button_name: "Добавить услугу"
                       li.accordion-item data-accordion-item="" 
                         a id="record-label-purchase-#{record.id}" class="accordion-title" aria-controls="record-purchase-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Покупки:
                         div id="accordion-purchase-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-purchase-#{record.id}" data-tab-content="" role="tabpanel" 

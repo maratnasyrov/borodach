@@ -1,10 +1,18 @@
 p
-  a data-open="modal-#{record.id}" class="title-type" Добавить услугу
-div id="modal-#{record.id}" class="reveal" data-reveal="" 
-  .modal-title Add service
-  = simple_form_for [record, record_service] do |f|
-  = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
-    = f.input :service_id, collection: Service.all, selected: Service.all.first
-    = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form"
+  a data-open="modal-services-#{record.id}" class="title-type #{class_name}" = button_name
+div id="modal-services-#{record.id}" class="reveal" data-reveal=""
+  .modal-title Выберите услугу:
+  .medium-9.small-9.columns.head-title Наименование
+  .medium-3.small-3.columns.head-title Цена
+  - Service.all.each do |service|
+    = simple_form_for [record, record_service] do |f|
+    = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+      .hidden = f.input :service_id, label: false, class: "qwer", input_html: { value: service.id }
+      .medium-9.small-9.columns
+        = f.submit service.name, id: "modal-#{record.id}", class: "btn-form table-form"
+      .medium-3.small-3.columns.price-form
+        = service.price
+        
+
   button.close-button aria-label=("Close modal") data-close="" type="button"  id="close-#{record.id}"
     span aria-hidden="true"  &times;

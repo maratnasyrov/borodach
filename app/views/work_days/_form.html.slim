@@ -1,3 +1,5 @@
 - work_day.records.all_records.each do |record|
   - if !RecordPolicy.new(record).status_added? && !record.dinner.eql?(true)
-    .time-online = link_to record.decorate.show_time, edit_work_day_record_path(work_day, record) 
+    .time-online = link_to record.decorate.show_time, edit_work_day_record_path(work_day, record)
+  - else
+    .time-online-disabled = record.decorate.show_time

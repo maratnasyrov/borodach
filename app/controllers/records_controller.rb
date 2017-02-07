@@ -323,19 +323,22 @@ class RecordsController < ApplicationController
 
   def status_online_params
     {
-      online: true
+      online: true,
+      not_show: true
     }
   end
 
   def dinner_params(bool)
     if bool
       {
-        dinner: true
+        dinner: true,
+        not_show: true
       }
     elsif !bool
       {
         dinner: false,
-        client_added: false
+        client_added: false,
+        not_show: false
       }
     end
   end
@@ -351,7 +354,9 @@ class RecordsController < ApplicationController
       client_name: nil,
       client_phone: nil,
       discount: nil,
-      client_added: false
+      client_added: false,
+      online: false,
+      not_show: false
     }
   end
 
@@ -367,6 +372,7 @@ class RecordsController < ApplicationController
       :price,
       :dinner,
       :online,
+      :not_show,
       :closed_record).merge(work_day_id: work_day.id)
   end
 

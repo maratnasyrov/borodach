@@ -1,0 +1,22 @@
+.row
+  .medium-12.custom-services
+    .medium-3.small-3.columns
+      = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+        .hidden = f.input :service_id, collection: Service.all.hair, selected: Service.hair.first, label: false
+        = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form hair-2"
+        = f.label "Стрижка", class: "online-label"
+    .medium-3.small-3.columns
+      = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+        .hidden = f.input :service_id, collection: Service.all.beard, selected: Service.beard.first, label: false
+        = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form beard"
+        = f.label "Оформление бороды", class: "online-label"
+    .medium-3.small-3.columns
+      = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+        .hidden = f.input :service_id, collection: Service.all.hair_beard, selected: Service.hair_beard.first, label: false
+        = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form hair-beard"
+        = f.label "Стрижка + борода", class: "online-label"
+    .medium-3.small-3.columns
+      = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
+        .hidden = f.input :service_id, collection: Service.all.hair_correction, selected: Service.hair_correction.first, label: false
+        = f.submit "Add service", id: "modal-#{record.id}", class: "btn-form hair"
+        = f.label "Коррекция стрижки", class: "online-label"

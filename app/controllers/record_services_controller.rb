@@ -1,10 +1,10 @@
-class RecordServicesController < ApplicationController
+  class RecordServicesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create, :destroy]
 
   expose(:record)
   
-  expose(:record_services)
-  expose(:record_service, attributes: :record_services_params)
+  expose(:record_services) { record.record_services  }
+  expose(:record_service, attributes: :record_services_params) 
 
   def create
     record_service = RecordService.create(record_services_params)
