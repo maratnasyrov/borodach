@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206153543) do
+ActiveRecord::Schema.define(version: 20170211132810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "costs", force: :cascade do |t|
     t.string   "name"
@@ -92,13 +98,14 @@ ActiveRecord::Schema.define(version: 20170206153543) do
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.integer  "price",        null: false
+    t.string   "name",                     null: false
+    t.integer  "price",                    null: false
     t.integer  "number"
     t.integer  "initial_cost"
-    t.integer  "bulk",         null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "bulk",                     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "brand_id",     default: 0
   end
 
   create_table "record_purchases", force: :cascade do |t|
@@ -165,8 +172,9 @@ ActiveRecord::Schema.define(version: 20170206153543) do
     t.integer  "number"
     t.integer  "bulk"
     t.integer  "purchase_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "brand_id",    default: 0
   end
 
   create_table "users", force: :cascade do |t|

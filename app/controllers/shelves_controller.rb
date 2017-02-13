@@ -12,6 +12,7 @@ class ShelvesController < ApplicationController
       flag_purchase_number = find_purchase.number
       params["shelf"]["name"] = find_purchase.name
       params["shelf"]["bulk"] = find_purchase.bulk * params["shelf"]["number"].to_i
+      params["shelf"]["brand_id"] = find_purchase.brand_id
 
       shelf = Shelf.create(shelf_params) if find_purchase
       success = shelf.save
@@ -45,6 +46,6 @@ class ShelvesController < ApplicationController
   private
 
   def shelf_params
-    params.require(:shelf).permit(:name, :bulk, :number, :purchase_id)
+    params.require(:shelf).permit(:name, :bulk, :number, :purchase_id, :brand_id)
   end
 end

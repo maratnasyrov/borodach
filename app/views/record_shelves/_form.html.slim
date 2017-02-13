@@ -1,11 +1,19 @@
 p
   a data-open="modal-shelf-#{record.id}" class="title-type" Добавить расходник
 div id="modal-shelf-#{record.id}" class="reveal" data-reveal="" 
-  .modal-title Добавить расходники
-  = simple_form_for [record, record_shelf] do |f|
-  = simple_form_for [record, record_shelf], data: { remote: true, behavior: "fragments" } do |f|
-    = f.input :shelf_id, collection: Shelf.all, selected: Shelf.all.first, label: false
-    = f.input :number, label: false, placeholder: "Количество"
-    = f.submit "Добавить расходник", id: "modal-#{record.id}", class: "btn-form"
+  .modal-title Добавить расходники:
+  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+    - Brand.all.each do |brand|
+      li.accordion-item data-accordion-item="" 
+        a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name
+        div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
+          - brand.shelves.all.each do |shelf|
+            .row
+              = simple_form_for [record, record_shelf], data: { remote: true, behavior: "fragments" } do |f|
+                .medium-9.small-9.columns
+                  .hidden = f.input :shelf_id, label: false, class: "qwer", input_html: { value: shelf.id }
+                  = f.submit shelf.name, id: "modal-#{record.id}", class: "btn-form table-form"
+                .medium-3.small-3.columns
+                  = f.input :number, label: false, class: "qwer", placeholder: "Количество"
   button.close-button aria-label=("Close modal") data-close="" type="button"  id="close-#{record.id}"
     span aria-hidden="true"  &times;

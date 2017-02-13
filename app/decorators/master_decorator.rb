@@ -5,10 +5,10 @@ class MasterDecorator < ApplicationDecorator
     "#{object.name} #{object.last_name}"
   end
 
-  def show_shelf_history
+  def show_shelf_history(day_id)
     history_hash = {}
 
-    object.shelf_histories.all.each do |shelf_history|
+    object.shelf_histories.find_day(day_id).each do |shelf_history|
       shelf_name = Shelf.find_by(id: shelf_history.shelf_id).name
       number_changes = shelf_history.number_changes
 

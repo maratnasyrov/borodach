@@ -34,7 +34,7 @@
               td.part Наименование
               td.part Количество (гр./шт.)
           tbody.shelves
-            - Master.find_by(id: work_day.master_id).decorate.show_shelf_history.each do |shelf_name, number_changes|
+            - Master.find_by(id: work_day.master_id).decorate.show_shelf_history(day.id).each do |shelf_name, number_changes|
               tr
                 td.part-name = shelf_name
                 td.part = number_changes

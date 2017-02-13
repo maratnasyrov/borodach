@@ -1,7 +1,7 @@
 = simple_form_for [purchase, purchase_history] do |f|
   .purchase-number
-    = f.input :seller
-    = f.input :price
-    = f.input :number_changes
+    = f.input :seller, label: false, placeholder: "Имя сотрудника"
+    = f.input :price, label: false, placeholder: "Оптовая цена"
+    = f.input :number_changes, label: false, placeholder: "Количество"
     .link
       = f.submit "✔", class: "link-number"

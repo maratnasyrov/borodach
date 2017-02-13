@@ -5,6 +5,7 @@ class RecordPurchasesController < ApplicationController
   
   expose(:record_purchases)
   expose(:record_purchase, attributes: :record_purchase_params)
+  expose(:brands) { Brand.all }
 
   def create
     record_purchase = RecordPurchase.create(record_purchase_params)

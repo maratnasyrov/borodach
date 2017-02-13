@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   expose(:purchases) { Purchase.all }
   expose(:purchase)
   expose(:purchase_history)
+  expose(:brands) { Brand.all }
 
   def create
     success = Purchase.create(purchases_params)
@@ -22,6 +23,6 @@ class PurchasesController < ApplicationController
   private
 
   def purchases_params
-    params.require(:purchase).permit(:name, :price, :number, :bulk, :initial_cost)
+    params.require(:purchase).permit(:name, :price, :number, :bulk, :initial_cost, :brand_id)
   end
 end

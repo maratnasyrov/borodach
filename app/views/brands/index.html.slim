@@ -1,0 +1,15 @@
+= render "form"
+.row
+  center
+    table.medium-6
+      thead.purchases
+        tr
+          th.part Наименование
+          th.part
+        tbody
+          - brands.each do |brand|
+            tr.brands
+              td.part-name
+                = brand.name
+              td.part-delete
+                = link_to 'X',  brand_path(brand),  method: :delete, data: { confirm: "Внимание! Удаление следует производить, только если вы не добавляли товар бренда #{brand.name}!" }

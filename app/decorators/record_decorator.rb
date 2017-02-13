@@ -26,7 +26,7 @@ class RecordDecorator < ApplicationDecorator
       price += service.price
     end
 
-    "Price: #{price}"
+    "Стоймость: #{price}"
   end
 
   def record_purchases_price
@@ -37,7 +37,7 @@ class RecordDecorator < ApplicationDecorator
       price += purchase.price
     end
 
-    "Price: #{price}"
+    "Стоймость: #{price}"
   end
 
   def show_time

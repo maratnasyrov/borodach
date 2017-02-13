@@ -1,10 +1,22 @@
 p
   a data-open="modal-purchase-#{record.id}" class="title-type" Добавить покупку
 div id="modal-purchase-#{record.id}" class="reveal" data-reveal="" 
-  .modal-title Add purchase
-  = simple_form_for [record, record_purchase] do |f|
-  = simple_form_for [record, record_purchase], data: { remote: true, behavior: "fragments" } do |f|
-    = f.input :purchase_id, collection: Purchase.all, selected: Purchase.all.first
-    = f.submit "Add purchase", id: "modal-#{record.id}", class: "btn-form"
+  .modal-title Выберите товар:
+  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+    - Brand.all.each do |brand|
+      li.accordion-item data-accordion-item="" 
+        a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name
+        div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
+          .medium-9.small-9.columns.head-title Наименование
+          .medium-3.small-3.columns.head-title Цена
+          - brand.purchases.all.each do |purchase|
+            .row
+              = simple_form_for [record, record_purchase], data: { remote: true, behavior: "fragments" } do |f|
+                .hidden = f.input :purchase_id, label: false, class: "qwer", input_html: { value: purchase.id }
+                .medium-9.small-9.columns
+                  = f.submit purchase.name, id: "modal-#{record.id}", class: "btn-form table-form"
+                .medium-3.small-3.columns.price-form
+                  = purchase.price
   button.close-button aria-label=("Close modal") data-close="" type="button"  id="close-#{record.id}"
     span aria-hidden="true"  &times;
+
