@@ -18,7 +18,7 @@
           = simple_form_for [work_day, record] do |f|
             .row
               .form-input
-                - if !RecordPolicy.new(record).status_added?
+                - if !RecordPolicy.new(record).status_added? && UserPolicy.new(current_user).all_rights?
                   .medium-12.dinner-checkbox 
                     = f.input :dinner, label: "Закрыть", input_html: { class: "custom checkbox" }
                 - if RecordPolicy.new(record).status_closed?

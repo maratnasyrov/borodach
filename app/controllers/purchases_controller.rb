@@ -23,6 +23,6 @@ class PurchasesController < ApplicationController
   private
 
   def purchases_params
-    params.require(:purchase).permit(:name, :price, :number, :bulk, :initial_cost, :brand_id)
+    params.require(:purchase).permit(:name, :price, :number, :bulk, :initial_cost, :brand_id, :not_for_sale)
   end
 end

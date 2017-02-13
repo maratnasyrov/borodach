@@ -9,7 +9,7 @@ div id="modal-purchase-#{record.id}" class="reveal" data-reveal=""
         div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
           .medium-9.small-9.columns.head-title Наименование
           .medium-3.small-3.columns.head-title Цена
-          - brand.purchases.all.each do |purchase|
+          - brand.purchases.for_sale.each do |purchase|
             .row
               = simple_form_for [record, record_purchase], data: { remote: true, behavior: "fragments" } do |f|
                 .hidden = f.input :purchase_id, label: false, class: "qwer", input_html: { value: purchase.id }

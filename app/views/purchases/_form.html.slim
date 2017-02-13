@@ -10,5 +10,9 @@
       = f.input :initial_cost, label: false, placeholder: "Оптовая цена"
     .medium-2.columns 
       = f.input :bulk, label: false, placeholder: "Кол-во (шт./гр.)"
+    .medium-12.columns
+      = f.input :not_for_sale, label: "Товар не для продажи"
+      
+
   .medium-12.btn
     = f.button :submit, "Добавить товар", class: "btn-form"
