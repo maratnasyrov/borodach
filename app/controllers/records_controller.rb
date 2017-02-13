@@ -269,7 +269,7 @@ class RecordsController < ApplicationController
     else
       success = record.update_attributes(params)
 
-      {"Daily moisturizing shampoo" => 10, "Daily moisturizing conditioner" => 10, "Полотенца" => 2, "Лезвия" => 0.5, "Воротнички" => 1}.each do |name, number|
+      {"Daily moisturizing shampoo" => 10, "Daily moisturizing conditioner" => 10, "Полотенца" => 2, "Лезвия" => 1, "Воротнички" => 1}.each do |name, number|
         sucess = shelf = Shelf.all.find_by name: name
 
         RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number, day_id: day.id) if sucess
