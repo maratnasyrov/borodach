@@ -1,15 +1,5 @@
-- if UserPolicy.new(current_user).master?
+- if UserPolicy.new(current_user).master? || RecordPolicy.new(record).status_added?
   = link_to work_day_record_path(work_day, record), class:"button record-info #{RecordPolicy.new(record).set_status_class}" do
-    .time.large-1.medium-1.small-1.columns
-      .hour
-        = record.start_time.strftime( "%H:%M" )
-      .minute
-        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
-    .client-info.large-11.medium-14.small-11.columns
-      = record.decorate.client_info(current_user)
-
-- elsif UserPolicy.new(current_user).all_rights?
-  button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
     .time.large-1.medium-1.small-1.columns
       .hour
         = record.start_time.strftime( "%H:%M" )
@@ -20,6 +10,16 @@
     .online-status.large-2.medium-1.small-1.columns 
       - if record.online.eql?(true)
         span.badge.success ✔
+
+- elsif UserPolicy.new(current_user).all_rights?
+  button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
+    .time.large-1.medium-1.small-1.columns
+      .hour
+        = record.start_time.strftime( "%H:%M" )
+      .minute
+        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
+    .client-info.large-9.medium-9.small-9.columns
+      = record.decorate.client_info(current_user)
 
   div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown=""
     div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}"
@@ -49,46 +49,6 @@
           - else
             .medium-6.columns
                 label = f.input :client_phone, label: false, placeholder: "Телефон"
-
-          - if RecordPolicy.new(record).status_added?
-            .medium-12.columns
-              ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
-                li.accordion-item.is-active data-accordion-item="" 
-                  a id="record-label-service-#{record.id}" class="accordion-title" aria-controls="record-service-#{record.id}" aria-expanded="true" aria-selected="true" href="#" role="tab"  Услуги:
-                  div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")
-                    - if RecordPolicy.new(record).status_added?
-                      - if RecordPolicy.new(record).status_closed?
-                        = render "record_services/form", record: record, class_name: "", button_name: "Добавить услугу"
-                      = render "record_services/record_services", record: record
-                li.accordion-item data-accordion-item="" 
-                  a id="record-label-purchase-#{record.id}" class="accordion-title" aria-controls="record-purchase-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Покупки:
-                  div id="accordion-purchase-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-purchase-#{record.id}" data-tab-content="" role="tabpanel" 
-                    - if RecordPolicy.new(record).status_added?
-                      - if RecordPolicy.new(record).status_closed?
-                        = render "record_purchases/form", record: record
-                      = render "record_purchases/record_purchases", record: record
-                li.accordion-item data-accordion-item="" 
-                  a id="record-label-shelf-#{record.id}" class="accordion-title" aria-controls="record-shelf-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Расходный материал
-                  div id="accordion-shelf-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-shelf-#{record.id}" data-tab-content="" role="tabpanel" 
-                    - if RecordPolicy.new(record).status_added?
-                      - if RecordPolicy.new(record).status_closed?
-                        = render "record_shelves/form", record: record
-                      = render "record_shelves/record_shelves", record: record
-                li.accordion-item data-accordion-item="" 
-                  a id="record-label-#{record.id}" class="accordion-title" aria-controls="record-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Предварительная запись
-                  div id="accordion-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-#{record.id}" data-tab-content="" role="tabpanel" 
-                    = render "pre_records/form", record: record, day: day
-
-          - if RecordPolicy.new(record).status_added?
-            .medium-6.columns
-              = f.input :price, input_html: { id: "price-#{record.id}" }, label: false, placeholder: "Общая стоимость"
-            .medium-6.columns
-              = f.select :payment_method,  ["Cash", "Card"]
-
-            /* .medium-12.discount-label
-              - if RecordPolicy.new(record).status_closed?
-                = link_to "Добавить скидку", '#', class: "discount-btn" */
-
           - if RecordPolicy.new(record).status_closed?
             .btn-form-record
               - if RecordPolicy.new(record).status_added?
