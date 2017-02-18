@@ -3,7 +3,7 @@
     .medium-6
       .record-form
         div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.record_number
-        .medium-12
+        .medium-12.small-12
           - if !record_previous.eql?(nil) && record_previous.work_day_id == record.work_day_id
             .medium-6.columns.previous
               = link_to "Предыдущая запись", work_day_record_path(work_day, record_previous)
@@ -69,14 +69,20 @@
                         div id="accordion-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-#{record.id}" data-tab-content="" role="tabpanel" 
                           = render "pre_records/form", record: record, day: day
 
-                - if RecordPolicy.new(record).status_added?
+                - if RecordPolicy.new(record).status_added? && RecordPolicy.new(record).status_closed?
                   .medium-6.columns
                     = f.input :price, input_html: { id: "price-#{record.id}" }, label: false, placeholder: "Общая стоимость"
                   .medium-6.columns
-                    = f.select :payment_method,  ["Cash", "Card"]
-                  /* .medium-12.discount-label
-                    - if RecordPolicy.new(record).status_closed?
-                      = link_to "Добавить скидку", '#', class: "discount-btn" */
+                    = f.select :payment_method,  ["Наличные", "Карта"]
+                - elsif !RecordPolicy.new(record).status_closed?
+                  .medium-12.columns
+                    .input-group
+                      span.input-group-label = record.payment_method
+                      = f.input :price, input_html: { id: "price-#{record.id}" }, label: false, placeholder: "Общая стоимость", disabled: true
+                      .input-group-button
+                        .btn-form-record-change-type
+                          = link_to "Изменить тип оплаты", change_payment_type_path(record), class: "btn-type-change"
+
                 - if RecordPolicy.new(record).status_closed?
                   .btn-form-record
                     - if RecordPolicy.new(record).status_added?

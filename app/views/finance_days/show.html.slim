@@ -32,10 +32,10 @@
   table
     thead.finances
       tr
-        td.part Приход
+        td.part Общая выручка
         td.part Расход
         td.part Безнал
-        td.part Наличные
+        td.part Наличных в кассе
       tbody
         tr
           td.part = day.decorate.show_all_coming
@@ -57,7 +57,7 @@
           th.part Приход
           th.part Время оформления
         tbody
-        - work_day.records.all.each do |record|
+        - work_day.records.all_records.each do |record|
           - record.finances.all.each do |finance|
             tr
               td.part = record.decorate.show_time
@@ -74,7 +74,7 @@
                 - else
                   | Наличные
               td.part = finance.price
-              td.part = finance.created_at
+              td.part = finance.created_at.strftime('%H:%M:%S %d-%m-%Y')
   table
       thead.finances
         tr

@@ -58,6 +58,20 @@ class RecordsController < ApplicationController
     redirect_to success_path
   end
 
+  def change_payment_type
+    record.payment_method.eql?("Карта") ? payment_method = "Наличные" : payment_method = "Карта"
+
+    record.update_attributes(payment_params(payment_method))
+
+    record.finances.all.each do |finance|
+      record.payment_method.eql?("Карта") ? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
+    end
+
+    work_day_flag = WorkDay.find_by id: record.work_day_id
+
+    redirect_to work_day_record_path(work_day_flag, record)
+  end
+
   private
 
   def dinner_update(record, params, month, day)
@@ -288,7 +302,7 @@ class RecordsController < ApplicationController
   def create_finances(master, record, price, service_id, service_type)
     finance_day = FinanceDay.all.find_by(day_id: day.id)
 
-    if record.payment_method.eql?("Card")
+    if record.payment_method.eql?("Карта")
       payment_method = true
     else
       payment_method = false
@@ -319,6 +333,12 @@ class RecordsController < ApplicationController
     end
 
     record.update_attributes(price_params(price))
+  end
+
+  def payment_params(payment_method)
+    {
+      payment_method: payment_method
+    }
   end
 
   def status_online_params

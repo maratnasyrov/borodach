@@ -15,16 +15,16 @@ class PreRecordsController < ApplicationController
 
     if !phone.empty?
       if after.eql?("3 недели")
-        create_pre_record(21)
+        create_pre_record(21, record)
       elsif after.eql?("2 недели")
-        create_pre_record(14)
+        create_pre_record(14, record)
       elsif after.eql?("1 неделя")
-        create_pre_record(7)
+        create_pre_record(7, record)
       elsif after.eql?("")
-        redirect_to "now_path_path"
+        respond_with work_day, record
       end
     else
-      redirect_to "now_path_path"
+      respond_with work_day, record
     end
   end
 
@@ -38,11 +38,11 @@ class PreRecordsController < ApplicationController
 
   private
 
-  def create_pre_record(number)
+  def create_pre_record(number, record)
     pre_record = PreRecord.create(pre_record_params(number))
     pre_record.save
 
-    redirect_to "now_path_path"
+    respond_with work_day, record
   end
 
   def pre_record_params(number)
