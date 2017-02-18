@@ -59,12 +59,12 @@ class RecordsController < ApplicationController
   end
 
   def change_payment_type
-    record.payment_method.eql?("Карта") ? payment_method = "Наличные" : payment_method = "Карта"
+    record.payment_method.eql?("Карта") || record.payment_method.eql?("Card") ? payment_method = "Наличные" : payment_method = "Карта"
 
     record.update_attributes(payment_params(payment_method))
 
     record.finances.all.each do |finance|
-      record.payment_method.eql?("Карта") ? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
+      record.payment_method.eql?("Карта") || record.payment_method.eql?("Card")? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
     end
 
     work_day_flag = WorkDay.find_by id: record.work_day_id
