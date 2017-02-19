@@ -91,6 +91,14 @@ class RecordsController < ApplicationController
       finance.destroy
     end
 
+    record.shelf_histories.all.each do |shelf_history|
+      shelf_flag = Shelf.find_by id: shelf_history.shelf_id
+
+      shelf_flag.update_attributes(bulk: shelf_flag.bulk + shelf_history.number_changes)
+
+      shelf_history.destroy
+    end
+
     redirect_to work_day_record_path(work_day_flag, record)
   end
 
@@ -208,6 +216,7 @@ class RecordsController < ApplicationController
           success = shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number) if shelf_flag.bulk > 0
 
           ShelfHistory.create(
+              record_id: record.id,
               shelf_id: shelf_flag.id,
               number_changes: shelf.number,
               day_id: day.id,

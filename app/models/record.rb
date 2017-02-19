@@ -5,6 +5,7 @@ class Record < ActiveRecord::Base
   has_many :record_shelves
   has_many :finances
   has_many :pre_records
+  has_many :shelf_histories
   
   scope :all_records, -> { order('start_time ASC') }
 end
