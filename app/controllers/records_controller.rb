@@ -64,7 +64,7 @@ class RecordsController < ApplicationController
     record.update_attributes(payment_params(payment_method))
 
     record.finances.all.each do |finance|
-      record.payment_method.eql?("Карта") || record.payment_method.eql?("Card")? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
+      record.payment_method.eql?("Карта") || record.payment_method.eql?("Card") ? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
     end
 
     work_day_flag = WorkDay.find_by id: record.work_day_id
@@ -72,7 +72,27 @@ class RecordsController < ApplicationController
     redirect_to work_day_record_path(work_day_flag, record)
   end
 
+  def open_record
+    work_day_flag = WorkDay.find_by id: record.work_day_id
+
+    if UserPolicy.new(current_user).superadmin?
+      record.update_attributes(open_params)
+
+      delete_finances_for_record(record, work_day_flag)
+    else
+      redirect_to work_day_record_path(work_day_flag, record)
+    end
+  end
+
   private
+
+  def delete_finances_for_record(record, work_day_flag)
+    record.finances.all.each do |finance|
+      finance.destroy
+    end
+
+    redirect_to work_day_record_path(work_day_flag, record)
+  end
 
   def dinner_update(record, params, month, day)
     if RecordPolicy.new(record).status_closed?
@@ -361,6 +381,12 @@ class RecordsController < ApplicationController
         not_show: false
       }
     end
+  end
+
+  def open_params
+    {
+      closed_record: false
+    }
   end
 
   def price_params(price)

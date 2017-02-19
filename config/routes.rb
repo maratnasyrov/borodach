@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   resources :brands
 
+  match 'open_record/:id', to: 'records#open_record', as: :open_record, via: [:get, :post]
   match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
   match 'closed_record/:id', to: 'records#closed_record', as: :closed_record, via: [:get, :post]
   match 'status_online/:id', to: 'records#status_online', as: :status_online, via: [:get, :post]

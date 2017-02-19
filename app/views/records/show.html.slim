@@ -68,6 +68,7 @@
                         a id="record-label-#{record.id}" class="accordion-title" aria-controls="record-#{record.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  Предварительная запись
                         div id="accordion-#{record.id}" class="accordion-content" aria-hidden="true" aria-labelledby="record-label-#{record.id}" data-tab-content="" role="tabpanel" 
                           = render "pre_records/form", record: record, day: day
+                  /*.full-cost-label = render "records/full_cost"*/
 
                 - if RecordPolicy.new(record).status_added? && RecordPolicy.new(record).status_closed?
                   .medium-6.columns
@@ -88,3 +89,5 @@
                     - if RecordPolicy.new(record).status_added?
                       = link_to "Очистить", record_clear_path(record), class: "btn-clear"
                     = f.button :submit, "Сохранить", class: "btn-save"
+          - if UserPolicy.new(current_user).superadmin? && !RecordPolicy.new(record).status_closed?               
+            = link_to "Открыть запись", open_record_path(record), class: "open-record"

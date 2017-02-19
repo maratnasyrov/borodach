@@ -1,4 +1,5 @@
 class ShelvesController < ApplicationController
+  expose(:brands) { Brand.all }
   expose(:shelves) { Shelf.all }
   expose(:shelf, attributes: :shelf_params)
   expose(:year) { Year.find_by number: Date.today.year }
