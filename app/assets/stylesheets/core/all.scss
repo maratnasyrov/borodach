@@ -4,13 +4,18 @@
 
 .top-bar {
   box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.2);
+  z-index: 10000;
   .menu {
-    background-color: #fff;
+    background-color: #24292e;
 
     li {
       a {
-        color: #6b6b6b;
-        border-right: 1px solid #E6E7E8;
+        color: rgba(255,255,255,0.75);
+        padding: 20px;
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }
@@ -23,3 +28,6 @@
   }
 }
 
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+  border-color: rgba(255,255,255,0.75) transparent transparent;
+}

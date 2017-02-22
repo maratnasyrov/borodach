@@ -47,9 +47,9 @@
                             .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
                     - if !RecordPolicy.new(record).status_added?
                       .medium-6.columns
-                        label = f.input :client_name, label: false, placeholder: "Имя"
+                        label = f.input :client_name, label: false, placeholder: "Ваше имя", required: true
                       .medium-6.columns
-                        label = f.input :client_phone, label: false, placeholder: "Телефон"
+                        label = f.input :client_phone, label: false, placeholder: "Ваш телефон", required: true
                         = f.input :client_added, as: :hidden, input_html: { value: true }
                       .btn-form-record
                         = f.button :submit, "Продолжить", class: "btn-save"

@@ -27,7 +27,8 @@
   center
     - work_days.each do |work_day|
       .medium-4.columns
-        .master-info = Master.find_by(id: work_day.master_id).name
+        .master-info 
+          b = Master.find_by(id: work_day.master_id).name
         table
           thead.shelves
             tr

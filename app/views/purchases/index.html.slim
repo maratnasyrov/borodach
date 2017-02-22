@@ -1,10 +1,10 @@
-= render 'new'
 .row
   ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
     - brands.each do |brand|
       li.accordion-item data-accordion-item="" 
         a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name
         div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
+          = render 'form', brand: brand
           table
             thead.purchases
               tr

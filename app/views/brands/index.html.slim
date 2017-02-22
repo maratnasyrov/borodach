@@ -1,15 +1,31 @@
 = render "form"
 .row
   center
-    table.medium-6
-      thead.purchases
-        tr
-          th.part Наименование
-          th.part
-        tbody
-          - brands.each do |brand|
-            tr.brands
-              td.part-name
-                = brand.name
-              td.part-delete
-                = link_to 'X',  brand_path(brand),  method: :delete, data: { confirm: "Внимание! Удаление следует производить, только если вы не добавляли товар бренда #{brand.name}!" }
+    .medium-6
+      table
+        thead.brands
+          tr
+            th.part Наименование
+            th.part
+            th.part
+          tbody
+            - brands.each do |brand|
+              tr.brands
+                td.part-name
+                  = brand.name
+                td.part
+                  button.button data-toggle="brand-#{brand.id}" type="button" class="add-category"  +
+                  div id="brand-#{brand.id}" class="dropdown-pane category-dropdown" data-dropdown="" data-hover-pane="true"
+                    .category-form
+                      = simple_form_for [brand, category] do |f|
+                        = f.input :name, label: false, placeholder: "Название категории"
+                        = f.input :not_for_sale, label: "Не для продажи"
+                        = f.submit "Добавить категорию брэнда", class: "btn-form"
+
+                td.part-delete
+                  = link_to 'X',  brand_path(brand),  method: :delete, data: { confirm: "Внимание! Удаление следует производить, только если вы не добавляли товар бренда #{brand.name}!" }
+              - brand.categories.all.each do |category|
+                tr.brands
+                  td.part-name-category = category.name
+                  td
+                  td.part-delete = link_to 'X',  brand_category_path(brand, category),  method: :delete, data: { confirm: "Внимание! Удаление следует производить, только если вы не добавляли товар категории '#{category.name}!'" }

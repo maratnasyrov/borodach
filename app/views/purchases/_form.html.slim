@@ -1,9 +1,9 @@
-= simple_form_for purchase, html: { class: "service-form" } do |f|
+= simple_form_for [brand, purchase], html: { class: "service-form" } do |f|
   .medium-12
     .medium-4.columns
       = f.input :name, label: false, placeholder: "Наименование"
     .medium-2.columns 
-      = f.input :brand_id, collection: Brand.all, label: false
+      = f.input :category_id, collection: brand.categories.all, label: false
     .medium-2.columns
       = f.input :price, label: false, placeholder: "Цена продажи"
     .medium-2.columns 

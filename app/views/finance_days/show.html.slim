@@ -44,7 +44,8 @@
           td.part = day.decorate.show_total
 
   - day.work_days.all.each do |work_day|
-    .master-info.medium-10.columns = Master.find_by(id: work_day.master_id).decorate.master_info
+    .master-info.medium-10.columns
+      b = Master.find_by(id: work_day.master_id).decorate.master_info
     .sum.medium-2.columns = work_day.decorate.show_work_day_price
     table
       thead.finances
@@ -75,6 +76,12 @@
                   | Наличные
               td.part = finance.price
               td.part = finance.created_at.strftime('%H:%M:%S %d-%m-%Y')
+  .title-cons
+    b
+      | Изменение кассы за 
+      = day.number_of_the_day
+      |  - 
+      = month.number
   table
       thead.finances
         tr
@@ -97,7 +104,7 @@
                   | Безнал
                 - else
                   | Наличные
-              td.part= finance.created_at
+              td.part= finance.created_at.strftime('%H:%M:%S %d-%m-%Y')
               td.part = finance.comment
               td.part-delete = link_to 'X',  finance_path(finance),  method: :delete, data: { confirm: 'Вы уверенны?' }
             - elsif finance.finance_type == true && finance.record_id.nil?
@@ -113,7 +120,7 @@
                   | Безнал
                 - else
                   | Наличные
-              td.part = finance.created_at
+              td.part = finance.created_at.strftime('%H:%M:%S %d-%m-%Y')
               td.part = finance.comment
               td.part-delete = link_to 'X',  finance_path(finance),  method: :delete, data: { confirm: 'Вы уверенны?' }
             end

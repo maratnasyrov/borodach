@@ -6,15 +6,15 @@
 }
 
 .array-of-the-date-month {
-  background-color: #fff;
+  background-color: #24292e;
   box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
-  border: 1px solid #E6E7E8;
+  margin-bottom: 0;
 
   li {
     padding-top: 5px;
     padding-bottom: 5px;
     a {
-      color:  #6b6b6b; 
+      color: rgba(255, 255, 255, 0.75);
     }
   }
 
@@ -24,6 +24,11 @@
       color: #fff;
     }
   }
+}
+
+.pagination a:hover, .pagination button:hover {
+  background-color: #24292e;
+  color: #fff;
 }
 
 .schedulle-table {
