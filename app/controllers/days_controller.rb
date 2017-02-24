@@ -33,6 +33,27 @@ class DaysController < ApplicationController
   expose(:shelf_histories) { day.shelf_histories.all }
   
   def show_current_date
+    day = search_current_date.first
+    month = search_current_date.second
+
+    redirect_to month_day_path(month, day)
+  end
+
+  def personal_shedule
+    day = search_current_date.first
+    month = search_current_date.second
+    year_search_flag =  Year.year_search(month.year_id).first
+
+    render "personal_shedule", locals: { day: day, month: month, year_search: year_search_flag, work_days: day.work_days.all}
+  end
+
+  private
+
+  def days_params
+    params.require(:day).permit(:number_of_the_day, :month_id)
+  end
+
+  def search_current_date
     current_year = Date.today.year
     current_month = Date::MONTHNAMES[Date.today.month]
     current_day = Date.today.day
@@ -41,12 +62,6 @@ class DaysController < ApplicationController
     month = Month.find_by name_of_the_month: current_month, year_id: year.id
     day = Day.find_by number_of_the_day: current_day, month_id: month.id
 
-    redirect_to month_day_path(month, day)
-  end
-
-  private
-
-  def days_params
-    params.require(:day).permit(:number_of_the_day, :month_id)
+    return day, month
   end
 end

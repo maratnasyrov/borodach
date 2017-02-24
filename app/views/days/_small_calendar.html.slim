@@ -1,0 +1,58 @@
+.calendar-small
+  .calendar-small-title 
+    = day.decorate.show_date
+  .calendar-small-days 
+    table.calendar
+      thead
+        tr
+          td.part Пн
+          td.part Вт
+          td.part Ср
+          td.part Чт
+          td.part Пт
+          td.part Сб
+          td.part Вс
+      tbody
+        tr.week
+          - month.decorate.first_week.each do |first_week_day|
+            td.part-day-number
+              - if first_week_day != nil
+                - if day.id == first_week_day.id
+                  .day = link_to first_week_day.number_of_the_day, month_day_path(month, first_week_day), class: "day-link current-day"
+                -else
+                  .day= link_to first_week_day.number_of_the_day, month_day_path(month, first_week_day), class: "day-link"
+        tr.week
+          - month.decorate.second_week.each do |second_week_day|
+            td.part-day-number 
+              - if second_week_day != nil
+                - if second_week_day.id == day.id
+                  .day = link_to second_week_day.number_of_the_day, month_day_path(month, second_week_day), class: "day-link current-day"
+                -else
+                  .day = link_to second_week_day.number_of_the_day, month_day_path(month, second_week_day), class: "day-link"
+        tr.week
+          - month.decorate.third_week.each do |third_week_day|
+            td.part-day-number 
+              - if third_week_day != nil
+                - if third_week_day.id== day.id
+                  .day = link_to third_week_day.number_of_the_day, month_day_path(month, third_week_day), class: "day-link current-day"
+                -else
+                  .day = link_to third_week_day.number_of_the_day, month_day_path(month, third_week_day), class: "day-link"
+        tr.week
+          - month.decorate.fourth_week.each do |fourth_week_day|
+            td.part-day-number 
+              - if fourth_week_day != nil
+                - if fourth_week_day.id == day.id
+                  .day = link_to fourth_week_day.number_of_the_day, month_day_path(month, fourth_week_day), class: "day-link current-day"
+                -else
+                  .day = link_to fourth_week_day.number_of_the_day, month_day_path(month, fourth_week_day), class: "day-link"
+        tr.week
+          - month.decorate.fifth_week.each do |fifth_week_day|
+            td.part-day-number 
+              - if fifth_week_day != nil
+                - if fifth_week_day.id == day.id
+                  .day = link_to fifth_week_day.number_of_the_day, month_day_path(month, fifth_week_day), class: "day-link current-day"
+                -else
+                  .day= link_to fifth_week_day.number_of_the_day, month_day_path(month, fifth_week_day), class: "day-link"
+
+  .calendar-next-month 
+    .btn-next v

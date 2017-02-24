@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   match 'change_payment_type/:id', to: 'records#change_payment_type', as: :change_payment_type, via: [:get, :post]
 
   get 'fill_schedule', to: 'months#fill_schedule'
+  get 'personal_shedule', to: 'days#personal_shedule'
 
   get 'success', to: 'pages#success_online'
   

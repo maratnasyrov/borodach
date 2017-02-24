@@ -1,5 +1,8 @@
 ul.top-bar-right.menu.dropdown(data-dropdown-menu)
   - if user_signed_in?
+    - if UserPolicy.new(current_user).superadmin?
+      = active_link_to "Персонал", masters_path, active: :exclusive, wrap_tag: :li
+      = active_link_to "Настройки", show_settings_path, active: :exclusive, wrap_tag: :li
     li
       a = current_user.full_name
       ul.menu

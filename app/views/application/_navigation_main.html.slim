@@ -1,22 +1,18 @@
 .top-bar-left
   ul.menu
     - if user_signed_in?
+      - if UserPolicy.new(current_user).director?
+        = active_link_to "Мое расписание", personal_shedule_path, wrap_tag: :li
       - if UserPolicy.new(current_user).all_rights?
-        = active_link_to "Расписание", now_path, active: [['months', 'days'], ['show']], wrap_tag: :li
-        = active_link_to "График", fill_schedule_path, active: [['months'], ['show']], wrap_tag: :li
-        = active_link_to "Финансы", finance_now_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Персонал", masters_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Услуги", services_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Расходы", shelves_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li
+        = active_link_to "Расписание", now_path, wrap_tag: :li
+        = active_link_to "График", fill_schedule_path, wrap_tag: :li
+        = active_link_to "Финансы", finance_now_path, wrap_tag: :li
+        = active_link_to "Расходы", shelves_path, wrap_tag: :li
+        = active_link_to "Склад", purchases_path, wrap_tag: :li
       - elsif UserPolicy.new(current_user).booker?
-        = active_link_to "Финансы", finance_now_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Расходы", shelves_path, active: :exclusive, wrap_tag: :li
-        = active_link_to "Склад", purchases_path, active: :exclusive, wrap_tag: :li
+        = active_link_to "Финансы", finance_now_path, wrap_tag: :li
+        = active_link_to "Расходы", shelves_path, wrap_tag: :li
+        = active_link_to "Склад", purchases_path, wrap_tag: :li
       - elsif UserPolicy.new(current_user).master?
-        = active_link_to "Расписание", now_path, active: [['months', 'days'], ['show']], wrap_tag: :li
-        = active_link_to "График", fill_schedule_path, active: [['months'], ['show']], wrap_tag: :li
-      end
-      - if UserPolicy.new(current_user).superadmin?
-        = active_link_to "Настройки", show_settings_path, active: :exclusive, wrap_tag: :li
-      end
+        = active_link_to "Расписание", now_path, wrap_tag: :li
+        = active_link_to "График", fill_schedule_path, wrap_tag: :li

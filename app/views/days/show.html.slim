@@ -1,27 +1,31 @@
 .row
-  ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
-    .year = year_search.number
-    li.pagination-previous
-      = link_to month_day_path(last_year.months.last, last_year.months.last.days.last)
-        span.show-for-sr page
-    - Month.year_detect(month.year_id).each do |month_part|
-      - if  month.id == month_part.id
-        li.current-month
-          = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
-      - else
-        li
-          = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
-    li.pagination-next
-      = link_to month_day_path(next_year.months.first, next_year.months.first.days.first)
-        span.show-for-sr page
-  ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
-    - month.days.each do |day_part|
-      - if  day.id == day_part.id
-        li.current-day
-          = link_to day_part.number_of_the_day, month_day_path(month, day_part)
-      - else
-        li
-          = link_to day_part.number_of_the_day, month_day_path(month, day_part)
+  .medium-12.small-12
+    .calendar-small
+      = render "small_calendar"
+    .calendar-big
+      ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
+        .year = year_search.number
+        li.pagination-previous
+          = link_to month_day_path(last_year.months.last, last_year.months.last.days.last)
+            span.show-for-sr page
+        - Month.year_detect(month.year_id).each do |month_part|
+          - if  month.id == month_part.id
+            li.current-month
+              = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
+          - else
+            li
+              = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
+        li.pagination-next
+          = link_to month_day_path(next_year.months.first, next_year.months.first.days.first)
+            span.show-for-sr page
+      ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
+        - month.days.each do |day_part|
+          - if  day.id == day_part.id
+            li.current-day
+              = link_to day_part.number_of_the_day, month_day_path(month, day_part)
+          - else
+            li
+              = link_to day_part.number_of_the_day, month_day_path(month, day_part)
           
   - if !day.pre_records.empty? && UserPolicy.new(current_user).all_rights?
     ul.vertical.menu.pre-record data-accordion-menu="" 
@@ -42,6 +46,6 @@
           .records
             .large-4.medium-4.columns.work-day-info
                 .master-info 
-                  b= day.find_master(work_day.master_id)
+                  b = day.find_master(work_day.master_id)
                 - work_day.records.all_records.each do |record|
                   = render "records/form", work_day: work_day, record: record

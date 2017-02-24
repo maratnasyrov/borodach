@@ -37,4 +37,8 @@ class DayDecorator < ApplicationDecorator
   def show_total
     show_all_coming.to_i - show_all_card_transaction.to_i - show_all_consumption.to_i
   end
+
+  def show_date
+    "#{object.number_of_the_day} #{Month.find_by(id: object.month_id).name_of_the_month}"
+  end
 end
