@@ -60,7 +60,7 @@
 
 .small-size, .very-small-size {
   .shedule-small-icon, .calendar-small-icon, .finance-small-icon, .money-small-icon, .purshases-small-icon, .personal-small-icon, .settings-small-icon, .exit-small-icon  {
-    padding: 5px;
+    padding: 2px;
     a {
       background-repeat: no-repeat;
       background-position: center;
@@ -73,7 +73,6 @@
 
   .shedule-small-icon {
     a {
-      margin-right: 20px;
       background-size: 40%;
       background-image: url("menu/fi-list.png");
     }
@@ -81,7 +80,6 @@
 
   .calendar-small-icon {
     a {
-      margin-right: 20px;
       background-size: 40%;
       background-image: url("menu/fi-calendar.png");
     }
@@ -89,7 +87,6 @@
 
   .finance-small-icon {
     a {
-      margin-right: 20px;
       background-size: 33%;
       background-image: url("menu/fi-dollar.png");
     }
@@ -97,7 +94,6 @@
 
   .money-small-icon {
     a {
-      margin-right: 20px;
       background-size: 37%;
       background-image: url("menu/fi-trash.png");
     }
@@ -105,7 +101,6 @@
 
   .purshases-small-icon {
     a {
-      margin-right: 20px;
       background-size: 45%;
       background-image: url("menu/fi-purch.png");
     }
@@ -113,22 +108,19 @@
 
   .personal-small-icon {
     a {
-      margin-right: 20px;
       background-size: 55%;
       background-image: url("menu/fi-torsos-all.png");
     }
   }
 
   .settings-small-icon {
-    a {
-      margin-right: 20px;  
+    a {  
       background-image: url("menu/fi-widget.png");
     }
   }
 
   .exit-small-icon {
-    a { 
-      margin-right: 20px; 
+    a {  
       background-image: url("menu/exit-small-icon.png");
     }
   }
