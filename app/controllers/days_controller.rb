@@ -9,6 +9,8 @@ class DaysController < ApplicationController
     end
   end
   expose(:month)
+  expose(:previous_month) { Month.find_by id: month.id - 1 }
+  expose(:next_month) { Month.find_by id: month.id + 1 }
 
   expose(:year_search) { Year.year_search(month.year_id).first }
 
@@ -42,9 +44,9 @@ class DaysController < ApplicationController
   def personal_shedule
     day = search_current_date.first
     month = search_current_date.second
-    year_search_flag =  Year.year_search(month.year_id).first
+    year_search=  Year.year_search(month.year_id).first
 
-    render "personal_shedule", locals: { day: day, month: month, year_search: year_search_flag, work_days: day.work_days.all}
+    render "personal_shedule", locals: { day: day, month: month, year_search: year_search, work_days: day.work_days.all }
   end
 
   private

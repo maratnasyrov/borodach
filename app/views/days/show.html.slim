@@ -42,7 +42,7 @@
   .columns
     .row
       - work_days.each do |work_day|
-        - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).all_rights?
+        - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).admin? || UserPolicy.new(current_user).superadmin?
           .records
             .large-4.medium-4.columns.work-day-info
                 .master-info 

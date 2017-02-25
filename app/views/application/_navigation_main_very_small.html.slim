@@ -1,0 +1,26 @@
+.top-bar
+  ul.menu.small-12
+    - if user_signed_in?
+      - if UserPolicy.new(current_user).all_rights?
+        - if UserPolicy.new(current_user).master? || UserPolicy.new(current_user).director?
+          = active_link_to "Мое расписание", now_path, wrap_tag: :li, class: "shedule-small-icon"
+        - else
+          = active_link_to "Расписание", now_path, wrap_tag: :li, class: "shedule-small-icon"
+        = active_link_to "График", fill_schedule_path, wrap_tag: :li, class: "calendar-small-icon"
+        = active_link_to "Финансы", finance_now_path, wrap_tag: :li, class: "finance-small-icon"
+        = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "money-small-icon"
+        = active_link_to "Склад", purchases_path, wrap_tag: :li, class: "purshases-small-icon"
+      - elsif UserPolicy.new(current_user).booker?
+        = active_link_to "Финансы", finance_now_path, wrap_tag: :li, class: "finance-small-icon"
+        = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "money-small-icon"
+        = active_link_to "Склад", purchases_path, wrap_tag: :li, class: "purshases-small-icon"
+      - elsif UserPolicy.new(current_user).master?
+        = active_link_to "Расписание", now_path, wrap_tag: :li, class: "shedule-small-icon"
+        = active_link_to "График", fill_schedule_path, wrap_tag: :li, class: "calendar-small-icon"
+      - if UserPolicy.new(current_user).superadmin?
+        = active_link_to "Персонал", masters_path, active: :exclusive, wrap_tag: :li, class: "personal-small-icon"
+        = active_link_to "Настройки", show_settings_path, active: :exclusive, wrap_tag: :li, class: "settings-small-icon"
+      = active_link_to "Выйти", destroy_user_session_path, active: :exclusive, wrap_tag: :li, class: "exit-small-icon"
+    - else
+      = image_tag("logo2.png", size: "50")
+      = active_link_to "Вход для сотрудников", new_user_session_path, active: :exclusive, wrap_tag: :li

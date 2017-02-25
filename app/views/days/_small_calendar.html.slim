@@ -1,4 +1,7 @@
 .calendar-small
+  center
+    .calendar-previous-month 
+      .btn-next =link_to "v", month_day_path(previous_month, previous_month.days.last), class: "move-up"
   .calendar-small-title 
     = day.decorate.show_date
   .calendar-small-days 
@@ -53,6 +56,6 @@
                   .day = link_to fifth_week_day.number_of_the_day, month_day_path(month, fifth_week_day), class: "day-link current-day"
                 -else
                   .day= link_to fifth_week_day.number_of_the_day, month_day_path(month, fifth_week_day), class: "day-link"
-
-  .calendar-next-month 
-    .btn-next v
+  center
+    .calendar-next-month
+      .btn-next =link_to "v", month_day_path(next_month, next_month.days.first), class: "move-down"

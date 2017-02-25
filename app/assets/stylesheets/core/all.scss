@@ -31,3 +31,145 @@
 .dropdown.menu > li.is-dropdown-submenu-parent > a::after {
   border-color: rgba(255,255,255,0.75) transparent transparent;
 }
+
+.move-up, .move-down {
+  background-repeat: no-repeat;
+  background-position: center;
+  color: transparent;
+  text-indent: -9999999px;
+  padding: 10px 15px 10px 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: 60%;
+
+  &:hover {
+    color: transparent;
+  }
+}
+
+.move-up {
+  background-image: url("move_icons/fi-arrow-up.svg");
+  background-color: #24292e !important;
+}
+
+.move-down {
+  background-image: url("move_icons/fi-arrow-down.svg");
+  background-color: #fff !important;
+}
+
+.small-size, .very-small-size {
+  .shedule-small-icon, .calendar-small-icon, .finance-small-icon, .money-small-icon, .purshases-small-icon, .personal-small-icon, .settings-small-icon, .exit-small-icon  {
+    padding: 5px;
+    a {
+      background-repeat: no-repeat;
+      background-position: center;
+      color: transparent;
+      text-indent: -9999999px;
+      border-radius: 50%;
+      background-size: 80%;
+    }
+  }
+
+  .shedule-small-icon {
+    a {
+      margin-right: 20px;
+      background-image: url("menu/fi-list.svg");
+    }
+  }
+
+  .calendar-small-icon {
+    a {
+      margin-right: 20px;
+      background-image: url("menu/fi-calendar.svg");
+    }
+  }
+
+  .finance-small-icon {
+    a {
+      margin-right: 20px;
+      background-image: url("menu/fi-dollar.svg");
+    }
+  }
+
+  .money-small-icon {
+    a {
+      margin-right: 20px;
+      background-image: url("menu/fi-trash.svg");
+    }
+  }
+
+  .purshases-small-icon {
+    a {
+      margin-right: 20px;
+      background-image: url("menu/fi-purch.svg");
+    }
+  }
+
+  .personal-small-icon {
+    a {
+      margin-right: 20px;  
+      background-image: url("menu/fi-torsos-all.svg");
+    }
+  }
+
+  .settings-small-icon {
+    a {
+      margin-right: 20px;  
+      background-image: url("menu/fi-widget.svg");
+    }
+  }
+
+  .exit-small-icon {
+    a { 
+      margin-right: 20px; 
+      background-image: url("menu/exit-small-icon.svg");
+    }
+  }
+}
+
+.menu .active a {
+  background-color: #24292e;
+}
+
+@media (max-width: 1100px) {
+  .big-size {
+    display: none;
+  }
+  .very-small-size {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .small-size {
+    display: none;
+  }
+  .very-small-size {
+    display: none;
+  }
+}
+
+@media (max-width: 641px) {
+  .shedule-small-icon, .calendar-small-icon, .finance-small-icon, .money-small-icon, .purshases-small-icon, .personal-small-icon, .settings-small-icon, .exit-small-icon  {
+    padding: 5px;
+    a {
+      background-size: 70% !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+
+@media (min-width:  320px) and (max-width: 640px) {
+  .small-size {
+    display: none;
+  }
+
+  .big-size {
+    display: none;
+  }
+
+  .very-small-size {
+    display: block;
+  }
+}

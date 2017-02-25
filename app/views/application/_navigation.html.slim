@@ -1,8 +1,12 @@
-.title-bar data-hide-for="medium" data-responsive-toggle="navigation_menu"
-  button.menu-icon data-toggle="" type="button"
-  title-bar-title Menu
+nav.top-bar.small-size
+  = image_tag("logo2.png", size: "50")
+  = render "navigation_main_small"
+  = render "navigation_user_small"
 
-nav.top-bar#navigation_menu
+nav.top-bar.big-size
   = render "navigation_main"
   = image_tag("logo2.png", size: "50")
   = render "navigation_user"
+
+nav.top-bar.very-small-size
+  = render "navigation_main_very_small"
