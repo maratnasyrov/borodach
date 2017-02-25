@@ -22,5 +22,5 @@
         = active_link_to "Настройки", show_settings_path, active: :exclusive, wrap_tag: :li, class: "settings-small-icon"
       = active_link_to "Выйти", destroy_user_session_path, active: :exclusive, wrap_tag: :li, class: "exit-small-icon"
     - else
-      = image_tag("logo2.png", size: "50")
+      = image_tag("logo2.png", size: "50", class: "logo")
       = active_link_to "Вход для сотрудников", new_user_session_path, active: :exclusive, wrap_tag: :li
