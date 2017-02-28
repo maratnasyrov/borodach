@@ -103,8 +103,9 @@ class MonthDecorator < ApplicationDecorator
   def second_sale(master)
     sum = 0
     first_part_of_the_week = object.days.first(15)
+    second_part_of_the_week = object.days.all - first_part_of_the_week
 
-    first_part_of_the_week.each do |day|
+    second_part_of_the_week.each do |day|
       day.work_days.masters_work_days(master).each do |work_day|
         sum += work_day.decorate.show_work_day_sale_price
       end
