@@ -132,6 +132,7 @@ class RecordsController < ApplicationController
       purchases = record.record_purchases.all
       services = record.record_services.all
       shelves = record.record_shelves.all
+      client = record.clients.first
 
       if !purchases.empty?
         purchases.each do |purchase|
@@ -155,6 +156,10 @@ class RecordsController < ApplicationController
         redirect_to month_day_path(month, day)
       elsif user_policy.master?
         redirect_to work_day_record_path(work_day_flag, record)
+      end
+
+      if !client.nil?
+        client.update_attributes(number: client.number - 1)
       end
     else
       if user_policy.all_rights?
@@ -180,6 +185,7 @@ class RecordsController < ApplicationController
       purchases = record.record_purchases.all
       record_services = record.record_services.all
       shelves = record.record_shelves.all
+      client = record.clients.all.first
 
       if !record_services.empty?
         record_services.each do |record_service|
@@ -222,6 +228,26 @@ class RecordsController < ApplicationController
               day_id: day.id,
               master_id: master.id
             ) if success
+        end
+      end
+
+      if !client.nil?
+        if client.number < 1
+          ClientHistory.create(
+            record_id: record.id,
+            master_id: master.id,
+            work_day_id: work_day.id,
+            day_id: day.id,
+            client_id: client.id,
+            new_client: true)
+        elsif client.number > 1
+          ClientHistory.create(
+            record_id: record.id,
+            master_id: master.id,
+            work_day_id: work_day.id,
+            day_id: day.id,
+            client_id: client.id,
+            new_client: false)
         end
       end
 
@@ -305,18 +331,26 @@ class RecordsController < ApplicationController
           end
         end
 
+        if !record.clients.first.nil?
+          record.clients.first.update_attributes(record_id: record_find.id)
+        end
+
         record.update_attributes(clear_params)
       elsif record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
         record.update_attributes(params)
       end
     else
-      success = record.update_attributes(params)
+      record.update_attributes(params)
 
       {"Daily moisturizing shampoo" => 10, "Daily moisturizing conditioner" => 10, "Полотенца" => 2, "Лезвия" => 1, "Воротнички" => 1}.each do |name, number|
-        sucess = shelf = Shelf.all.find_by name: name
+        success = shelf = Shelf.all.find_by name: name
 
-        RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number, day_id: day.id) if sucess
+        RecordShelf.create(shelf_id: shelf.id, record_id: record.id, number: number, day_id: day.id) if success
       end
+
+      master = Master.find_by id: work_day.master_id
+
+      add_client(master, record) if !record.client_phone.eql?("")
     end
 
     if current_user.eql?(nil)
@@ -352,6 +386,23 @@ class RecordsController < ApplicationController
       finance_day_id: finance_day.id,
       record_id: record.id)
     finance.save
+  end
+
+  def add_client(master, record)
+    client_found = Client.find_by phone: record.client_phone
+
+    if client_found.nil?
+      client_new = Client.create(
+        record_id: record.id,
+        master_id: master.id,
+        phone: record.client_phone,
+        name: record.client_name,
+        number: 0)
+
+      client_new.save
+    else
+      client_found.update_attributes(number: client_found.number + 1, record_id: record.id)
+    end
   end
 
   def price_time_update(record)

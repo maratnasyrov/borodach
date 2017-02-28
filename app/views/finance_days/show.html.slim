@@ -3,6 +3,8 @@
   #finance-day-dropdown.center.dropdown-pane.right data-dropdown="" 
     = render "finances/form", day: day, finance_day: finance_day
 
+= link_to "$", day_finance_days_path(day), class: "sallary-btn"
+
 .row
   ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
     .year = year_search.number

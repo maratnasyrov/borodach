@@ -1,0 +1,2 @@
+class ClientHistoriesController < ApplicationController
+end

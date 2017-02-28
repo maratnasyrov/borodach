@@ -45,7 +45,8 @@
         - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).admin? || UserPolicy.new(current_user).superadmin?
           .records
             .large-4.medium-4.columns.work-day-info
-                .master-info 
+                .master-info
                   b = day.find_master(work_day.master_id)
+                  .clients-info = work_day.decorate.client_statistic
                 - work_day.records.all_records.each do |record|
                   = render "records/form", work_day: work_day, record: record

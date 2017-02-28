@@ -59,3 +59,28 @@ table {
   color: #6b6b6b;
   font-size: 1.1rem;
 }
+
+.sallary-btn {
+  position: fixed;
+  color: #fff;
+  left: 30px;
+  top: 150px;
+  font-size: 2rem;
+  border-radius: 50%;
+  padding-left: 19px;
+  padding-top: 3px;
+  padding-right: 19px;
+  padding-bottom: 3px;
+  background-color: #0d8c3e;
+  box-shadow: 0 0px 24px 0 rgba(104, 104, 104, 0.5);
+
+  &:hover {
+    background-color: #1583cc;
+    color: #fff;
+  }
+
+  &:focus {
+    background-color: #1583cc;
+    color: #fff;
+  }
+}

@@ -17,6 +17,8 @@ class FinanceDaysController < ApplicationController
   expose(:days)
   expose(:day)
   expose(:month) { Month.find_by(id: day.month_id) }
+  expose(:first_part_of_the_week) { month.days.first(15) }
+  expose(:second_part_of_the_week) { month.days.all - first_part_of_the_week }
 
 
   def show_current_finance_day

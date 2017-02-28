@@ -3,6 +3,9 @@ class WorkDay < ActiveRecord::Base
   belongs_to :days
   belongs_to :finances
   has_many :records, dependent: :destroy
+  has_many :client_histories
+
+  scope :masters_work_days, -> (master) { where(master_id: master.id) }
 
   def create_records
     hour_start = 9

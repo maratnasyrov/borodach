@@ -31,12 +31,16 @@
   color: #fff;
 }
 
-.schedulle-table {
+.schedulle-table, .salary-table {
   border: 1px solid #E6E7E8;
   box-shadow: 0 1px 10px 0 rgba(104,104,104,.1);
 
   thead {
     color: #0d8c3e;
+
+    td {
+      text-align: center;
+    }
   }
     th {
       text-align: center;
@@ -46,6 +50,11 @@
     border: 1px solid #E6E7E8;
     min-width: 40px !important;
     color:  #6b6b6b; 
+    text-align: center;
+  }
+
+  .part-name {
+    color: #872929 !important;
   }
 
   .btn {
