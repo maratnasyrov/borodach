@@ -15,7 +15,7 @@ class DayDecorator < ApplicationDecorator
   def show_only_coming
     overall_consumption = 0
     object.finances.all.each do |finance|
-      if finance.finance_type == true
+      if finance.finance_type == true && finance.service_type.nil?
         overall_consumption += finance.price
       end
     end
