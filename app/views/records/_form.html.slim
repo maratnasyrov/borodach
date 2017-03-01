@@ -39,6 +39,7 @@
                 .medium-6.columns
                   = f.input :end_time, start_hour: record.start_time.hour + 1, end_hour: 20, hour_step: 1, minute_step: 15, label: "Окончание"
           .medium-6.columns
+            = f.error_notification
             label = f.input :client_name, label: false, placeholder: "Имя"
             = f.input :client_added, as: :hidden, input_html: { value: true }
             = f.input :not_show, as: :hidden, input_html: { value: true }

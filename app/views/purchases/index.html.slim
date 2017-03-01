@@ -1,10 +1,11 @@
 .row
-  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
     - brands.each do |brand|
       li.accordion-item data-accordion-item="" 
         a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name
         div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
           = render 'form', brand: brand
+          .category-title Неотсортированный товар
           table
             thead.purchases
               tr
@@ -14,20 +15,55 @@
                 th.part Оптовая цена
                 th.part Цена продажи
                 th.part
+                th.part
               tbody
                 - brand.purchases.sort_by_name.each do |purchase|
-                  tr.purchases
-                    td.part-name
-                      = link_to(purchase.name, purchase_path(purchase))
-                    td.part-purchases
-                      button.button data-toggle="purchase-#{purchase.id}" type="button"  = purchase.number
-                      div id="purchase-#{purchase.id}" class="dropdown-pane top purchase-dropdown" data-dropdown="" 
-                        = render "purchase_history/form", purchase: purchase
-                    td.part
-                      = purchase.bulk
-                    td.part
-                      = purchase.initial_cost
-                    td.part
-                      = purchase.price
-                    td.part-delete
-                      = link_to 'X',  purchase_path(purchase),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке финансов в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }
+                  - if purchase.category_id.nil?
+                    tr.purchases
+                      td.part-name
+                        = link_to(purchase.name, purchase_path(purchase))
+                      td.part-purchases
+                        button.button data-toggle="purchase-#{purchase.id}" type="button"  = purchase.number
+                        div id="purchase-#{purchase.id}" class="dropdown-pane top purchase-dropdown" data-dropdown="" 
+                          = render "purchase_history/form", purchase: purchase
+                      td.part
+                        = purchase.bulk
+                      td.part
+                        = purchase.initial_cost
+                      td.part
+                        = purchase.price
+                      td.part
+                        = link_to "Ред.", edit_brand_purchase_path(brand, purchase)
+                      td.part-delete
+                        = link_to 'X',  purchase_path(purchase),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке финансов в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }
+          table
+            thead.purchases
+              tr
+                th.part Наименование
+                th.part Кол-во (уп./шт.)
+                th.part Кол-во (гр./шт.)
+                th.part Оптовая цена
+                th.part Цена продажи
+                th.part
+                th.part
+              tbody
+                - brand.categories.all.each do |category|
+                  - category.purchases.sort_by_name.each do |purchase|
+                    .category-title = category.name
+                    tr.purchases
+                      td.part-name
+                        = link_to(purchase.name, purchase_path(purchase))
+                      td.part-purchases
+                        button.button data-toggle="purchase-#{purchase.id}" type="button"  = purchase.number
+                        div id="purchase-#{purchase.id}" class="dropdown-pane top purchase-dropdown" data-dropdown="" 
+                          = render "purchase_history/form", purchase: purchase
+                      td.part
+                        = purchase.bulk
+                      td.part
+                        = purchase.initial_cost
+                      td.part
+                        = purchase.price
+                      td.part
+                        = link_to "Ред.", edit_purchase_path(brand, purchase)
+                      td.part-delete
+                        = link_to 'X',  purchase_path(purchase),  method: :delete, data: { confirm: 'Внимание! Удаление данных может привести к несостыковке финансов в будущем! Рекомендуется довести склад по продукту до нуля и удалить его в конце месяца!' }

@@ -7,14 +7,24 @@ class WorkDay < ActiveRecord::Base
 
   scope :masters_work_days, -> (master) { where(master_id: master.id) }
 
-  def create_records
-    hour_start = 9
+  def create_records(master)
+    user = User.find_by id: master.user_id
+    hour_start = 0
+    hour_end = 0
+
+    if UserPolicy.new(user).director?
+      hour_start = 8
+      hour_end = 12
+    else
+      hour_start = 9
+      hour_end = 11
+    end
 
     time_start = Time.new()
     end_time = time_start.change(hour: hour_start+1)
 
     i = 1
-    while i <= 11 do
+    while i <= hour_end do
       if hour_start == 12
         Record.create(
           client_name: "Обед",

@@ -15,6 +15,7 @@ class RecordsController < ApplicationController
   expose(:record_shelf) { RecordShelf.new() }
   expose(:finance)
   expose(:pre_record) { PreRecord.new() }
+  expose(:master) { Master.find_by id: work_day.master_id }
 
   def update
     price_params = params["record"]
@@ -27,6 +28,8 @@ class RecordsController < ApplicationController
       dinner_update(record, dinner_params(true), month, day)
     elsif dinner.eql?("0") && client_name.empty? && client_phone.empty?
       dinner_update(record, dinner_params(false), month, day)
+    elsif client_phone.empty? && current_user.nil?
+      redirect_to edit_work_day_record_path(work_day, record), notice: "Проверьте правильность введеных данных!"
     elsif price.nil?
       update_time(record, record_params, month, day)
     elsif price.empty?
@@ -359,6 +362,8 @@ class RecordsController < ApplicationController
       redirect_to month_day_path(month, day)
     elsif user_policy.master?
       redirect_to work_day_record_path(work_day_flag, record)
+    else
+      redirect_to edit_work_day_record_path(work_day, record) , notice: "Проверьте правильность введеных данных!"
     end
   end
 

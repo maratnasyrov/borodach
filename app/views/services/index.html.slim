@@ -1,20 +1,24 @@
-= render 'new'
-.row
-  table
-    thead.services
-      tr
-        th.part Name
-        th.part Price
-        th.part Time
-        th.part
-      tbody
-        - services.each do |service|
-          tr.services
-            td.part-name
-              = service.name
-            td.part
-              = service.price
-            td.part
-              = service.time
-            td.part-delete
-              = link_to 'X',  service_path(service),  method: :delete, data: { confirm: "Внимание! Удаление данных может привести к несостыковке финансов в будущем! Удаление лучше всего совершать в конце месяца, после подсчета всех финансов!" }
+- Master.all.each do |master|
+  .row
+    center
+      .medium-8
+        .master-info = master.decorate.master_info
+        = render 'form', master: master
+        table
+          thead.services
+            tr
+              th.part Наименование
+              th.part Цена
+              th.part Время в минутах
+              th.part
+            tbody
+              - master.services.all.each do |service|
+                tr.services
+                  td.part-name
+                    = service.name
+                  td.part
+                    = service.price
+                  td.part
+                    = service.time
+                  td.part-delete
+                    = link_to 'X',  service_path(service),  method: :delete, data: { confirm: "Внимание! Удаление данных может привести к несостыковке финансов в будущем! Удаление лучше всего совершать в конце месяца, после подсчета всех финансов!" }

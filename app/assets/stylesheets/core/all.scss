@@ -2,6 +2,10 @@
 
 @include foundation-everything();
 
+.notice {
+  display: none;
+}
+
 .top-bar {
   box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.2);
   z-index: 10000;

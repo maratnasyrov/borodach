@@ -12,6 +12,17 @@ class DayDecorator < ApplicationDecorator
     "#{overall_consumption}"
   end
 
+  def show_only_coming
+    overall_consumption = 0
+    object.finances.all.each do |finance|
+      if finance.finance_type == true
+        overall_consumption += finance.price
+      end
+    end
+
+    "#{overall_consumption}"
+  end
+
   def show_all_coming
     overall_coming = 0
     object.finances.all.each do |finance|

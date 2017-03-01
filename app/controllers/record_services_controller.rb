@@ -2,7 +2,7 @@
   skip_before_action :authenticate_user!, only: [:create, :destroy]
 
   expose(:record)
-  
+  expose(:master)
   expose(:record_services) { record.record_services  }
   expose(:record_service, attributes: :record_services_params) 
 

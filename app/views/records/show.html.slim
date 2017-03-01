@@ -42,7 +42,7 @@
 
                 - if RecordPolicy.new(record).status_added?
                   .medium-12.columns
-                    ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+                    ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
                       li.accordion-item.is-active data-accordion-item="" 
                         a id="record-label-service-#{record.id}" class="accordion-title" aria-controls="record-service-#{record.id}" aria-expanded="true" aria-selected="true" href="#" role="tab"  Услуги:
                         div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")

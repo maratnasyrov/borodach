@@ -2,7 +2,7 @@ p
   a data-open="modal-shelf-#{record.id}" class="title-type" Добавить расходник
 div id="modal-shelf-#{record.id}" class="reveal" data-reveal="" 
   .modal-title Добавить расходники:
-  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+  ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
     - Brand.all.each do |brand|
       li.accordion-item data-accordion-item="" 
         a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name

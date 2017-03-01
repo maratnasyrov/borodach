@@ -1,4 +1,7 @@
+
 .row
+  - if !notice.nil?
+    .notice-msg = notice
   ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
     .year = year_show.number
     li.pagination-previous
@@ -50,7 +53,7 @@
       thead
         tr
           th Мастер
-          - month.days.last(16).each do |day|
+          - second_part_of_the_month.each do |day|
             th = day.number_of_the_day
 
       tbody
@@ -63,7 +66,7 @@
                 - elsif current_user.id == master.user_id
                   = master.decorate.master_info
 
-              - month.days.last(16).each do |day|
+              - second_part_of_the_month.each do |day|
                 td.in-tbl
                   - if current_user.id == master.user_id
                     - if !SchedulePolicy.new(master.id, day.id).create?

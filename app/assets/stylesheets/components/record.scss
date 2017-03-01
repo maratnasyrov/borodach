@@ -67,8 +67,8 @@
 }
 
 .client-info, .online-status {
-  margin-top: 4px;
-  font-size: 1rem;
+  margin-top: 6px;
+  font-size: 0.9rem;
 }
 
 .online-status {
@@ -423,4 +423,10 @@
 
 .open-record {
   color: #872929;
+}
+
+.notice-msg {
+  background-color: #ff3333;
+  color: #fff;
+  padding: 10px;
 }

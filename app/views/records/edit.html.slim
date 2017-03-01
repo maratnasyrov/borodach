@@ -4,6 +4,8 @@
       .medium-6
         .record-form
           div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}" = record.decorate.advices
+          - if !notice.nil?
+            .notice-msg = notice
           .time-start 
             | Выбранное время: 
             = record.decorate.show_time
@@ -15,7 +17,7 @@
               .confirm-title 
                 = record.decorate.success_online_record
             .record-form-body
-              ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+              ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion-new-#{record.id}" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
                 li.accordion-item.is-active data-accordion-item="" 
                   a id="record-label-service-#{record.id}" class="accordion-title" aria-controls="record-service-#{record.id}" aria-expanded="true" aria-selected="true" href="#" role="tab"  Услуги:
                   div id="record-service-#{record.id}" class="accordion-content" aria-hidden="false" aria-labelledby="record-label-service-#{record.id}" data-tab-content="" role="tabpanel" style=("display: block;")
@@ -40,6 +42,7 @@
               = simple_form_for [work_day, record] do |f|
                 .row
                   .form-input
+                    = f.error_notification
                     - if RecordPolicy.new(record).status_closed?
                       .time
                         center
@@ -47,9 +50,10 @@
                             .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
                     - if !RecordPolicy.new(record).status_added?
                       .medium-6.columns
-                        label = f.input :client_name, label: false, placeholder: "Ваше имя", required: true
+                        label = f.input :client_name, label: false, placeholder: "Ваше имя", required: true, hint: 'Пример: Алексей'
                       .medium-6.columns
-                        label = f.input :client_phone, label: false, placeholder: "Ваш телефон", required: true
+                        = f.error :client_phone, id: "record_client_phone"
+                        label = f.input :client_phone, label: false, placeholder: "Ваш телефон", required: true, hint: 'Формат: 89000000000', error: 'Неверный номер!', maxlength: 11, minlength: 11
                         = f.input :client_added, as: :hidden, input_html: { value: true }
                       .btn-form-record
                         = f.button :submit, "Продолжить", class: "btn-save"

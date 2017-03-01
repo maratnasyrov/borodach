@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   resources :services
 
+  resources :masters do
+    resources :services
+  end
+
   resources :purchases
 
   resources :records do

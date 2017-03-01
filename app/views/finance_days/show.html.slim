@@ -36,12 +36,14 @@
       tr
         td.part Общая выручка
         td.part Расход
+        td.part Приход
         td.part Безнал
         td.part Наличных в кассе
       tbody
         tr
           td.part = day.decorate.show_all_coming
           td.part = day.decorate.show_all_consumption
+          td.part = day.decorate.show_only_coming
           td.part = day.decorate.show_all_card_transaction
           td.part = day.decorate.show_total
 

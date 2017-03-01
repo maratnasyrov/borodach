@@ -20,6 +20,8 @@ class MonthsController < ApplicationController
 
   expose(:work_day) { WorkDay.new() }
 
+  expose(:second_part_of_the_month) { month.days.all - month.days.first(15) }
+
   def fill_schedule
     current_year = Date.today.year
     year = Year.find_by number: current_year

@@ -25,7 +25,7 @@ class WorkDaysController < ApplicationController
     finance_day= FinanceDay.create(day_id: day.id, month_id: month.id)
     finance_day.save
 
-    work_day.create_records if success
+    work_day.create_records(master) if success
 
     redirect_to month_path(day.month_id)
   end
@@ -38,7 +38,7 @@ class WorkDaysController < ApplicationController
       success = work_day.destroy
       redirect_to month_path(month) if success
     else
-      redirect_to month_path(month)
+      redirect_to month_path(month), notice: "В выбранном дне есть записи!"
     end
   end
 end

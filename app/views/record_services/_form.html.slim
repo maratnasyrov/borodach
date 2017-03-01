@@ -4,7 +4,7 @@ div id="modal-services-#{record.id}" class="reveal" data-reveal=""
   .modal-title Выберите услугу:
   .medium-9.small-9.columns.head-title Наименование
   .medium-3.small-3.columns.head-title Цена
-  - Service.all.each do |service|
+  - master.services.all.each do |service|
     = simple_form_for [record, record_service] do |f|
     = simple_form_for [record, record_service], data: { remote: true, behavior: "fragments" } do |f|
       .hidden = f.input :service_id, label: false, class: "qwer", input_html: { value: service.id }

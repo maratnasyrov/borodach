@@ -1,5 +1,6 @@
 class Service < ActiveRecord::Base
   has_many :record_services
+  belongs_to :masters
 
   scope :beard, -> { where(name: "Оформление бороды") }
   scope :hair, -> { where(name: "Стрижка") }

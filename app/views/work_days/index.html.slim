@@ -3,7 +3,7 @@
     .large-5.medium-8.small-12
       .online-title Выберите мастера
       .all-masters
-        ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"
+        ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"data-allow-all-closed="true"
           - day.work_days.each do |work_day|
             li.accordion-item data-accordion-item="" 
               a id="select-master" class="accordion-title" aria-controls="select-master-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = day.find_master(work_day.master_id)
