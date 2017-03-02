@@ -1,2 +1,5 @@
-footer.row
-  .columns
+footer
+  .contacts-info
+    - if !user_signed_in?
+      = render "first_address"
+      = render "second_address"
