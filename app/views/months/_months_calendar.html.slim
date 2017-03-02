@@ -37,7 +37,7 @@
 
               - month.days.first(15).each do |day|
                 td.in-tbl
-                  - if UserPolicy.new(current_user).all_rights? && UserPolicy.new(current_user).director?
+                  - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
                     - if SchedulePolicy.new(master.id, day.id).create?
                       = form_for work_day do |f|
                         = hidden_field_tag :master_id, master.id
@@ -68,7 +68,7 @@
 
               - second_part_of_the_month.each do |day|
                 td.in-tbl
-                  - if UserPolicy.new(current_user).all_rights?
+                  - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
                     - if SchedulePolicy.new(master.id, day.id).create?
                       = form_for work_day do |f|
                         = hidden_field_tag :master_id, master.id

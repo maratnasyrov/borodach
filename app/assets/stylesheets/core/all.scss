@@ -3,14 +3,8 @@
 @include foundation-everything();
 
 body {
-  background: url("background.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.body-sign-in {
   background: url("background-2.jpg");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

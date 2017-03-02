@@ -17,31 +17,16 @@ html class="no-js" lang="en"
 
     == analytics_init if GA.tracker
 
-  - if user_signed_in?
-    body.body-sign-in
-      = render "navigation"
-      = render "messages"
+  body
+    = render "navigation"
+    = render "messages"
 
-      main.container
-        = yield
+    main.container
+      = yield
 
-      = render "footer"
+    = render "footer"
 
-      javascript:
-        App.currentUserData = #{{current_user.to_json}};
+    javascript:
+      App.currentUserData = #{{current_user.to_json}};
 
-      = javascript_include_tag :application
-  - else
-    body
-      = render "navigation"
-      = render "messages"
-
-      main.container
-        = yield
-
-      = render "footer"
-
-      javascript:
-        App.currentUserData = #{{current_user.to_json}};
-
-      = javascript_include_tag :application
+    = javascript_include_tag :application
