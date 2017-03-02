@@ -37,10 +37,7 @@
 
               - month.days.first(15).each do |day|
                 td.in-tbl
-                  - if current_user.id == master.user_id
-                    - if !SchedulePolicy.new(master.id, day.id).create?
-                      .work-day-for-master P
-                  - elsif UserPolicy.new(current_user).all_rights?
+                  - if UserPolicy.new(current_user).all_rights? && UserPolicy.new(current_user).director?
                     - if SchedulePolicy.new(master.id, day.id).create?
                       = form_for work_day do |f|
                         = hidden_field_tag :master_id, master.id
@@ -48,6 +45,9 @@
                         = f.button "-", class: "btn"
                     - else
                       = link_to 'x', work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day "       
+                  - elsif current_user.id == master.user_id
+                    - if !SchedulePolicy.new(master.id, day.id).create?
+                      .work-day-for-master P
 
     table.schedulle-table
       thead
@@ -68,10 +68,7 @@
 
               - second_part_of_the_month.each do |day|
                 td.in-tbl
-                  - if current_user.id == master.user_id
-                    - if !SchedulePolicy.new(master.id, day.id).create?
-                      .work-day-for-master P
-                  - elsif UserPolicy.new(current_user).all_rights?
+                  - if UserPolicy.new(current_user).all_rights?
                     - if SchedulePolicy.new(master.id, day.id).create?
                       = form_for work_day do |f|
                         = hidden_field_tag :master_id, master.id
@@ -79,3 +76,6 @@
                         = f.button "-", class: "btn"
                     - else
                       = link_to 'x', work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day "
+                  - elsif current_user.id == master.user_id
+                    - if !SchedulePolicy.new(master.id, day.id).create?
+                      .work-day-for-master P

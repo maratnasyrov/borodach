@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     success = user.save
 
-    redirect_to user_path(user) if success
+    redirect_to users_path if success
   end
 
   def destroy
