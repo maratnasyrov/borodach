@@ -14,8 +14,11 @@ class WorkDaysController < ApplicationController
 
   expose(:record) { Record.update() }
 
+  expose(:salons) { Salon.all }
+  expose(:salon)
+
   def create
-    work_day = WorkDay.create(master_id: master.id, day_id: day.id)
+    work_day = WorkDay.create(master_id: master.id, day_id: day.id, salon_id: salon.id)
     success = work_day.save
 
     day = Day.find_by(id: work_day.day_id)

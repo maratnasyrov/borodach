@@ -20,6 +20,8 @@ class MonthsController < ApplicationController
 
   expose(:work_day) { WorkDay.new() }
 
+  expose(:salons) { Salon.all }
+
   expose(:second_part_of_the_month) { month.days.all - month.days.first(15) }
 
   def fill_schedule

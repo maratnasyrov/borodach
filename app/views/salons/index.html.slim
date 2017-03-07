@@ -1,0 +1,20 @@
+.row
+  center
+    .medium-6
+      = render 'new'
+      .row
+        table
+          thead.purchases
+            tr
+              th.part Название салона
+              th.part Адрес
+              th.part
+            tbody
+              - salons.each do |salon|
+                tr.salon
+                  td.part-name
+                    = link_to(salon.name, salon_path(salon))
+                  td.part-name
+                    = salon.address
+                  td.part-delete
+                    = link_to 'X',  salon_path(salon),  method: :delete, data: { confirm: 'Вы уверены?' }

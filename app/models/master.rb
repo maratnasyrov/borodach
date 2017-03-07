@@ -4,6 +4,8 @@ class Master < ActiveRecord::Base
   has_many :clients
   has_many :client_histories
   has_many :services
+
+  belongs_to :salons
   
   scope :sort_by_id, -> { order('id ASC') }
 end

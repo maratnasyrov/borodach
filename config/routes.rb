@@ -83,6 +83,8 @@ Rails.application.routes.draw do
     resources :categories 
   end
 
+  resources :salons
+
   resources :clients
 
   resources :client_histories

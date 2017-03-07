@@ -61,4 +61,8 @@ class WorkDayDecorator < ApplicationDecorator
   def client_statistic
     "Новых: #{new_clients} Старых: #{old_clients}"
   end
+
+  def show_address
+    "#{Salon.find_by(id: object.salon_id).address}"
+  end
 end

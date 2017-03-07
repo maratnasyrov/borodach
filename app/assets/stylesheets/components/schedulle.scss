@@ -64,10 +64,10 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    color: #fff;
+    color: #0d8c3e;
     &:hover {
       background-color: #0d8c3e;
-      color: #0d8c3e;
+      color: #fff;
     }
     &:active {
       border:none;
@@ -77,24 +77,24 @@
 
   .work-day {
     background-color: #0d8c3e;
-    color: #0d8c3e;
+    color: #fff;
     width: 100%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    height: 40px;
+    height: 100%;
     border-left: 1px solid #fff;
     border-right: 1px solid #fff; 
 
     &:hover {
       background-color: #9e3f3f;
-      color: #9e3f3f;
+      color: #fff;
     }
   }
 
   .work-day-for-master {
     background-color: #0d8c3e;
-    color: #0d8c3e;
+    color: #fff;
     width: 100%;
     text-align: center;
     text-decoration: none;
