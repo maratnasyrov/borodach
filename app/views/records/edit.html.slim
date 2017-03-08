@@ -12,9 +12,10 @@
           .master 
             | Мастер: 
             b = Master.find_by(id: work_day.master_id).decorate.master_info
-          .master 
-            | Адрес: 
-            b = Salon.find_by(id: work_day.salon_id).address
+          - if !work_day.salon_id.nil?
+            .address 
+              | Адрес: 
+              b = Salon.find_by(id: work_day.salon_id).address
           - if RecordPolicy.new(record).status_added?
             .medium-12
               .confirm-title 
