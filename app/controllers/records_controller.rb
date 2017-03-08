@@ -28,7 +28,7 @@ class RecordsController < ApplicationController
       dinner_update(record, dinner_params(true), month, day)
     elsif dinner.eql?("0") && client_name.empty? && client_phone.empty?
       dinner_update(record, dinner_params(false), month, day)
-    elsif client_phone.eql?("") && current_user.nil?
+    elsif (client_phone.eql?("") || client_phone.length < 11) && current_user.nil?
       redirect_to edit_work_day_record_path(work_day, record), notice: "Проверьте правильность введеных данных!"
     elsif price.nil?
       update_time(record, record_params, month, day)
@@ -57,6 +57,7 @@ class RecordsController < ApplicationController
 
   def status_online
     record.update_attributes(status_online_params)
+    work_day_flag = WorkDay.find_by id: record.work_day_id 
 
     redirect_to success_path
   end

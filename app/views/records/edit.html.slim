@@ -8,10 +8,13 @@
             .notice-msg = notice
           .time-start 
             | Выбранное время: 
-            = record.decorate.show_time
+            b = record.decorate.show_time
           .master 
             | Мастер: 
-            = Master.find_by(id: work_day.master_id).decorate.master_info
+            b = Master.find_by(id: work_day.master_id).decorate.master_info
+          .master 
+            | Адрес: 
+            b = Salon.find_by(id: work_day.salon_id).address
           - if RecordPolicy.new(record).status_added?
             .medium-12
               .confirm-title 
@@ -50,10 +53,10 @@
                             .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
                     - if !RecordPolicy.new(record).status_added?
                       .medium-6.columns
-                        label = f.input :client_name, label: false, placeholder: "Ваше имя", required: true, hint: 'Пример: Алексей'
+                        label = f.input :client_name, label: false, placeholder: "Пример: Алексей", required: true
                       .medium-6.columns
                         = f.error :client_phone, id: "record_client_phone"
-                        label = f.input :client_phone, label: false, placeholder: "Ваш телефон", required: true, hint: 'Формат: 89000000000', error: 'Неверный номер!', maxlength: 11, minlength: 11
+                        label = f.input :client_phone, label: false, placeholder: "Формат: 89000000000", required: true, error: 'Неверный номер!', maxlength: 11, minlength: 11
                         = f.input :client_added, as: :hidden, input_html: { value: true }
                       .btn-form-record
                         = f.button :submit, "Продолжить", class: "btn-save"
