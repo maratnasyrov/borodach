@@ -57,7 +57,7 @@
                         label = f.input :client_name, label: false, placeholder: "Пример: Алексей", required: true
                       .medium-6.columns
                         = f.error :client_phone, id: "record_client_phone"
-                        label = f.input :client_phone, label: false, placeholder: "Формат: 89000000000", required: true, error: 'Неверный номер!', maxlength: 11, minlength: 11
+                        label = f.input :client_phone, label: false, placeholder: "Формат: 89000000000", required: true, error: 'Неверный номер.', maxlength: 11, minlength: 11
                         = f.input :client_added, as: :hidden, input_html: { value: true }
                       .btn-form-record
                         = f.button :submit, "Продолжить", class: "btn-save"
