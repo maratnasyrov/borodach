@@ -1,3 +1,5 @@
+require 'telegram/bot'
+
 class RecordsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:edit, :update, :status_online]
 
@@ -58,6 +60,7 @@ class RecordsController < ApplicationController
   def status_online
     record.update_attributes(status_online_params)
     work_day_flag = WorkDay.find_by id: record.work_day_id 
+    send_message_to_telegram(record)
 
     redirect_to success_path
   end
@@ -419,6 +422,56 @@ class RecordsController < ApplicationController
     end
 
     record.update_attributes(price_params(price))
+  end
+
+  def send_message_to_telegram(record)
+    token = '378755776:AAH8blnBXmuqUg5zi-vMdpe3bp1ineEisk0'   
+
+    work_day_flag = WorkDay.find_by id: record.work_day_id
+    day_flag = Day.find_by id: work_day_flag.day_id
+    month_flag = Month.find_by id: day_flag.month_id
+    year_flag = Year.find_by id: month_flag.year_id
+    chat_ids = []
+
+    service_text = ""
+    purchase_text = ""
+    superadmin = User.find_by role: "superadmin"
+    master_login = User.find_by(id: Master.find_by(id: work_day_flag.master_id).user_id)
+
+    superadmin_chat_id = [superadmin.telegram_chat_id]
+    
+    if !master_login.nil?
+      master_chat_id = [master_login.telegram_chat_id] 
+      chat_ids = chat_ids | master_chat_id
+    end
+
+    chat_ids = chat_ids | superadmin_chat_id
+    
+
+    date_text = "Дата записи: #{day_flag.number_of_the_day}-#{month_flag.number}-#{year_flag.number}, "
+    master_text = "Мастер: #{Master.find_by(id: work_day_flag.master_id).decorate.master_info}, "
+    record_text = "Запись на #{record.start_time.hour} часов, "
+    UserPolicy.new(master_login).all_rights? ? client_info = "Клиент: #{record.client_name} - #{record.client_phone}, " : client_info = "Клиент: #{record.client_name}, "
+
+    if !record.record_services.empty?
+      record.record_services.all.each do |record_service|
+        service_text += "#{Service.find_by(id: record_service.service_id).name};"
+      end
+    end
+
+    if !record.record_purchases.empty?
+      record.record_purchases.all.each do |record_purchase|
+        purchase_text += "#{Purchase.find_by(id: record_purchase.purchase_id).name};"
+      end
+    end
+
+    text = date_text + master_text + record_text + client_info + "Услуги: " + service_text + " Покупки: " + purchase_text
+
+    Telegram::Bot::Client.run(token) do |bot|
+      chat_ids.each do |chat_id|
+        bot.api.sendMessage(chat_id: chat_id, text: text)
+      end
+    end
   end
 
   def payment_params(payment_method)

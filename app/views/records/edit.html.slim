@@ -13,7 +13,7 @@
             | Мастер: 
             b = Master.find_by(id: work_day.master_id).decorate.master_info
           - if !work_day.salon_id.nil?
-            .address 
+            .master 
               | Адрес: 
               b = Salon.find_by(id: work_day.salon_id).address
           - if RecordPolicy.new(record).status_added?
