@@ -467,10 +467,10 @@ class RecordsController < ApplicationController
 
     text = date_text + master_text + record_text + client_info + "Услуги: " + service_text + " Покупки: " + purchase_text
 
-    Telegram::Bot::Client.run(token) do |bot|
-      chat_ids.each do |chat_id|
-        bot.api.sendMessage(chat_id: chat_id, text: text)
-      end
+    bot = Telegram::Bot::Client.new(token)
+
+    chat_ids.each do |chat_id|
+      bot.api.sendMessage(chat_id: chat_id, text: text)
     end
   end
 
