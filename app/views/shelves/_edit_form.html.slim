@@ -1,0 +1,8 @@
+= simple_form_for shelf, html: { class: "shelf-form" } do |f|
+  .medium-12
+    .input-group
+      span.input-group-label Количество
+      = f.input :bulk, label: false, placeholder: "Количество в гр./шт."
+      .input-group-button
+        .btn-form-record-change-type
+          = f.button :submit, "Сохранить", class: "btn-type-change add-shelf-btn"

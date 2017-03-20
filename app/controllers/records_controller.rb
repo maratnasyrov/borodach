@@ -67,12 +67,12 @@ class RecordsController < ApplicationController
   end
 
   def change_payment_type
-    record.payment_method.eql?("Карта") || record.payment_method.eql?("Card") ? payment_method = "Наличные" : payment_method = "Карта"
+    record.payment_method.eql?("Карта") ? payment_method = "Наличные" : payment_method = "Карта"
 
     record.update_attributes(payment_params(payment_method))
 
     record.finances.all.each do |finance|
-      record.payment_method.eql?("Карта") || record.payment_method.eql?("Card") ? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
+      record.payment_method.eql?("Карта") ? finance.update_attributes(cash_type: true) : finance.update_attributes(cash_type: false)
     end
 
     work_day_flag = WorkDay.find_by id: record.work_day_id
@@ -227,7 +227,13 @@ class RecordsController < ApplicationController
           shelf_flag = Shelf.all.find_by(id: shelf.shelf_id)
           flag_number = shelf_flag.number
 
-          success = shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number) if shelf_flag.bulk > 0
+          shelf_number = shelf_flag.number
+
+          if shelf_flag.bulk - shelf.number <= 0
+            shelf_number = 0
+          end
+
+          success = shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number, number: shelf_number) if shelf_flag.bulk > 0
 
           ShelfHistory.create(
               record_id: record.id,

@@ -56,3 +56,19 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.add-shelf {
+  border-radius: 50%;
+  padding:   6px 10px 6px 10px;
+  background-color: #0d8c3e;
+  color: #fff;
+
+  &:hover {
+    background-color: #042d14;
+    color: #fff;
+  }
+}
+
+.add-shelf-btn {
+    padding: 11px 28px 10px 28px !important;
+}

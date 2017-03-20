@@ -2,6 +2,8 @@
     center
       .medium-7
         .row
+          - if !notice.nil?
+            .notice-msg = notice
           .link-to-shelfs
             = link_to "Посмотреть расходы по материалам за #{day.number_of_the_day} число", day_shelf_histories_path(day)
         = render 'new'
@@ -15,6 +17,7 @@
                     th.part Наименование
                     th.part Кол-во (гр./шт.)
                     th.part Кол-во (шт./упак.)
+                    td.part
                     th.part
                   tbody
                     - brand.shelves.sort_by_name.each do |shelf|
@@ -29,5 +32,7 @@
                             = shelf.bulk
                         td.part
                           = shelf.number
+                        td.part
+                          = link_to "+", add_shelf_path(shelf), class: "add-shelf", data: { confirm: "Вы уверены что хотите добавить данный товар в размере 1 шт./упак." }
                         td.part-delete
                           = link_to 'X',  shelf_path(shelf),  method: :delete, data: { confirm: "Внимание! #{shelf.name} еще не закончился, осталось #{shelf.bulk} грамм. Удаление невозможно!" }
