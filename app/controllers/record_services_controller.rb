@@ -15,7 +15,9 @@
       if service.name.eql?("Окрашивание (средние волосы)")
         record_next = Record.find_by id: record.id + 1
 
-        if record_next.client_added == false
+        if record_next.nil?
+          notice = "Невозможно добавить окрашивание на это время, так как данная услуга займет больше одного часа по времени! Пожалуйста, выберите другое время."
+        elsif record_next.client_added == false && record_next.dinner == false
           record_next.update_attributes(dinner: true)
         else
           notice = "Невозможно добавить окрашивание на это время, так как данная услуга займет больше одного часа по времени! А следующий час занят! Пожалуйста, выберите другое время."
@@ -24,7 +26,9 @@
         record_next_one = Record.find_by id: record.id + 1
         record_next_two = Record.find_by id: record.id + 2
 
-        if record_next_one.client_added == false && record_next_two.client_added == false
+        if record_next_one.nil? || record_next_two.nil?
+          notice = "Невозможно добавить окрашивание на это время, так как данная услуга займет около 2 часов! Пожалуйста, выберите другое время."
+        elsif (record_next_one.client_added && record_next_two.client_added) == false && (record_next_one.dinner && record_next_two.dinner) == false
           record_next_one.update_attributes(dinner: true)
           record_next_two.update_attributes(dinner: true)
         else
