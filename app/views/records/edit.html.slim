@@ -54,10 +54,10 @@
                             .online-time = f.input :start_time, start_hour: record.start_time.hour, end_hour: record.start_time.hour, hour_step: 1, minute_step: 60, label: "Время начала"
                     - if !RecordPolicy.new(record).status_added?
                       .medium-6.columns
-                        label = f.input :client_name, label: false, placeholder: "Пример: Алексей", required: true
+                        label.label-input-form = f.input :client_name, label: "Ваше имя", placeholder: "Пример: Алексей"
                       .medium-6.columns
                         = f.error :client_phone, id: "record_client_phone"
-                        label = f.input :client_phone, label: false, placeholder: "Формат: 89000000000", required: true, error: 'Неверный номер.', maxlength: 11, minlength: 11
+                        label.label-input-form = f.input :client_phone, label: "Ваш телефон", placeholder: "Формат: 89995553344", error: 'Неверный номер.', maxlength: 11, minlength: 11
                         = f.input :client_added, as: :hidden, input_html: { value: true }
                       .btn-form-record
                         = f.button :submit, "Продолжить", class: "btn-save"
