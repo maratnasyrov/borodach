@@ -35,7 +35,7 @@
             .time
               center
                 .medium-6.columns
-                  - if !UserPolicy.new(current_user).director?
+                  - if UserPolicy.new(current_user).director?
                     = f.input :start_time, start_hour: 8, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"
                   - else
                     = f.input :start_time, start_hour: 9, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"

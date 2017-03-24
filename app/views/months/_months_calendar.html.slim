@@ -27,36 +27,37 @@
 
       tbody
         - Master.all.each do |master|
-          - if current_user.id == master.user_id || UserPolicy.new(current_user).all_rights?
-            tr
-              td
-                - if UserPolicy.new(current_user).all_rights?
-                  = link_to master.decorate.master_info, edit_master_path(master)
-                - elsif current_user.id == master.user_id
-                  = master.decorate.master_info
-
-              - month.days.first(15).each do |day|
-                td.in-tbl
-                  - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
-                    - if SchedulePolicy.new(master.id, day.id).create?
-                      - salons.each do |salon|
-                        = form_for work_day do |f|
-                          = hidden_field_tag :salon_id, salon.id
-                          = hidden_field_tag :master_id, master.id
-                          = hidden_field_tag :day_id, day.id
-                          = f.button salon.address[0], class: "btn"
-                    - else
-                      - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
-                        = link_to Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0], work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
-                      - else
-                        = link_to "-", work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
+          - if master.master_active == true
+            - if current_user.id == master.user_id || UserPolicy.new(current_user).all_rights?
+              tr
+                td
+                  - if UserPolicy.new(current_user).all_rights?
+                    = link_to master.decorate.master_info, edit_master_path(master)
                   - elsif current_user.id == master.user_id
-                    - if !SchedulePolicy.new(master.id, day.id).create?
-                      .work-day-for-master
+                    = master.decorate.master_info
+
+                - month.days.first(15).each do |day|
+                  td.in-tbl
+                    - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
+                      - if SchedulePolicy.new(master.id, day.id).create?
+                        - salons.each do |salon|
+                          = form_for work_day do |f|
+                            = hidden_field_tag :salon_id, salon.id
+                            = hidden_field_tag :master_id, master.id
+                            = hidden_field_tag :day_id, day.id
+                            = f.button salon.address[0], class: "btn"
+                      - else
                         - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
-                          = Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0]
+                          = link_to Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0], work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
                         - else
-                          | -
+                          = link_to "-", work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
+                    - elsif current_user.id == master.user_id
+                      - if !SchedulePolicy.new(master.id, day.id).create?
+                        .work-day-for-master
+                          - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
+                            = Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0]
+                          - else
+                            | -
 
     table.schedulle-table
       thead
@@ -67,33 +68,34 @@
 
       tbody
         - Master.all.each do |master|
-          - if current_user.id == master.user_id || UserPolicy.new(current_user).all_rights?
-            tr
-              td
-                - if UserPolicy.new(current_user).all_rights?
-                  = link_to master.decorate.master_info, edit_master_path(master)
-                - elsif current_user.id == master.user_id
-                  = master.decorate.master_info
-
-              - second_part_of_the_month.each do |day|
-                td.in-tbl
-                  - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
-                    - if SchedulePolicy.new(master.id, day.id).create?
-                      - salons.each do |salon|
-                        = form_for work_day do |f|
-                          = hidden_field_tag :salon_id, salon.id
-                          = hidden_field_tag :master_id, master.id
-                          = hidden_field_tag :day_id, day.id
-                          = f.button salon.address[0], class: "btn"
-                    - else
-                      - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
-                        = link_to Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0], work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
-                      - else
-                        = link_to "-", work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
+          - if master.master_active == true
+            - if current_user.id == master.user_id || UserPolicy.new(current_user).all_rights?
+              tr
+                td
+                  - if UserPolicy.new(current_user).all_rights?
+                    = link_to master.decorate.master_info, edit_master_path(master)
                   - elsif current_user.id == master.user_id
-                    - if !SchedulePolicy.new(master.id, day.id).create?
-                      .work-day-for-master
+                    = master.decorate.master_info
+
+                - second_part_of_the_month.each do |day|
+                  td.in-tbl
+                    - if UserPolicy.new(current_user).all_rights? || UserPolicy.new(current_user).director?
+                      - if SchedulePolicy.new(master.id, day.id).create?
+                        - salons.each do |salon|
+                          = form_for work_day do |f|
+                            = hidden_field_tag :salon_id, salon.id
+                            = hidden_field_tag :master_id, master.id
+                            = hidden_field_tag :day_id, day.id
+                            = f.button salon.address[0], class: "btn"
+                      - else
                         - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
-                          = Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0]
+                          = link_to Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0], work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
                         - else
-                          | -
+                          = link_to "-", work_day_path(WorkDay.find_by(master_id: master.id, day_id: day.id)), method: :delete, class: "work-day"
+                    - elsif current_user.id == master.user_id
+                      - if !SchedulePolicy.new(master.id, day.id).create?
+                        .work-day-for-master
+                          - if WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id != nil
+                            = Salon.find_by(id: WorkDay.find_by(master_id: master.id, day_id: day.id).salon_id).address[0]
+                          - else
+                            | -
