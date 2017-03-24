@@ -484,7 +484,8 @@ class RecordsController < ApplicationController
       discount: nil,
       client_added: false,
       online: false,
-      not_show: false
+      not_show: false,
+      record_id: nil
     }
   end
 

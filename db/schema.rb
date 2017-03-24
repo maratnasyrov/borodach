@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324080521) do
+ActiveRecord::Schema.define(version: 20170324132449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20170324080521) do
     t.datetime "updated_at",                     null: false
     t.boolean  "online"
     t.boolean  "not_show",       default: false
+    t.integer  "record_id"
   end
 
   create_table "salons", force: :cascade do |t|

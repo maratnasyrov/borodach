@@ -10,12 +10,19 @@ class RecordPolicy
   end
 
   def set_status_class
+    set_class = ""
     if set_check?(record.client_added) && !set_check?(record.closed_record)
-      'client-added'
+      set_class = 'client-added'
     elsif set_check?(record.dinner)
-      'dinner'
+      set_class = 'dinner'
     elsif set_check?(record.closed_record)
-      'closed-record'
+       set_class = 'closed-record'
+    end
+
+    if record.record_id.nil?
+      return set_class
+    else
+      return set_class + ' depend'
     end
   end
 

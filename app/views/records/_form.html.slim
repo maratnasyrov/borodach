@@ -2,11 +2,15 @@
   = link_to work_day_record_path(work_day, record), class:"button record-info #{RecordPolicy.new(record).set_status_class}" do
     .time.large-1.medium-1.small-1.columns
       .hour
-        = record.start_time.strftime( "%H:%M" )
+        = record.start_time.strftime( "%H:%M" ) if !record.start_time.nil? && record.record_id.nil?
       .minute
-        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
-    .client-info.large-9.medium-9.small-9.columns
-      = record.decorate.client_info(current_user)
+        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil? && record.record_id.nil?
+    - if record.record_id.nil?
+      .client-info.large-9.medium-9.small-9.columns
+        = record.decorate.client_info(current_user)
+    - else
+      .client-info.large-12.medium-12.small-12.columns
+        = record.decorate.client_info(current_user)
     .online-status.large-2.medium-1.small-1.columns 
       - if record.online.eql?(true)
         span.badge.success ✔
@@ -15,11 +19,15 @@
   button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
     .time.large-1.medium-1.small-1.columns
       .hour
-        = record.start_time.strftime( "%H:%M" )
+        = record.start_time.strftime( "%H:%M" ) if !record.start_time.nil? && record.record_id.nil?
       .minute
-        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil?
-    .client-info.large-9.medium-9.small-9.columns
-      = record.decorate.client_info(current_user)
+        = record.end_time.strftime( "%H:%M" ) if !record.end_time.nil? && record.record_id.nil?
+    - if record.record_id.nil?
+      .client-info.large-9.medium-9.small-9.columns
+        = record.decorate.client_info(current_user)
+    - else
+      .client-info.large-12.medium-12.small-12.columns
+        = record.decorate.client_info(current_user)
     .online-status.large-2.medium-1.small-1.columns
 
   div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown=""

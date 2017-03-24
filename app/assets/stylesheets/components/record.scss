@@ -20,7 +20,7 @@
 
 .record-info, .select-master {
   text-align: center;
-  border-bottom: 1px solid #E6E7E8;
+  border-top: 1px solid #E6E7E8;
   width: 100%;
   height: 50px;
   margin-bottom: 0 !important;
@@ -62,8 +62,12 @@
   color: #fff;
 }
 
-.record-info:last-child {
-  border-bottom: none;
+.depend {
+  border-top: none !important;
+}
+
+.record-info:first-child {
+  border-top: none;
 }
 
 .client-info, .online-status {
