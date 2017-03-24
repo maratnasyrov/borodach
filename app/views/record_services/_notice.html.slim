@@ -1,0 +1,5 @@
+.record-service data-fragment-id="record-service-#{record.id}"
+  - if !notice.nil? 
+    .notice-msg = notice
+    .btn-form-record
+      = link_to "Выбрать другое время", record_clear_path(record), class: "btn-clear btn-cancel"

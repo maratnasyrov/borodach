@@ -52,4 +52,8 @@ class DayDecorator < ApplicationDecorator
   def show_date
     "#{object.number_of_the_day} #{Month.find_by(id: object.month_id).name_of_the_month}"
   end
+
+  def show_date_number
+    "#{object.number_of_the_day}.#{Month.find_by(id: object.month_id).number}"
+  end
 end

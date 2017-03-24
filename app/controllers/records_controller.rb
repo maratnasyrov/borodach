@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:edit, :update, :status_online]
+  skip_before_action :authenticate_user!, only: [:edit, :update, :status_online, :clear_record]
 
   expose(:work_day)
   expose(:record) 
@@ -160,7 +160,9 @@ class RecordsController < ApplicationController
         end
       end
 
-      if user_policy.all_rights?
+      if current_user.nil?
+        redirect_to root_path
+      elsif user_policy.all_rights?
         redirect_to month_day_path(month, day)
       elsif user_policy.master?
         redirect_to work_day_record_path(work_day_flag, record)

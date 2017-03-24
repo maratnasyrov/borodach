@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310101027) do
+ActiveRecord::Schema.define(version: 20170324080521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(version: 20170310101027) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "master_id"
+    t.boolean  "coloration"
   end
 
   create_table "shelf_histories", force: :cascade do |t|

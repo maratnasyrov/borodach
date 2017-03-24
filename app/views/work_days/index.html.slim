@@ -1,7 +1,11 @@
 .row
   center
     .large-5.medium-8.small-12
-      .online-title Выберите мастера
+      .online-title
+        | Дата: 
+        b = day.decorate.show_date_number
+      .online-title
+        | Выберите мастера
       .all-masters
         ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist"data-allow-all-closed="true"
           - day.work_days.each do |work_day|
