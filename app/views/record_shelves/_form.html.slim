@@ -7,7 +7,7 @@ div id="modal-shelf-#{record.id}" class="reveal" data-reveal=""
       li.accordion-item data-accordion-item="" 
         a id="brand-label-#{brand.id}" class="accordion-title" aria-controls="brand-#{brand.id}" aria-expanded="false" aria-selected="false" href="#" role="tab"  = brand.name
         div id="brand-#{brand.id}" class="accordion-content" aria-hidden="true" aria-labelledby="brand-label-#{brand.id}" data-tab-content="" role="tabpanel" style=("display: none;")
-          - brand.shelves.all.each do |shelf|
+          - brand.shelves.sort_by_name.each do |shelf|
             .row
               = simple_form_for [record, record_shelf], data: { remote: true, behavior: "fragments" } do |f|
                 .medium-9.small-9.columns
