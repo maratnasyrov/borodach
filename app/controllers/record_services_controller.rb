@@ -51,6 +51,28 @@
   def destroy
     success = record_service.destroy
 
+    service = Service.find_by id: record_service.service_id
+
+    if service.coloration.eql?(true)
+      if service.name.eql?("Окрашивание (средние волосы)")
+        record_next = Record.find_by id: record.id + 1
+
+        if record_next.record_id == record.id
+          record.update_attributes(end_time: record.start_time + 1)
+          record_next.update_attributes(client_name: nil, client_added: false, record_id: nil)
+        end
+      elsif service.name.eql?("Окрашивание (длинные волосы)")
+        record_next_one = Record.find_by id: record.id + 1
+        record_next_two = Record.find_by id: record.id + 2
+
+        if record_next_one.record_id == record.id && record_next_two.record_id == record.id
+          record.update_attributes(end_time: record.start_time + 1)
+          record_next_one.update_attributes(client_name: nil, client_added: false, record_id: nil)
+          record_next_two.update_attributes(client_name: nil, client_added: false, record_id: nil)
+        end
+      end
+    end
+
     render_record_services if success
   end
 
