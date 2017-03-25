@@ -11,6 +11,7 @@
               th.part Цена
               th.part Время в минутах
               th.part
+              th.part
             tbody
               - master.services.all.each do |service|
                 tr.services
@@ -20,5 +21,7 @@
                     = service.price
                   td.part
                     = service.time
+                  td.part
+                    = link_to "Ред.", edit_master_service_path(master, service)
                   td.part-delete
                     = link_to 'X',  service_path(service),  method: :delete, data: { confirm: "Внимание! Удаление данных может привести к несостыковке финансов в будущем! Удаление лучше всего совершать в конце месяца, после подсчета всех финансов!" }

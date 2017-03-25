@@ -9,8 +9,8 @@ class ServicesController < ApplicationController
   end
 
   def update
-    success = Service.update(services_params)
-    respond_with service if success
+    success = service.update(services_params)
+    redirect_to services_path if success
   end
 
   def destroy
