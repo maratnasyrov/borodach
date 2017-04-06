@@ -3,6 +3,8 @@ class BrandsController < ApplicationController
 
   expose(:brands) { Brand.all }
   expose(:brand, attributes: :brands_params)
+  expose(:purchase_history) { PurchaseHistory.new() }
+  expose(:purchase) { Purchase.new() }
 
   expose(:category) { Category.new() }
 

@@ -7,18 +7,19 @@ class PurchasesController < ApplicationController
   
   def create
     success = Purchase.create(purchases_params)
-    respond_with purchase if success
+
+    redirect_to brand_path(brand) if success
   end
 
   def update
     flag_number = purchase.number
     success = purchase.update(purchases_params)
-    redirect_to purchases_path if success
+    redirect_to brand_path(brand) if success
   end
   
   def destroy
     purchase.destroy
-    redirect_to purchases_path
+    redirect_to brand_path(brand) if success
   end
 
   private

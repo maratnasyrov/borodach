@@ -14,13 +14,14 @@ div id="modal-purchase-#{record.id}" class="reveal" data-reveal=""
               - if category.not_for_sale == false && !category.purchases.all.empty?
                 .category-title = category.name
                 - category.purchases.for_sale.each do |purchase|
-                  .row
-                    = simple_form_for [record, record_purchase], data: { remote: true, behavior: "fragments" } do |f|
-                      .hidden = f.input :purchase_id, label: false, class: "qwer", input_html: { value: purchase.id }
-                      .medium-9.small-9.columns
-                        = f.submit purchase.name, id: "modal-#{record.id}", class: "btn-form table-form"
-                      .medium-3.small-3.columns.price-form
-                        = purchase.price
+                  - if purchase.number >= 1
+                    .row
+                      = simple_form_for [record, record_purchase], data: { remote: true, behavior: "fragments" } do |f|
+                        .hidden = f.input :purchase_id, label: false, class: "qwer", input_html: { value: purchase.id }
+                        .medium-9.small-9.columns
+                          = f.submit purchase.name, id: "modal-#{record.id}", class: "btn-form table-form"
+                        .medium-3.small-3.columns.price-form
+                          = purchase.price
   button.close-button aria-label=("Close modal") data-close="" type="button"  id="close-#{record.id}"
     span aria-hidden="true"  &times;
 

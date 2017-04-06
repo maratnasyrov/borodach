@@ -15,7 +15,9 @@ class PurchaseHistoriesController < ApplicationController
       new_number = hash_params["number_changes"].to_i + purchase.number
     end
     purchase.update_attributes(number: new_number)
-    redirect_to purchases_path
+
+    brand = Brand.find_by id: purchase.brand_id
+    redirect_to brand_path(brand)
   end
 
   private

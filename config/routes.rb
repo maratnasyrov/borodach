@@ -83,6 +83,8 @@ Rails.application.routes.draw do
     resources :brands
   end
 
+  resources :brands
+
   resources :brands do
     resources :categories 
   end

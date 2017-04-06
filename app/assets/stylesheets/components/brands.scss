@@ -51,3 +51,20 @@
   font-size: 1.2rem;  
   color: #0d8c3e;
 }
+
+.part {
+  float: left;
+  width: 200px;
+  border: 1px solid #E6E7E8;
+  box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.1);
+
+  .brand-part {
+    img {
+      width: 50%;
+    }
+  }
+  .brand-title {
+    background-color: #fff;
+    padding: 10px;
+  }
+}

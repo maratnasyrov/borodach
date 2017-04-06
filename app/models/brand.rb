@@ -4,4 +4,6 @@ class Brand < ActiveRecord::Base
   has_many :categories
 
   belongs_to :providers
+
+  scope :sort_by_name, -> { order('name ASC')  }
 end
