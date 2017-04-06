@@ -7,14 +7,22 @@ class CategoriesController < ApplicationController
     category = Category.create(categories_params)
     success = category.save
 
-    redirect_to brands_path if success
+    provider = Provider.find_by id: brand.provider_id
+
+    redirect_to provider_path(provider) if success
   end
 
   def destroy
     purchase_empty = category.purchases.empty?
-    category.destroy if purchase_empty
+    success = category.destroy if purchase_empty
 
-    redirect_to brands_path
+    provider = Provider.find_by id: brand.provider_id
+
+    if success
+      redirect_to provider_path(provider) 
+    else
+      redirect_to provider_path(provider), notice: "Удаление невозможно, так как существует товар данной категории!"
+    end
   end
   
   private

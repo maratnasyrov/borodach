@@ -1,0 +1,6 @@
+button.button data-toggle="order-#{order.id}" type="button" class="add-category"  +
+div id="order-#{order.id}" class="dropdown-pane category-dropdown" data-dropdown="" data-hover-pane="true"
+  .category-form
+    = simple_form_for order do |f|
+      = f.input :invoice, label: false, placeholder: "Номер накладной"
+      = f.submit "Добавить накладную", class: "btn-form"

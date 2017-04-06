@@ -1,0 +1,29 @@
+.row
+  .medium-12
+    - if !notice.nil? 
+      .notice-msg = notice
+    .link-to-provider = link_to "Вернуться к списку заказов", orders_path
+    .form-title = order.name
+    table
+      thead
+        tr
+          td.part Наименование товара
+          td.part Объем
+          td.part Количество
+          td.part Оптовая стоимость
+          td.part Статус
+          - if order.closed_status == false
+            td.part
+            td.part
+      tbody
+        - order.product_lists.each do |product|
+          tr
+            td.part = product.name
+            td.part = product.bulk
+            td.part = product.number
+            td.part = product.price
+            td.part = product.decorate.status
+            - if product.closed_status == false
+              td.part = link_to "Добавить на склад", add_to_stock_path(product)
+              td.part-delete = link_to 'X',  order_product_list_path(order, product),  method: :delete, data: { confirm: 'Вы уверенны?' }
+

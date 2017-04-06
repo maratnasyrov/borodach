@@ -1,4 +1,7 @@
 .row
+  ul.menu
+    = active_link_to "Заказы", orders_path, wrap_tag: :li, class: "btn-item-cart"
+    = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "btn-item-shelf"
   ul#vhheat-responsiveaccordiontabs.accordion data-accordion="accordion" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
     - brands.each do |brand|
       li.accordion-item data-accordion-item="" 

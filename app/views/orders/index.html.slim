@@ -1,0 +1,26 @@
+.medium-12
+  .form-title Заказы продукции
+  table
+    thead
+      tr
+        td.part Описание заказа
+        td.part Дата создания заказа
+        td.part Дата закрытия заказа
+        td.part Поставщик
+        td.part Статус заказа
+        td.part Номер накладной
+        td.part
+      tbody
+        - orders.sort_by_date.each do |order|
+          tr
+            td.part = link_to order.name, order_path(order)
+            td.part = order.created_at.strftime('%H:%M:%S %d-%m-%Y')
+            td.part = order.closed_date.strftime('%H:%M:%S %d-%m-%Y') if !order.closed_date.nil?
+            td.part = Provider.find_by(id: order.provider_id).name
+            td.part = order.decorate.order_status
+            td.part
+              - if order.invoice.nil?
+                = render "form_invoice", order: order
+              - else 
+                = order.invoice 
+            td.part = link_to "Закрыть заказ", close_path(order) if !order.closed_status == true

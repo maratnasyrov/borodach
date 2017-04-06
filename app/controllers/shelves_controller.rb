@@ -20,6 +20,9 @@ class ShelvesController < ApplicationController
       success = shelf.save
 
       succes_number_change = find_purchase.update_attributes(number: find_purchase.number - shelf.number) if success
+
+      CheckPurchase.new(find_purchase).check
+      
       if find_purchase.number - flag_purchase_number != 0
         PurchaseHistory.create(
           purchase_id: find_purchase.id,
@@ -45,6 +48,9 @@ class ShelvesController < ApplicationController
       success = shelf.save
 
       succes_number_change = find_purchase.update_attributes(number: find_purchase.number - 1) if success
+
+      CheckPurchase.new(find_purchase).check
+
       if find_purchase.number - flag_purchase_number != 0
         PurchaseHistory.create(
           purchase_id: find_purchase.id,

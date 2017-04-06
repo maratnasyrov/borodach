@@ -1,0 +1,11 @@
+= simple_form_for provider, html: { class: "finances-form" } do |f|
+  .medium-12
+    = f.input :name, label: false, placeholder: "Наименование поставщика"
+  .medium-12
+    = f.input :email, label: false, placeholder: "Электронная почта"
+  .medium-12
+    = f.input :phone_number, label: false, placeholder: "Номер телефона"
+  .medium-12
+    = f.input :contact_name, label: false, placeholder: "Контактное лицо"
+  .medium-12.btn
+    = f.button :submit, "Добавить", class: "btn-form"

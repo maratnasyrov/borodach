@@ -1,9 +1,11 @@
-= render "form"
 .row
   center
-    - if !notice.nil? 
-      .notice-msg = notice
     .medium-6
+      .link-to-provider = link_to "Вернуться к списку поставщиков", providers_path
+      - if !notice.nil? 
+        .notice-msg = notice
+      .form-title = provider.name
+      = render "brands/form", provider: provider
       table
         thead.brands
           tr
@@ -11,7 +13,7 @@
             th.part
             th.part
           tbody
-            - brands.each do |brand|
+            - provider.brands.each do |brand|
               tr.brands
                 td.part-name
                   = brand.name

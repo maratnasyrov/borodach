@@ -1,0 +1,15 @@
+.btn-item-cart, .btn-item-shelf {
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999999px;
+  width: 80px;
+  height: 80px;
+  background-size: 70%;
+}
+
+.btn-item-shelf {
+  background-image: asset-data-url("items/shelf.png");
+}
+.btn-item-cart {
+  background-image: asset-data-url("items/cart.png");
+}

@@ -8,11 +8,9 @@
           = active_link_to "Расписание", now_path, wrap_tag: :li, class: "shedule-small-icon"
         = active_link_to "График", fill_schedule_path, wrap_tag: :li, class: "calendar-small-icon"
         = active_link_to "Финансы", finance_now_path, wrap_tag: :li, class: "finance-small-icon"
-        = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "money-small-icon"
         = active_link_to "Склад", purchases_path, wrap_tag: :li, class: "purshases-small-icon"
       - elsif UserPolicy.new(current_user).booker?
         = active_link_to "Финансы", finance_now_path, wrap_tag: :li, class: "finance-small-icon"
-        = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "money-small-icon"
         = active_link_to "Склад", purchases_path, wrap_tag: :li, class: "purshases-small-icon"
       - elsif UserPolicy.new(current_user).master?
         = active_link_to "Расписание", now_path, wrap_tag: :li, class: "shedule-small-icon"

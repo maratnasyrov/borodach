@@ -73,10 +73,14 @@ Rails.application.routes.draw do
     resources :shelf_histories
   end
 
-  resources :brands
-
   resources :brands do
     resources :purchases
+  end
+
+  resources :providers
+  
+  resources :providers do
+    resources :brands
   end
 
   resources :brands do
@@ -89,12 +93,20 @@ Rails.application.routes.draw do
 
   resources :client_histories
 
+  resources :orders
+
+  resources :orders do
+    resources :product_lists 
+  end
+
   match 'open_record/:id', to: 'records#open_record', as: :open_record, via: [:get, :post]
   match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
   match 'closed_record/:id', to: 'records#closed_record', as: :closed_record, via: [:get, :post]
   match 'status_online/:id', to: 'records#status_online', as: :status_online, via: [:get, :post]
   match 'change_payment_type/:id', to: 'records#change_payment_type', as: :change_payment_type, via: [:get, :post]
   match 'add_shelf/:id', to: 'shelves#add_shelf', as: :add_shelf, via: [:get, :post]
+  match 'close_order/:id', to: 'orders#close', as: :close, via: [:get, :post]
+  match 'add_to_stock/:id', to: 'product_lists#add_to_stock', as: :add_to_stock, via: [:get, :post]
 
   get 'fill_schedule', to: 'months#fill_schedule'
 

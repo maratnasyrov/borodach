@@ -1,0 +1,26 @@
+.add-provider-btn
+  button.button data-toggle="provider-dropdown" type="button"  +
+  #provider-dropdown.center.dropdown-pane.right data-dropdown="" 
+    = render "providers/form"
+.row
+  .medium-12
+    - if !notice.nil? 
+      .notice-msg = notice
+    .form-title Поставщики
+    table
+      thead
+        tr
+          td.part Наименование поставщика
+          td.part Электронная почта
+          td.part Номер
+          td.part Контактное лицо
+          td.part 
+      tbody
+        - providers.each do |provider|
+          tr
+            td.part = link_to provider.name, provider_path(provider)
+            td.part = provider.email
+            td.part = provider.phone_number
+            td.part = provider.contact_name
+            td.part-delete = link_to 'X',  provider_path(provider),  method: :delete, data: { confirm: 'Вы уверенны?' }
+

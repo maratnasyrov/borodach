@@ -213,13 +213,15 @@ class RecordsController < ApplicationController
 
           flag_number = find_purchase.number
           success = find_purchase.update_attributes(number: find_purchase.number - 1)
+          CheckPurchase.new(find_purchase).check if success
+
           if find_purchase.number - flag_number != 0
             PurchaseHistory.create(
               purchase_id: find_purchase.id,
               number_changes: find_purchase.number - flag_number,
               price: find_purchase.price,
               seller: master.name
-            )   
+            )
           end
         end
       end
@@ -236,14 +238,19 @@ class RecordsController < ApplicationController
           end
 
           success = shelf_flag.update_attributes(bulk: shelf_flag.bulk - shelf.number, number: shelf_number) if shelf_flag.bulk > 0
+          find_purchase = Purchase.find_by id: shelf_flag.purchase_id
 
-          ShelfHistory.create(
-              record_id: record.id,
-              shelf_id: shelf_flag.id,
-              number_changes: shelf.number,
-              day_id: day.id,
-              master_id: master.id
-            ) if success
+          if success
+            CheckPurchase.new(find_purchase).check
+
+            ShelfHistory.create(
+                record_id: record.id,
+                shelf_id: shelf_flag.id,
+                number_changes: shelf.number,
+                day_id: day.id,
+                master_id: master.id
+              )
+          end
         end
       end
 

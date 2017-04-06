@@ -1,4 +1,6 @@
 class BrandsController < ApplicationController
+  expose(:provider)
+
   expose(:brands) { Brand.all }
   expose(:brand, attributes: :brands_params)
 
@@ -8,20 +10,28 @@ class BrandsController < ApplicationController
     brand = Brand.create(brands_params)
     success = brand.save
 
-    redirect_to brands_path if success
+    provider = Provider.find_by id: brand.provider_id
+
+    redirect_to provider_path(provider)
   end
 
   def destroy
     purchase_empty = brand.purchases.empty?
     category_empty = brand.categories.empty?
-    brand.destroy if purchase_empty && category_empty
+    success = brand.destroy if purchase_empty && category_empty
 
-    redirect_to brands_path
+    provider = Provider.find_by id: brand.provider_id
+
+    if success
+      redirect_to provider_path(provider)
+    else
+      redirect_to provider_path(provider), notice: "Удаление невозможно, так как есть товары или категории данного бренда!"
+    end
   end
   
   private
 
   def brands_params
-    params.require(:brand).permit(:name)
+    params.require(:brand).permit(:name).merge(provider_id: provider.id)
   end
 end
