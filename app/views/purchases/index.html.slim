@@ -4,8 +4,9 @@
     = active_link_to "Расходы", shelves_path, wrap_tag: :li, class: "btn-item-shelf"
   .form-title Склад
   - brands.sort_by_name.each do |brand|
-    .part
-      = link_to brand_path(brand) do
-        .brand-part = image_tag ("no_image2.png")
-        .brand-title = brand.name
-      end
+    .brands-list
+      center
+        = link_to brand_path(brand) do
+          .brand-image = image_tag ("no_image2.png")
+          .brand-title = brand.name
+        end
