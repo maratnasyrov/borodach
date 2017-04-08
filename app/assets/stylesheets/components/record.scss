@@ -129,11 +129,12 @@ table.white {
 }
 
 .time-online-disabled {
-  padding: 5px;
   color: #fff !important;
-  padding: 7px;
+  padding: 10px !important;
   background-color: #872929;
   text-align: center;
+  border-top: 1px solid #E6E7E8;
+  border-bottom: 1px solid #E6E7E8;
 }
 
 .time-start, .master {

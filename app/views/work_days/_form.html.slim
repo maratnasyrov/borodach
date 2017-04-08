@@ -7,14 +7,20 @@
       tr
         - if work_day.records.all.length/2 == 5
             td.time-online.part
-        - work_day.records.all_records.first(work_day.records.all.length/2).each do |record|
+        - work_day.records.first_four(work_day.records.all.length/3).each do |record|
           - if !RecordPolicy.new(record).status_added? && !record.dinner.eql?(true)
             td.time-online.part = link_to record.decorate.show_time, edit_work_day_record_path(work_day, record)
           - else
             td.time-online-disabled.part = record.decorate.show_time
       tr
-        - (work_day.records.all_records - work_day.records.all_records.first(work_day.records.all.length/2)).each do |record|
+        - work_day.records.second_four(work_day.records.all.length/3).each do |record|
           - if !RecordPolicy.new(record).status_added? && !record.dinner.eql?(true)
             td.time-online.part.part-top = link_to record.decorate.show_time, edit_work_day_record_path(work_day, record)
           - else
-            td.time-online-disabled.part.part-top = record.decorate.show_time
+            td.time-online-disabled.part = record.decorate.show_time
+      tr
+        - work_day.records.third_four(work_day.records.all.length/3).each do |record|
+          - if !RecordPolicy.new(record).status_added? && !record.dinner.eql?(true)
+            td.time-online.part.part-top = link_to record.decorate.show_time, edit_work_day_record_path(work_day, record)
+          - else
+            td.time-online-disabled.part = record.decorate.show_time
