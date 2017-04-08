@@ -10,6 +10,7 @@ vendor/cache
 vendor/ruby
 .sass-cache
 public/system/brands/*
+public/system/masters/*
 ._*
 .env
 .pryrc

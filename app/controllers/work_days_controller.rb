@@ -17,6 +17,9 @@ class WorkDaysController < ApplicationController
   expose(:salons) { Salon.all }
   expose(:salon)
 
+  expose(:six_record) { work_day.records.all_records.first(6) }
+  expose(:last_record) { work_day.records.all_records - six_record }
+
   def create
     work_day = WorkDay.create(master_id: master.id, day_id: day.id, salon_id: salon.id)
     success = work_day.save

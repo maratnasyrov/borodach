@@ -18,4 +18,8 @@ class MasterDecorator < ApplicationDecorator
 
     return history_hash
   end
+
+  def service_info
+    return "#{object.about_master}"
+  end
 end

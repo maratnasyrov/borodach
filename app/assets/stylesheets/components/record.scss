@@ -92,7 +92,10 @@
 }
 
 .time-online {
-  padding: 5px;
+  text-align: center;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+
   a {
     color: #6b6b6b;
     padding: 7px;
@@ -105,11 +108,32 @@
   }
 }
 
+.time-select {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+table.white {
+  tr {
+    background-color: #fff;
+    width: 100%;
+
+    td {
+      padding: 0;
+    }
+  }
+}
+
+.part-top {
+  border-top: 1px solid #E6E7E8;
+}
+
 .time-online-disabled {
   padding: 5px;
-  color: #fff;
+  color: #fff !important;
   padding: 7px;
   background-color: #872929;
+  text-align: center;
 }
 
 .time-start, .master {

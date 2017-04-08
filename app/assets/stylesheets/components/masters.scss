@@ -8,3 +8,19 @@
     padding-left: 15px;
   }
 }
+
+.master-info-online {
+  width: 100%;
+  float: left;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 10px;
+
+  .master-avatar {
+    width: 130px;
+    float: left;
+  }
+  .master-service-info {
+    color: #6b6b6b;
+    padding: 5px;
+  }
+}

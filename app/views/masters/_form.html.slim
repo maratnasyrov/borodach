@@ -16,4 +16,7 @@
       = f.input :master_active, label: "Мастер активен"
       = f.input :online_record, label: "Онлайн записи"
   center
+    .medium-10
+      = f.input :avatar, label: false, as: :file
+  center
     = f.button :submit, "Сохранить"

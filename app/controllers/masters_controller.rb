@@ -26,6 +26,6 @@ class MastersController < ApplicationController
   private
 
   def masters_params
-    params.require(:master).permit(:name, :last_name, :user_id, :phone, :email, :birthday, :about_master, :online_record, :master_active)
+    params.require(:master).permit(:name, :last_name, :user_id, :phone, :email, :birthday, :about_master, :online_record, :master_active, :avatar)
   end
 end
