@@ -1,5 +1,7 @@
-= simple_form_for [provider, brand], html: { class: "service-form" } do |f|
+= simple_form_for [provider, brand], html: { multipart: true, class: "service-form" } do |f|
   .medium-12
     = f.input :name, label: false, placeholder: "Наименование"
+  .medium-12
+    = f.input :image, label: false, as: :file
   .medium-12
     = f.button :submit, "Добавить брэнд", class: "btn-form"

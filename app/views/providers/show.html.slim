@@ -16,7 +16,7 @@
             - provider.brands.each do |brand|
               tr.brands
                 td.part-name
-                  = brand.name
+                  = link_to brand.name, edit_brand_path(brand)
                 td.part
                   button.button data-toggle="brand-#{brand.id}" type="button" class="add-category"  +
                   div id="brand-#{brand.id}" class="dropdown-pane category-dropdown" data-dropdown="" data-hover-pane="true"

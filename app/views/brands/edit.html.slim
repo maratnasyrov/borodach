@@ -1,0 +1,5 @@
+.row
+  .medium-12
+    .link-to-provider = link_to "Вернуться к брендам поставщика", provider_path(Provider.find_by(id: brand.provider_id))
+    .form-title = brand.name
+    = render "form", provider: Provider.find_by(id: brand.provider_id)

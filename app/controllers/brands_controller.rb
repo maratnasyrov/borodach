@@ -17,6 +17,14 @@ class BrandsController < ApplicationController
     redirect_to provider_path(provider)
   end
 
+  def update
+    success = brand.update(brands_params)
+
+    provider = Provider.find_by id: brand.provider_id
+
+    redirect_to provider_path(provider) if success
+  end
+
   def destroy
     purchase_empty = brand.purchases.empty?
     category_empty = brand.categories.empty?
@@ -34,6 +42,6 @@ class BrandsController < ApplicationController
   private
 
   def brands_params
-    params.require(:brand).permit(:name).merge(provider_id: provider.id)
+    params.require(:brand).permit(:name, :image).merge(provider_id: provider.id)
   end
 end

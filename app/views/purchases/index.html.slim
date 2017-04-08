@@ -7,6 +7,6 @@
     .brands-list
       center
         = link_to brand_path(brand) do
-          .brand-image = image_tag ("no_image2.png")
+          .brand-image = image_tag brand.image.url(:medium)
           .brand-title = brand.name
         end

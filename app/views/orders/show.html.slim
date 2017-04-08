@@ -26,4 +26,5 @@
             - if product.closed_status == false
               td.part = link_to "Добавить на склад", add_to_stock_path(product)
               td.part-delete = link_to 'X',  order_product_list_path(order, product),  method: :delete, data: { confirm: 'Вы уверенны?' }
-
+    .total-price 
+      b = order.decorate.total_price

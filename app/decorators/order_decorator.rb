@@ -28,4 +28,14 @@ class OrderDecorator < ApplicationDecorator
       return false
     end
   end
+
+  def total_price
+    sum = 0
+
+    object.product_lists.all.each do |product_list|
+      sum += product_list.price
+    end
+
+    return "Общая сумма: #{sum}"
+  end
 end
