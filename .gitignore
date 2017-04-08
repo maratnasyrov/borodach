@@ -9,6 +9,7 @@ vendor/bundle
 vendor/cache
 vendor/ruby
 .sass-cache
+public/system/brands/*
 ._*
 .env
 .pryrc
