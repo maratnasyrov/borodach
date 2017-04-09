@@ -140,7 +140,19 @@ class MonthDecorator < ApplicationDecorator
     sum = 0
     percent = "35%"
 
-    if all_master_money_in_month >= 110000
+    if all_master_money_in_month >= 150000
+      sum = (all_master_money_in_month*0.45).round - first_salary_with_percent(master)
+      percent = "45%"
+    elsif all_master_money_in_month >= 140000 && all_master_money_in_month < 150000
+      sum = (all_master_money_in_month*0.44).round - first_salary_with_percent(master)
+      percent = "44%"
+    elsif all_master_money_in_month >= 130000 && all_master_money_in_month < 140000
+      sum = (all_master_money_in_month*0.43).round - first_salary_with_percent(master)
+      percent = "43%"
+    elsif all_master_money_in_month >= 120000 && all_master_money_in_month < 130000
+      sum = (all_master_money_in_month*0.42).round - first_salary_with_percent(master)
+      percent = "42%"
+    elsif all_master_money_in_month >= 110000 && all_master_money_in_month < 120000
       sum = (all_master_money_in_month*0.41).round - first_salary_with_percent(master)
       percent = "41%"
     elsif all_master_money_in_month >= 100000 && all_master_money_in_month < 110000

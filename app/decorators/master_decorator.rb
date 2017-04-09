@@ -20,6 +20,25 @@ class MasterDecorator < ApplicationDecorator
   end
 
   def service_info
-    return "#{object.about_master}"
+    info = object.about_master.split(";")
+
+    return info
+  end
+
+  def services_in_about_master
+    description = [service_info.first]
+    about_services =  service_info - description
+    hash_services = {}
+    about_services.each do |about_service|
+      info = about_service.split("-")
+      info.first.slice! "\r\n"
+
+      key = info.first
+      value = info.second
+
+      hash_services[key] = value
+    end
+
+    return description.first, hash_services
   end
 end

@@ -1,6 +1,15 @@
 .master-info-online
-  .master-avatar = image_tag master.avatar.url(:medium)
-  .master-service-info = master.decorate.service_info
+  .row
+    .description = master.decorate.services_in_about_master.first
+    .medium-12
+      .master-avatar.medium-3.small-2.columns = image_tag master.avatar.url(:medium)
+      .master-services-info.medium-8.small-7.columns
+        table
+          tbody
+            - master.decorate.services_in_about_master.second.each do |key, value|
+              tr
+                td.part = key
+                td.part = value
 .time-online-info
   table.white
     tbody

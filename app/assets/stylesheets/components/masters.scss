@@ -16,11 +16,36 @@
   margin-bottom: 10px;
 
   .master-avatar {
-    width: 130px;
-    float: left;
+    width: 129px;
+
+    img {
+      box-shadow: 0 1px 10px 0 rgba(104, 104, 104, 0.3);
+    }
   }
   .master-service-info {
     color: #6b6b6b;
     padding: 5px;
+  }
+}
+
+.description {
+  padding: 10px;
+  color: #872929;
+  font-size: 1.1rem;
+}
+
+.master-services-info {
+  table {
+    font-size: 0.8rem;
+
+    td {
+      padding: 8px;
+    }
+  }
+}
+
+@media (min-width: 320px) {
+  .master-avatar {
+    width: 90px;
   }
 }
