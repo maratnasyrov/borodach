@@ -9,6 +9,7 @@ class PagesController < ApplicationController
 
   expose(:two_month) { [current_month, next_month] }
   expose(:masters) { Master.all }
+  expose(:landing_images) { LandingImage.all }
 
   def success_online
     render "success_online"

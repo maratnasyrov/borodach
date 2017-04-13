@@ -1,0 +1,60 @@
+.online-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #E6E7E8;
+  background-color: #171717;
+  a {
+    color: #E6E7E8;
+  }
+}
+
+.landing-images {
+  float: left; 
+
+  .landing-image {
+    float: left;
+  }
+}
+
+.about-us {
+  background-color: #171717;
+  margin-top: 5px;
+
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+.landing-title {
+  padding: 10px;
+  color: #E6E7E8;
+  background-color: #171717;
+}
+
+.gallery, .map {
+  background-color: #171717;
+}
+
+.online {
+  background-color: #E6E7E8;
+}
+
+.map {
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+.landing-block {
+  margin-bottom: 5px;
+}
+
+.landing-part-image {
+  img {
+    width: 100%;
+  }
+}

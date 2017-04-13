@@ -1,19 +1,49 @@
-center
-  .row
-    .large-5.medium-8.small-12
-      .online-title Выберите дату
-      ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
-        - two_month.each do |month|
-          - if month.id == two_month.first.id
-            li.accordion-item.is-active data-accordion-item="" 
-              a id="current-month" class="accordion-title" aria-controls="current-month-label" aria-expanded="true" aria-selected="true" href="#" role="tab" = month.name_of_the_month
-              div id="current-month-label" class="accordion-content month-calendar" aria-hidden="false" aria-labelledby="current-month" data-tab-content="" role="tabpanel" style=("display: block;")
-                = render "days", month: month
-          -else
-            li.accordion-item data-accordion-item="" 
-              a id="next-month" class="accordion-title" aria-controls="next-month-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = month.name_of_the_month
-              div id="next-month-label" class="accordion-content month-calendar" aria-hidden="true" aria-labelledby="next-month" data-tab-content="" role="tabpanel" 
-                = render "days", month: month
+.row
+  .medium-12
+    center
+      .online-menu
+        ul.horizontal.menu data-magellan="" 
+          li
+            a href="#first" О НАС
+          li
+            a href="#second" ЗАПИСАТЬСЯ
+          li
+            a href="#third" ГАЛЛЕРЕЯ
+          li
+            a href="#four" КАРТА
+      .landing-title Подберем и сделаем стильную стрижку с который Вы обретете уверенность в себе и своей неотразимости! Эффектно! Доступно!
+      .sections
+        section#first data-magellan-target="first"
+          .landing-block.about-us
+            .landing-title О НАС
+            .about-us-info
+              iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/Ow_qI_F2ZJI?list=RDEMtLx6cWShWhH58jkEvCW70w" width="460" 
+        section#second data-magellan-target="second"
+          .landing-block.online
+            .landing-title ЗАПИСАТЬСЯ НА СТРИЖКУ
+            .medium-5
+              .online-title Выберите дату
+              ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
+                - two_month.each do |month|
+                  - if month.id == two_month.first.id
+                    li.accordion-item.is-active data-accordion-item="" 
+                      a id="current-month" class="accordion-title" aria-controls="current-month-label" aria-expanded="true" aria-selected="true" href="#" role="tab" = month.name_of_the_month
+                      div id="current-month-label" class="accordion-content month-calendar" aria-hidden="false" aria-labelledby="current-month" data-tab-content="" role="tabpanel" style=("display: block;")
+                        = render "days", month: month
+                  -else
+                    li.accordion-item data-accordion-item="" 
+                      a id="next-month" class="accordion-title" aria-controls="next-month-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = month.name_of_the_month
+                      div id="next-month-label" class="accordion-content month-calendar" aria-hidden="true" aria-labelledby="next-month" data-tab-content="" role="tabpanel" 
+                        = render "days", month: month
+        section#third data-magellan-target="third"
+          .landing-block.gallery
+            .landing-title ГАЛЛЕРЕЯ
+            .landing-part-image= image_tag landing_images[(Random.rand(landing_images.length))].image
+        section#four data-magellan-target="four"
+          .landing-block.map
+            .landing-title КАРТА
+            iframe frameborder="0" src="https://api-maps.yandex.ru/frame/v1/-/C6aAV8NI"
+
 <!— Yandex.Metrika counter —>
 javascript:
   (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter43240149 = new Ya.Metrika({ id:43240149, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");
