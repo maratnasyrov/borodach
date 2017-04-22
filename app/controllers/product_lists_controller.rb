@@ -32,6 +32,8 @@ class ProductListsController < ApplicationController
 
     update = product_list.update_attributes(closed_status: true) if write_history
 
+    order = Order.find_by id: product_list.order_id
+
     redirect_to order_path(order) if update
   end
 
