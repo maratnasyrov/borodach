@@ -1,48 +1,41 @@
-.row
-  .medium-12
-    center
-      .online-menu
-        ul.horizontal.menu data-magellan="" 
-          li
-            a href="#first" О НАС
-          li
-            a href="#second" ЗАПИСАТЬСЯ
-          li
-            a href="#third" ГАЛЛЕРЕЯ
-          li
-            a href="#four" КАРТА
-      .landing-title Подберем и сделаем стильную стрижку с который Вы обретете уверенность в себе и своей неотразимости! Эффектно! Доступно!
-      .sections
-        section#first data-magellan-target="first"
-          .landing-block.about-us
-            .landing-title О НАС
-            .about-us-info
-              iframe allowfullscreen="" frameborder="0" height="360" src="https://www.youtube.com/embed/Ow_qI_F2ZJI?list=RDEMtLx6cWShWhH58jkEvCW70w" width="460" 
-        section#second data-magellan-target="second"
-          .landing-block.online
-            .landing-title ЗАПИСАТЬСЯ НА СТРИЖКУ
-            .medium-5
-              .online-title Выберите дату
-              ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
-                - two_month.each do |month|
-                  - if month.id == two_month.first.id
-                    li.accordion-item.is-active data-accordion-item="" 
-                      a id="current-month" class="accordion-title" aria-controls="current-month-label" aria-expanded="true" aria-selected="true" href="#" role="tab" = month.name_of_the_month
-                      div id="current-month-label" class="accordion-content month-calendar" aria-hidden="false" aria-labelledby="current-month" data-tab-content="" role="tabpanel" style=("display: block;")
-                        = render "days", month: month
-                  -else
-                    li.accordion-item data-accordion-item="" 
-                      a id="next-month" class="accordion-title" aria-controls="next-month-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = month.name_of_the_month
-                      div id="next-month-label" class="accordion-content month-calendar" aria-hidden="true" aria-labelledby="next-month" data-tab-content="" role="tabpanel" 
-                        = render "days", month: month
-        section#third data-magellan-target="third"
-          .landing-block.gallery
-            .landing-title ГАЛЛЕРЕЯ
-            .landing-part-image= image_tag landing_images[(Random.rand(landing_images.length))].image
-        section#four data-magellan-target="four"
-          .landing-block.map
-            .landing-title КАРТА
-            iframe frameborder="0" src="https://api-maps.yandex.ru/frame/v1/-/C6aAV8NI"
+.row.contacts
+.row.main-part
+  .medium-12.small-12
+    button.land-btn aria-controls="motion-example-1" data-toggle="land-menu" type="button"
+      .landing-menu.medium-1 = image_tag("menu/land-menu.gif")
+    #land-menu.callout.secondary.ease.online-menu aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
+      .menu-link = link_to "О НАС"
+      .menu-link = link_to "ЗАПИСАТЬСЯ"
+      .menu-link = link_to "ГАЛЛЕРЕЯ"
+      .menu-link = link_to "КАРТА"
+
+    .info-about
+      button.land-btn-info aria-controls="motion-example-1" data-toggle="info-land" type="button"
+        .landing-menu.medium-1 = image_tag("menu/info-land.png")
+      #info-land.callout.secondary.ease.info-contacts aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
+        = render "top_layout"
+    
+    .medium-12.small-12.phrase Стильные стрижки в Казани!
+
+  .medium-6.landing-image.columns
+    = image_tag("company-logo.jpg")
+  .medium-6.landing-records-reveal.columns
+    .about Запишитесь на стрижку тогда, когда вам удобно
+    .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
+    p
+      a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
+    div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
+      .landing-title Выберите дату
+      .medium-12
+        button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
+        button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
+
+      .two-months = render "days", month: two_month.first
+      #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+        .second-month-land = render "days", month: two_month.last
+
+      button.close-button aria-label=("Close modal") data-close="" type="button"
+        span aria-hidden="true"  &times;
 
 <!— Yandex.Metrika counter —>
 javascript:

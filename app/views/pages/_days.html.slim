@@ -1,13 +1,14 @@
+.landing-title.month-name-land = month.name_of_the_month
 table.calendar
   thead
     tr
-      td.part Пн
-      td.part Вт
-      td.part Ср
-      td.part Чт
-      td.part Пт
-      td.part Сб
-      td.part Вс
+      td.part.table-head Пн
+      td.part.table-head Вт
+      td.part.table-head Ср
+      td.part.table-head Чт
+      td.part.table-head Пт
+      td.part.table-head Сб
+      td.part.table-head Вс
   tbody
     tr.week
       - month.decorate.first_week.each do |first_week_day|

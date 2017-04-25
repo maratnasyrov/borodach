@@ -18,6 +18,13 @@ ul.accordion.months  {
   padding: 0;
 }
 
+.table-head {
+  font-family: "Segoe UI", sans-serif;
+  font-variant: small-caps;
+  font-size: 1rem;
+  line-height: 20px;
+}
+
 .months {
   border: none;
 }
@@ -35,9 +42,35 @@ ul.accordion.months  {
   font-size: 1.3rem;
 }
 
+.land-reveal {
+  height: 380px;
+  width: 380px;
+  padding: 0;
+  border: 2px solid #000;
+}
+
+.month-btn-land-left, .month-btn-land-rigth {
+  padding: 20px 30px 20px 30px;
+  width: 50%;
+  outline: none;
+  position: relative;
+  z-index: 4;
+}
+
+.month-btn-land-rigth {
+  float: right;
+}
+
 .calendar {
   margin-bottom: 0;
   border: none;
+  position: absolute;
+  box-shadow: none;
+  border-bottom: none;
+
+  tbody {
+    border: none;
+  }
 
   .week {
     background-color: #fff;
@@ -58,7 +91,7 @@ ul.accordion.months  {
       
       .day-link {
         color: #6b6b6b;
-        padding: 7px 12px 7px 12px;
+        padding: 7px 12px 5px 9px;
         text-align: center;
         margin-bottom: 10px;
 
@@ -75,7 +108,18 @@ ul.accordion.months  {
 
 td.part-day-number {
   padding: 0;
-  height: 35px !important;
+  height: 40px !important;
+  font-family: Retrica, sans-serif;
+  font-size: 1.7rem;
+}
+
+.two-months {
+  position: absolute;
+  width: 100%;
+}
+
+.month-name-land {
+  background-color: #fff;
 }
 
 .calendar-small {
