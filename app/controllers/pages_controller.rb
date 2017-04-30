@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :success_online]
+  skip_before_action :authenticate_user!, only: [:index, :success_online, :about]
 
   expose(:masters) { Master.all }
 

@@ -16,26 +16,34 @@
         = render "top_layout"
     
     .medium-12.small-12.phrase Стильные стрижки в Казани!
+  
+.row.main-part.about = render "about"
 
-  .medium-6.landing-image.columns
-    = image_tag("company-logo.jpg")
-  .medium-6.landing-records-reveal.columns
-    .about Запишитесь на стрижку тогда, когда вам удобно
-    .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
-    p
-      a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
-    div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
-      .landing-title Выберите дату
-      .medium-12
-        button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
-        button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
+.row.main-part.online-record-landing
+  .medium-12.small-12
+    .medium-6.landing-image.columns
+      = image_tag("company-logo.jpg")
+    .medium-6.landing-records-reveal.columns
+      .about Запишитесь на стрижку тогда, когда вам удобно
+      .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
+      p
+        a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
+      div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
+        .landing-title Выберите дату
+        .medium-12
+          button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
+          button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
 
-      .two-months = render "days", month: two_month.first
-      #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
-        .second-month-land = render "days", month: two_month.last
+        .two-months = render "days", month: two_month.first
+        #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+          .second-month-land = render "days", month: two_month.last
 
-      button.close-button aria-label=("Close modal") data-close="" type="button"
-        span aria-hidden="true"  &times;
+        button.close-button aria-label=("Close modal") data-close="" type="button"
+          span aria-hidden="true"  &times;
+    
+.row.main-part.gallery = render "gallery"
+
+.row.main-part.map = render "map"
 
 <!— Yandex.Metrika counter —>
 javascript:
