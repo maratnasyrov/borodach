@@ -1,0 +1,2 @@
+class WorkingShiftsController < ApplicationController
+end

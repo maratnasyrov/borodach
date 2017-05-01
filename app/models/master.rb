@@ -4,6 +4,7 @@ class Master < ActiveRecord::Base
   has_many :clients
   has_many :client_histories
   has_many :services
+  has_many :working_shifts
 
   belongs_to :salons
   
