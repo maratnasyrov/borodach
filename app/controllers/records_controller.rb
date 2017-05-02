@@ -99,11 +99,14 @@ class RecordsController < ApplicationController
       finance.destroy
 
       working_shift_find = WorkingShift.find_by(id: finance.working_shift_id)
+      month_salary = MonthSalary.find_by(id: working_shift_find.month_salary_id)
 
       if finance.service_type.eql?(false)
         working_shift_find.update_attributes(sales: working_shift_find.sales - finance.price)
+        month_salary.update_attributes(sales: month_salary.sales - finance.price)
       else
         working_shift_find.update_attributes(services: working_shift_find.services - finance.price)
+        month_salary.update_attributes(services: month_salary.services - finance.price)
       end
     end
 
@@ -400,10 +403,16 @@ class RecordsController < ApplicationController
   end
 
   def create_finances(master, record, price, service_id, service_type)
+    month = Month.find_by id: day.month_id
+    month_salary = MonthSalary.find_by(master_id: master.id, month_id: month.id)
     working_shift_find = WorkingShift.find_by(master_id: master.id, day_id: day.id)
 
+    if month_salary == nil
+      month_salary = MonthSalary.create(master_id: master.id, month_id: month.id)
+    end
+
     if working_shift_find == nil
-      working_shift_find = WorkingShift.create(master_id: master.id, day_id: day.id)
+      working_shift_find = WorkingShift.create(master_id: master.id, day_id: day.id, month_salary_id: month_salary.id)
     end
 
     finance_day = FinanceDay.all.find_by(day_id: day.id)
@@ -433,8 +442,10 @@ class RecordsController < ApplicationController
 
     if finance.service_type.eql?(false)
       working_shift_find.update_attributes(sales: working_shift_find.sales + finance.price)
+      month_salary.update_attributes(sales: month_salary.sales + finance.price)
     else
       working_shift_find.update_attributes(services: working_shift_find.services + finance.price)
+      month_salary.update_attributes(services: month_salary.services + finance.price)
     end
   end
 

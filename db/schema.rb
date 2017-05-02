@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430232418) do
+ActiveRecord::Schema.define(version: 20170501012901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,15 @@ ActiveRecord::Schema.define(version: 20170430232418) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "month_salaries", force: :cascade do |t|
+    t.integer  "sales",      default: 0
+    t.integer  "services",   default: 0
+    t.integer  "master_id"
+    t.integer  "month_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "months", force: :cascade do |t|
@@ -306,12 +315,13 @@ ActiveRecord::Schema.define(version: 20170430232418) do
   end
 
   create_table "working_shifts", force: :cascade do |t|
-    t.integer  "sales",      default: 0
-    t.integer  "services",   default: 0
+    t.integer  "sales",           default: 0
+    t.integer  "services",        default: 0
     t.integer  "master_id"
     t.integer  "day_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "month_salary_id"
   end
 
   create_table "years", force: :cascade do |t|
