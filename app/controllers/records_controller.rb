@@ -97,6 +97,17 @@ class RecordsController < ApplicationController
   def delete_finances_for_record(record, work_day_flag)
     record.finances.all.each do |finance|
       finance.destroy
+
+      working_shift_find = WorkingShift.find_by(id: finance.working_shift_id)
+      month_salary = MonthSalary.find_by(id: working_shift_find.month_salary_id)
+
+      if finance.service_type.eql?(false)
+        working_shift_find.update_attributes(sales: working_shift_find.sales - finance.price)
+        month_salary.update_attributes(sales: month_salary.sales - finance.price)
+      else
+        working_shift_find.update_attributes(services: working_shift_find.services - finance.price)
+        month_salary.update_attributes(services: month_salary.services - finance.price)
+      end
     end
 
     record.shelf_histories.all.each do |shelf_history|
@@ -392,6 +403,18 @@ class RecordsController < ApplicationController
   end
 
   def create_finances(master, record, price, service_id, service_type)
+    month = Month.find_by id: day.month_id
+    month_salary = MonthSalary.find_by(master_id: master.id, month_id: month.id)
+    working_shift_find = WorkingShift.find_by(master_id: master.id, day_id: day.id)
+
+    if month_salary == nil
+      month_salary = MonthSalary.create(master_id: master.id, month_id: month.id)
+    end
+
+    if working_shift_find == nil
+      working_shift_find = WorkingShift.create(master_id: master.id, day_id: day.id, month_salary_id: month_salary.id)
+    end
+
     finance_day = FinanceDay.all.find_by(day_id: day.id)
 
     if record.payment_method.eql?("Карта")
@@ -413,8 +436,17 @@ class RecordsController < ApplicationController
       service_type: service_type,
       cash_type: payment_method,
       finance_day_id: finance_day.id,
-      record_id: record.id)
+      record_id: record.id,
+      working_shift_id: working_shift_find.id)
     finance.save
+
+    if finance.service_type.eql?(false)
+      working_shift_find.update_attributes(sales: working_shift_find.sales + finance.price)
+      month_salary.update_attributes(sales: month_salary.sales + finance.price)
+    else
+      working_shift_find.update_attributes(services: working_shift_find.services + finance.price)
+      month_salary.update_attributes(services: month_salary.services + finance.price)
+    end
   end
 
   def add_client(master, record)

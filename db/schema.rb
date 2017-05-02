@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408075339) do
+ActiveRecord::Schema.define(version: 20170501012901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,18 +77,28 @@ ActiveRecord::Schema.define(version: 20170408075339) do
   create_table "finances", force: :cascade do |t|
     t.integer  "master_id"
     t.integer  "day_id"
-    t.boolean  "cash_type",      default: false, null: false
-    t.integer  "price",                          null: false
+    t.boolean  "cash_type",        default: false, null: false
+    t.integer  "price",                            null: false
     t.string   "comment"
     t.string   "client_name"
     t.string   "client_phone"
     t.boolean  "service_type"
     t.integer  "service_id"
-    t.boolean  "finance_type",   default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "finance_type",     default: false, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "finance_day_id"
     t.integer  "record_id"
+    t.integer  "working_shift_id"
+  end
+
+  create_table "landing_images", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "masters", force: :cascade do |t|
@@ -107,6 +117,15 @@ ActiveRecord::Schema.define(version: 20170408075339) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "month_salaries", force: :cascade do |t|
+    t.integer  "sales",      default: 0
+    t.integer  "services",   default: 0
+    t.integer  "master_id"
+    t.integer  "month_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "months", force: :cascade do |t|
@@ -293,6 +312,16 @@ ActiveRecord::Schema.define(version: 20170408075339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "salon_id"
+  end
+
+  create_table "working_shifts", force: :cascade do |t|
+    t.integer  "sales",           default: 0
+    t.integer  "services",        default: 0
+    t.integer  "master_id"
+    t.integer  "day_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "month_salary_id"
   end
 
   create_table "years", force: :cascade do |t|
