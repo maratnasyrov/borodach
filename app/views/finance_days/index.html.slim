@@ -6,54 +6,55 @@
         = month.name_of_the_month
       .master-salary-part.medium-12
       - Master.sort_by_name.each do |master|
-        .row.master-salary-part
-          .medium-12
-            .medium-1.main-part.columns
-              = image_tag(master.avatar.url, class: "masters-salary-img")
-              .master-name = master.name
-            .medium-3.money-all.columns
-              .money.medium-12.columns
-                .money-total
-                  .money-total-title  Услуги за месяц
-                  .money-services = master.decorate.all_money(month)
-                .money-total-sales
-                  .money-sales-title Продажи за месяц
-                  .money-sales = master.decorate.all_sales_without_percent(month)
-            .medium-4.first-week.columns
-              .medium-12
-                .money.medium-10.columns
+        - if master.master_active == true
+          .row.master-salary-part
+            .medium-12
+              .medium-1.main-part.columns
+                = image_tag(master.avatar.url, class: "masters-salary-img")
+                .master-name = master.name
+              .medium-3.money-all.columns
+                .money.medium-12.columns
                   .money-total
-                    .money-total-title Наработка с 1 по 15
-                    - if master.decorate.first_salary(month) != 0
-                      .money-total-sum = master.decorate.first_salary(month).last
-                    - else
-                      .money-total-sum 0
-                  .money-salary
-                    .money-salary-title Аванс
-                    .money-salary-sum
+                    .money-total-title  Услуги за месяц
+                    .money-services = master.decorate.all_money(month)
+                  .money-total-sales
+                    .money-sales-title Продажи за месяц
+                    .money-sales = master.decorate.all_sales_without_percent(month)
+              .medium-4.first-week.columns
+                .medium-12
+                  .money.medium-10.columns
+                    .money-total
+                      .money-total-title Наработка с 1 по 15
                       - if master.decorate.first_salary(month) != 0
-                        = master.decorate.percent(master.decorate.first_salary(month).last)
+                        .money-total-sum = master.decorate.first_salary(month).last
                       - else
-                        | 0
-                .percent-35.medium-2.columns 
-                  .text 35
-            .medium-4.second-week.columns
-              .medium-12
-                .money.medium-10.columns
-                  .money-total
-                    .money-total-title
-                      | Наработка с 16 по 
-                      = month.days.last.number_of_the_day
-                    - if master.decorate.second_salary(month) != 0
-                      .money-total-sum = master.decorate.second_salary(month)
-                    - else
-                      .money-total-sum 0
-                  .money-salary
-                    .money-salary-title Зарплата + процент с продаж
-                    .money-salary-sum
-                      - if master.decorate.percents(month) != 0
-                        = master.decorate.percents(month).last
+                        .money-total-sum 0
+                    .money-salary
+                      .money-salary-title Аванс
+                      .money-salary-sum
+                        - if master.decorate.first_salary(month) != 0
+                          = master.decorate.percent(master.decorate.first_salary(month).last)
+                        - else
+                          | 0
+                  .percent-35.medium-2.columns 
+                    .text 35
+              .medium-4.second-week.columns
+                .medium-12
+                  .money.medium-10.columns
+                    .money-total
+                      .money-total-title
+                        | Наработка с 16 по 
+                        = month.days.last.number_of_the_day
+                      - if master.decorate.second_salary(month) != 0
+                        .money-total-sum = master.decorate.second_salary(month)
                       - else
-                        | 0
-                div class="percent-second-#{master.decorate.percents(month).first} medium-2 columns"
-                  .text = master.decorate.percents(month).first
+                        .money-total-sum 0
+                    .money-salary
+                      .money-salary-title Зарплата + процент с продаж
+                      .money-salary-sum
+                        - if master.decorate.percents(month) != 0
+                          = master.decorate.percents(month).last
+                        - else
+                          | 0
+                  div class="percent-second-#{master.decorate.percents(month).first} medium-2 columns"
+                    .text = master.decorate.percents(month).first
