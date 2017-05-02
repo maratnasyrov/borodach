@@ -84,3 +84,170 @@ table {
     color: #fff;
   }
 }
+
+.master-salary-part {
+  box-shadow: 0 3px 15px 0 rgba(104,104,104,0.6);
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.finance-calculation-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #767676;
+  padding-bottom: 10px;
+}
+
+.main-part {
+  background-color: #fff;
+  
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+
+  img {
+    width: 100px;
+    border: 1px solid #c1c1c1;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+  }
+
+  .master-name {
+    text-align: center;
+    font-size: 1rem;
+    padding: 12px;
+    color: #6b6b6b;
+    border-right: 1px solid #E6E7E8;
+  }
+}
+
+.second-week {
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.money-all{
+  border-right: 10px solid #767676;
+}
+
+.first-week, .second-week, .money-all {
+  background-color: #fff;
+  padding: 0;
+  height: auto;
+
+  .percent-35,
+  .percent-second-35,
+  .percent-second-35,
+  .percent-second-36,
+  .percent-second-37,
+  .percent-second-38,
+  .percent-second-39,
+  .percent-second-40,
+  .percent-second-41,
+  .percent-second-42,
+  .percent-second-43,
+  .percent-second-44,
+  .percent-second-45 {
+    background-color: #767676;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    padding-top: 47.5px;
+    padding-bottom: 47.5px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+
+    .text {
+      transform: rotate(-20deg);
+    }
+  }
+
+  .percent-second-36 {
+    background-color: #767676;
+  }
+
+  .percent-second-37 {
+    background-color: #767676;
+  }
+
+  .percent-second-38 {
+    background-color: #ffae00;
+  }
+
+  .percent-second-39 {
+    background-color: #ffae00;
+  }
+
+  .percent-second-40 {
+    background-color: #ffae00;
+  }
+
+  .percent-second-41 {
+    background-color: #3adb76;
+  }
+
+  .percent-second-42 {
+    background-color: #3adb76;
+  }
+
+  .percent-second-43 {
+    background-color: #3adb76;
+  }
+
+  .percent-second-44 {
+    background-color: #cc4b37;
+  }
+
+  .percent-second-45 {
+    background-color: #cc4b37;
+  }
+
+  .money {
+    padding: 0;
+
+    .money-total {
+      .money-total-title, .money-total-sum, .money-services  {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        color: #706e71;
+        font-size: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+
+      .money-total-title, .money-sales {
+        color: #1a5414
+      }
+
+      .money-total-sum, .money-services  {
+        font-size: 1rem;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #E6E7E8;
+      }
+    }
+
+    .money-salary, .money-total-sales {
+      .money-salary-title,  .money-salary-sum, .money-sales, .money-sales-title {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        color: #706e71;
+        font-size: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+
+      .money-salary-title, .money-sales-title {
+        color: #24384c;
+      }
+
+      .money-salary-sum {
+        font-size: 1rem;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-bottom: none;
+      }
+    }
+  }
+}

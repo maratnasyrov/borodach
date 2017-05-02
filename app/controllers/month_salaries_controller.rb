@@ -1,0 +1,2 @@
+class MonthSalariesController < ApplicationController
+end

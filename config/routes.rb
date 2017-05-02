@@ -102,6 +102,8 @@ Rails.application.routes.draw do
   end
 
   resources :landing_images
+  
+  resources :working_shifts
 
   match 'open_record/:id', to: 'records#open_record', as: :open_record, via: [:get, :post]
   match 'clear_record/:id', to: 'records#clear_record', as: :record_clear, via: [:get, :post]
