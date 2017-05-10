@@ -57,11 +57,11 @@ class RecordsController < ApplicationController
 
   def status_online
     record.update_attributes(status_online_params)
-    work_day_flag = WorkDay.find_by id: record.work_day_id
 
-    notice = "Запись онлайн"
-    
-    TelegramMailer.new(record, notice, 2).send_message_to_telegram
+    notice_telegram = "Запись онлайн"
+  
+    TelegramMailer.new(record, notice_telegram, 2).send_message_to_telegram
+    SmsMailer.new(record).send_sms
 
     redirect_to success_path
   end

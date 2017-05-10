@@ -12,7 +12,7 @@
   font-variant: small-caps;
   line-height: 40px;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   margin-top: 25px;
   margin-left: 25px;
   z-index: 4;
@@ -67,7 +67,7 @@
   }
 }
 
-.main-part {
+.main-part-land {
   background-color: #fff;
   box-shadow: 0 7px 20px 0 rgb(0, 0, 0);
 }
@@ -188,7 +188,7 @@
 
 .land-btn {
   float: left;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   margin-top: 35px;
   margin-left: 35px;
@@ -202,7 +202,7 @@
   margin-top: 35px;
   margin-left: -65px;
   outline: none;
-  position: absolute;
+  position: fixed;
   z-index: 5;
 }
 

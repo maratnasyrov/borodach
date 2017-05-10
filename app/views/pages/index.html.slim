@@ -1,5 +1,5 @@
 .row.contacts
-.row.main-part
+.row.main-part-land
   .medium-12.small-12
     button.land-btn aria-controls="motion-example-1" data-toggle="land-menu" type="button"
       .landing-menu.medium-1 = image_tag("menu/land-menu.gif")
@@ -17,9 +17,9 @@
     
     .medium-12.small-12.phrase Стильные стрижки в Казани!
   
-.row.main-part.about = render "about"
+.row.main-part-land.about = render "about"
 
-.row.main-part.online-record-landing
+.row.main-part-land.online-record-landing
   .medium-12.small-12
     .medium-6.landing-image.columns
       = image_tag("company-logo.jpg")
@@ -41,9 +41,9 @@
         button.close-button aria-label=("Close modal") data-close="" type="button"
           span aria-hidden="true"  &times;
     
-.row.main-part.gallery = render "gallery"
+.row.main-part-land.gallery = render "gallery"
 
-.row.main-part.map = render "map"
+.row.main-part-land.map = render "map"
 
 <!— Yandex.Metrika counter —>
 javascript:
