@@ -3,47 +3,54 @@
   .medium-12.small-12
     button.land-btn aria-controls="motion-example-1" data-toggle="land-menu" type="button"
       .landing-menu.medium-1 = image_tag("menu/land-menu.gif")
-    #land-menu.callout.secondary.ease.online-menu aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
-      .menu-link = link_to "О НАС"
-      .menu-link = link_to "ЗАПИСАТЬСЯ"
-      .menu-link = link_to "ГАЛЛЕРЕЯ"
-      .menu-link = link_to "КАРТА"
+    #land-menu.callout.secondary.ease.online-menu aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+      ul.vertical.menu.menu-land-info data-magellan="" 
+        li.menu-link
+            a href="#first"  О НАС
+        li.menu-link
+            a href="#second"  ЗАПИСАТЬСЯ
+        li.menu-link
+            a href="#third" ГАЛЛЕРЕЯ
+        li.menu-link
+            a href="#four" КАРТА
+  .info-about
+    button.land-btn-info aria-controls="motion-example-1" data-toggle="info-land" type="button"
+      .landing-menu.medium-1 = image_tag("menu/info-land.png")
+    #info-land.callout.secondary.ease.info-contacts aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
+      = render "top_layout"
+      
+  .medium-12.small-12.phrase Стильные стрижки в Казани!
+.sections
+  section#first data-magellan-target="first"
+    .row.main-part-land.about = render "about"
 
-    .info-about
-      button.land-btn-info aria-controls="motion-example-1" data-toggle="info-land" type="button"
-        .landing-menu.medium-1 = image_tag("menu/info-land.png")
-      #info-land.callout.secondary.ease.info-contacts aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
-        = render "top_layout"
-    
-    .medium-12.small-12.phrase Стильные стрижки в Казани!
-  
-.row.main-part-land.about = render "about"
+  .row.main-part-land.online-record-landing
+    .medium-12.small-12
+      .medium-6.landing-image.columns
+        = image_tag("company-logo.jpg")
+      section#second data-magellan-target="second"
+        .medium-6.landing-records-reveal.columns
+          .about Запишитесь на стрижку тогда, когда вам удобно
+          .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
+          p
+            a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
+          div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
+            .landing-title Выберите дату
+            .medium-12
+              button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
+              button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
 
-.row.main-part-land.online-record-landing
-  .medium-12.small-12
-    .medium-6.landing-image.columns
-      = image_tag("company-logo.jpg")
-    .medium-6.landing-records-reveal.columns
-      .about Запишитесь на стрижку тогда, когда вам удобно
-      .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
-      p
-        a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
-      div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
-        .landing-title Выберите дату
-        .medium-12
-          button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
-          button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
+            .two-months = render "days", month: two_month.first
+            #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+              .second-month-land = render "days", month: two_month.last
 
-        .two-months = render "days", month: two_month.first
-        #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
-          .second-month-land = render "days", month: two_month.last
+            button.close-button aria-label=("Close modal") data-close="" type="button"
+              span aria-hidden="true"  &times;
 
-        button.close-button aria-label=("Close modal") data-close="" type="button"
-          span aria-hidden="true"  &times;
-    
-.row.main-part-land.gallery = render "gallery"
-
-.row.main-part-land.map = render "map"
+  section#third data-magellan-target="third"
+    .row.main-part-land.gallery = render "gallery"
+  section#four data-magellan-target="four"
+    .row.main-part-land.map = render "map"
 
 <!— Yandex.Metrika counter —>
 javascript:

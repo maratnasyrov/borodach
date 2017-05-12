@@ -3,6 +3,11 @@
     src: url(retrica.ttf);
 }
 
+.menu-land-info {
+  width: 145px;
+  margin: 10px; 
+}
+
 .online-menu, .info-contacts {
   background-color: #fff !important;
   font-size: 1rem;
@@ -19,6 +24,7 @@
 
   .menu-link {
     text-align: center;
+    margin-bottom: 10px;
 
     a {
       color: rgba(107, 107, 107, 1);
@@ -38,6 +44,7 @@
 
     &:last-child {
       border-right: none;
+      margin-bottom: 0;
     }
   }
 }
@@ -135,10 +142,9 @@
 
 .landing-title {
   padding: 10px;
-  color: #000;
-  font-family: Retrica, sans-serif;
+  color: #6b6b6b;
   font-variant: small-caps;
-  font-size: 3rem;
+  font-size: 1.7rem;
   padding-top: 20px;
   line-height: 30px;
   text-align: center;
