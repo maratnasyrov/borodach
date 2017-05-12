@@ -37,7 +37,7 @@ class SmsMailer
     url = "http://api.prostor-sms.ru/messages/v2/send/?login=t89534074294&password=480577&phone=+#{parse_phone}&text=#{notice_sms}"
 
     uri = Addressable::URI.parse(url)
-    binding.pry
+
     response = Net::HTTP.get_response(uri.normalize)
   end
 
