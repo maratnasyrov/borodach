@@ -101,6 +101,8 @@ Rails.application.routes.draw do
     resources :product_lists 
   end
 
+  resources :landing_images
+  
   resources :working_shifts
 
   match 'open_record/:id', to: 'records#open_record', as: :open_record, via: [:get, :post]

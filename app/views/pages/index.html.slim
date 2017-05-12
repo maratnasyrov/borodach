@@ -1,19 +1,57 @@
-center
-  .row
-    .large-5.medium-8.small-12
-      .online-title Выберите дату
-      ul#vhheat-responsiveaccordiontabs.accordion.months data-accordion="calendar-online" data-responsive-accordion-tabs="accordion medium-tabs large-accordion" role="tablist" data-allow-all-closed="true"
-        - two_month.each do |month|
-          - if month.id == two_month.first.id
-            li.accordion-item.is-active data-accordion-item="" 
-              a id="current-month" class="accordion-title" aria-controls="current-month-label" aria-expanded="true" aria-selected="true" href="#" role="tab" = month.name_of_the_month
-              div id="current-month-label" class="accordion-content month-calendar" aria-hidden="false" aria-labelledby="current-month" data-tab-content="" role="tabpanel" style=("display: block;")
-                = render "days", month: month
-          -else
-            li.accordion-item data-accordion-item="" 
-              a id="next-month" class="accordion-title" aria-controls="next-month-label" aria-expanded="false" aria-selected="false" href="#" role="tab" = month.name_of_the_month
-              div id="next-month-label" class="accordion-content month-calendar" aria-hidden="true" aria-labelledby="next-month" data-tab-content="" role="tabpanel" 
-                = render "days", month: month
+.row.contacts
+.row.main-part-land
+  .medium-12.small-12
+    button.land-btn aria-controls="motion-example-1" data-toggle="land-menu" type="button"
+      .landing-menu.medium-1 = image_tag("menu/land-menu.gif")
+    #land-menu.callout.secondary.ease.online-menu aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+      ul.vertical.menu.menu-land-info data-magellan="" 
+        li.menu-link
+            a href="#first"  О НАС
+        li.menu-link
+            a href="#second"  ЗАПИСАТЬСЯ
+        li.menu-link
+            a href="#third" ГАЛЛЕРЕЯ
+        li.menu-link
+            a href="#four" КАРТА
+  .info-about
+    button.land-btn-info aria-controls="motion-example-1" data-toggle="info-land" type="button"
+      .landing-menu.medium-1 = image_tag("menu/info-land.png")
+    #info-land.callout.secondary.ease.info-contacts aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")      
+      = render "top_layout"
+      
+  .medium-12.small-12.phrase Стильные стрижки в Казани!
+.sections
+  section#first data-magellan-target="first"
+    .row.main-part-land.about = render "about"
+
+  .row.main-part-land.online-record-landing
+    .medium-12.small-12
+      .medium-6.landing-image.columns
+        = image_tag("company-logo.jpg")
+      section#second data-magellan-target="second"
+        .medium-6.landing-records-reveal.columns
+          .about Запишитесь на стрижку тогда, когда вам удобно
+          .about-text Мы стараемся сделать запись к нам максимально удобной, и если вам проще сделать все через интернет, то наш сервис онлайн записи поможет вам в этом.
+          p
+            a data-open="modal-landing" class="title-type landing-online-btn" Записаться к мастеру
+          div id="modal-landing" data-animation-in="fade-in" data-animation-out="fade-out" class="reveal land-reveal" data-reveal="" data-options="showDelay:1000; hideDelay:100"
+            .landing-title Выберите дату
+            .medium-12
+              button.month-btn-land-left.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ◀
+              button.month-btn-land-rigth.medium-6.columns aria-controls="motion-example-1" data-toggle="month-land" type="button" ▶
+
+            .two-months = render "days", month: two_month.first
+            #month-land aria-expanded="true" data-animate="fade-in fade-out" data-toggler="x2e61g-toggler" style=("display: none;")
+              .second-month-land = render "days", month: two_month.last
+
+            button.close-button aria-label=("Close modal") data-close="" type="button"
+              span aria-hidden="true"  &times;
+
+  section#third data-magellan-target="third"
+    .row.main-part-land.gallery = render "gallery"
+  section#four data-magellan-target="four"
+    .row.main-part-land.map = render "map"
+
 <!— Yandex.Metrika counter —>
 javascript:
   (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter43240149 = new Ya.Metrika({ id:43240149, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");

@@ -1,0 +1,21 @@
+.medium-6.columns
+  center
+    #yo99mp-orbit.orbit data-events="resize" data-orbit="nyfxa7-orbit" data-resize="yo99mp-orbit" role="region" data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;"
+      ul.orbit-container.landing-orbit tabindex="0" 
+      button.orbit-previous tabindex="0" 
+        span.show-for-sr> Previous Slide
+        | ◀︎
+      button.orbit-next tabindex="0" 
+        span.show-for-sr> Next Slide
+        | ▶︎
+
+      - landing_images.each do |landing_image|
+        - if landing_image.id == landing_images.first.id
+          li.orbit-slide.is-active aria-live="polite" data-slide="0" style=("display: block; position: relative; top: 0px;")
+            img.orbit-image = image_tag landing_image.image.url, class: "palaroid"
+        - else
+          li.orbit-slide data-slide="1" style=("position: relative; top: 0px; display: none;")
+            img.orbit-image = image_tag landing_image.image.url, class: "palaroid"
+
+.medium-6.columns
+  = image_tag ("palaroid.png")

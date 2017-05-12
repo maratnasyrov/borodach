@@ -1,0 +1,9 @@
+.row
+  = render "form"
+  .form-title Изображения лендинга
+  .landing-images
+    - landing_images.each do |landing_image|
+      .landing-image 
+        = image_tag landing_image.image.url(:medium)
+        .delete-link = link_to 'Удалить изображение',  landing_image_path(landing_image),  method: :delete, data: { confirm: 'Вы уверены?' }
+
