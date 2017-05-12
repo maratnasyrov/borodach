@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(version: 20170501012901) do
     t.datetime "image_updated_at"
   end
 
+  create_table "landing_images", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "masters", force: :cascade do |t|
     t.string   "name",                           default: "", null: false
     t.string   "last_name",                      default: "", null: false

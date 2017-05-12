@@ -1,0 +1,301 @@
+@font-face {
+    font-family: Retrica;
+    src: url(retrica.ttf);
+}
+
+.menu-land-info {
+  width: 145px;
+  margin: 10px; 
+}
+
+.online-menu, .info-contacts {
+  background-color: #fff !important;
+  font-size: 1rem;
+  padding: 10px;
+  box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.4);
+  font-family: "Segoe UI", sans-serif;
+  font-variant: small-caps;
+  line-height: 40px;
+  padding: 20px;
+  position: fixed;
+  margin-top: 25px;
+  margin-left: 25px;
+  z-index: 4;
+
+  .menu-link {
+    text-align: center;
+    margin-bottom: 10px;
+
+    a {
+      color: rgba(107, 107, 107, 1);
+      padding: 5px 20px 5px 20px;
+      font-size: 1.1rem;
+
+      &:hover {
+        color: #fff;
+        background-color: rgba(107, 107, 107, 0.6);
+        border-radius: 30px;
+      }
+    }
+
+    &:first-child {
+      margin-top: 20px;
+    }
+
+    &:last-child {
+      border-right: none;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.info-about {
+  float: right;
+}
+
+.info-contacts {
+  margin-left: -224px;
+
+  .address {
+    line-height: 10px;
+    padding-top: 10px;
+  }
+}
+
+.landing-online-btn {
+  padding: 15px 20px 15px 20px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  outline: none;
+
+  &:hover {
+    background-color: #1585cf;
+    color: #fff;
+  }
+}
+
+.main-part-land {
+  background-color: #fff;
+  box-shadow: 0 7px 20px 0 rgb(0, 0, 0);
+}
+
+.landing-records-reveal{
+  text-align: center;
+  margin-bottom: 30px;
+
+  .about {
+    background-color: #fff;
+    font-family: "Segoe UI", sans-serif;
+    font-variant: small-caps;
+    font-size: 3rem;
+    line-height: 40px;
+    margin-top: 40px;
+  }
+
+  .about-text {
+    font-family: "Segoe UI", sans-serif;
+    font-variant: small-caps;
+    font-size: 1.3rem;
+    line-height: 20px;
+    margin: 50px 15px 50px 15px;
+  }
+}
+
+.online-record-landing {
+  padding: 30px;
+}
+
+.landing-images {
+  float: left; 
+
+  .landing-image {
+    float: left;
+  }
+}
+
+.about-us {
+  background-color: #171717;
+  margin-top: 5px;
+
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+.about-part {
+  padding: 35px;
+  background-image: url("gallery-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: 1px solid #a6a6a6;
+  border-top: 1px solid #a6a6a6;
+}
+
+.group-photo {
+  border: 15px solid #fff;
+  box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.6);
+  border-radius: 5px;
+  transform: rotate(3deg);
+  z-index: 1;
+}
+
+.landing-title {
+  padding: 10px;
+  color: #6b6b6b;
+  font-variant: small-caps;
+  font-size: 1.7rem;
+  padding-top: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.online {
+  background-color: #E6E7E8;
+}
+
+.map {
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+.landing-block {
+  margin-bottom: 5px;
+}
+
+.landing-part-image {
+  img {
+    width: 100%;
+  }
+}
+
+.contacts {
+  padding-top: 30px;
+  background-color: rgba(107, 107, 107, 0.6);
+  box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.6);
+}
+
+.phrase {
+  font-family: Retrica, sans-serif;
+  font-variant: small-caps;
+  font-size: 5rem;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.landing-menu {
+  width: 30px;
+  height: 50px;
+}
+
+.land-btn {
+  float: left;
+  position: fixed;
+  z-index: 2;
+  margin-top: 35px;
+  margin-left: 35px;
+  outline: none;
+  z-index: 5;
+}
+
+.land-btn-info {
+  float: right;
+  z-index: 4;
+  margin-top: 35px;
+  margin-left: -65px;
+  outline: none;
+  position: fixed;
+  z-index: 5;
+}
+
+.menu-name {
+  float: none !important;
+}
+
+.month-land {
+  height: 300px;
+}
+
+.second-month-land {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+
+.landing-orbit {
+  height: auto !important;
+}
+
+.gallery {
+  background-image: url("gallery-background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 10px;
+  border-bottom: 1px solid #a6a6a6;
+  border-top: 1px solid #a6a6a6;
+}
+
+.palaroid {
+  border: 25px solid #e9e9e9;
+  border-bottom: 100px solid #e9e9e9;
+  box-shadow: 0 2px 35px 0 rgb(25, 25, 25);
+  width: 370px;
+}
+
+.orbit {
+  transform: rotate(-3deg);
+}
+
+.orbit-previous, .orbit-next {
+  color: #000;
+}
+
+@media screen and (max-width: 480px) {
+  .phrase {
+    padding: 20px;
+    font-size: 4.7rem;
+  }
+
+  .landing-image {
+    display: none;
+  }
+
+  .land-btn {
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+
+ .land-btn-info {
+    margin-top: 15px;
+    margin-left: -40px;
+  }
+
+  .online-menu {
+    margin-top: 2px;
+    margin-left: 2px;
+  }
+
+  .info-contacts {
+    margin-top: 2px;
+    margin-left: -202px;
+  }
+
+  .landing-records-reveal .about {
+    margin-top: 5px;
+    font-size: 2rem;
+    line-height: 30px;
+  }
+
+  .contacts {
+    display: none;
+  }
+
+  .land-reveal {
+    width: 100%;
+    border: none;
+  }
+}

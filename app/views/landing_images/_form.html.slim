@@ -1,0 +1,5 @@
+= simple_form_for landing_image, html: { multipart: true, class: "service-form" } do |f|
+  .medium-12
+    = f.input :image, label: false, as: :file
+  .medium-12
+    = f.button :submit, "Добавить изображение", class: "btn-form"

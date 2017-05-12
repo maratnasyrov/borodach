@@ -27,21 +27,16 @@ html class="no-js" lang="en"
       main.container
         = yield
 
-      = render "footer"
-
       javascript:
         App.currentUserData = #{{current_user.to_json}};
 
       = javascript_include_tag :application
   - else
-    body.body-sign-in
-      = render "navigation"
+    body.body-landing
       = render "messages"
 
-      main.container
+      main
         = yield
-
-      = render "footer"
 
       javascript:
         App.currentUserData = #{{current_user.to_json}};
