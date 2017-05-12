@@ -11,6 +11,7 @@ vendor/ruby
 .sass-cache
 public/system/brands/*
 public/system/masters/*
+public/system/landing_images/*
 ._*
 .env
 .pryrc
