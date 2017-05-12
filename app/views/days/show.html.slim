@@ -1,32 +1,19 @@
 .row
   .medium-12.small-12
-    .calendar-small
-      = render "small_calendar"
-    .calendar-big
-      ul.pagination.text-center.array-of-the-date-month aria-label="Pagination" role="navigation"
-        .year = year_search.number
-        li.pagination-previous
-          = link_to month_day_path(last_year.months.last, last_year.months.last.days.last)
-            span.show-for-sr page
-        - Month.year_detect(month.year_id).each do |month_part|
-          - if  month.id == month_part.id
-            li.current-month
-              = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
-          - else
-            li
-              = link_to month_part.name_of_the_month, month_day_path(month_part, month_part.days.first)
-        li.pagination-next
-          = link_to month_day_path(next_year.months.first, next_year.months.first.days.first)
-            span.show-for-sr page
-      ul.pagination.text-center.array-of-the-date aria-label="Pagination" role="navigation"
-        - month.days.each do |day_part|
-          - if  day.id == day_part.id
-            li.current-day
-              = link_to day_part.number_of_the_day, month_day_path(month, day_part)
-          - else
-            li
-              = link_to day_part.number_of_the_day, month_day_path(month, day_part)
-          
+    center.info-layout
+      p.date-today
+        a data-open="calendar" 10.05.2017
+      #calendar.reveal.calendar-reveal data-reveal="" 
+        = render "small_calendar"
+        button.close-button aria-label=("Close reveal") data-close="" type="button" 
+          span aria-hidden="true"  &times;
+      .current-record
+         - work_days.each do |work_day|
+          - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).admin? || UserPolicy.new(current_user).superadmin?
+            = image_tag(Master.find_by(id: work_day.master_id).avatar.url, class: "master-record-current-img")
+            = work_day.decorate.current_record
+            = work_day.decorate.next_record
+
   - if !day.pre_records.empty? && UserPolicy.new(current_user).all_rights?
     ul.vertical.menu.pre-record data-accordion-menu="" 
       li
@@ -43,10 +30,10 @@
     .row
       - work_days.each do |work_day|
         - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).admin? || UserPolicy.new(current_user).superadmin?
-          .records
-            .large-4.medium-4.columns.work-day-info
-                .master-info
-                  b = day.find_master(work_day.master_id)
-                  .clients-info = work_day.decorate.client_statistic
-                - work_day.records.all_records.each do |record|
-                  = render "records/form", work_day: work_day, record: record
+          .medium-12.records
+            .medium-2.columns
+              center
+                = image_tag(Master.find_by(id: work_day.master_id).avatar.url, class: "master-info-img")
+            .medium-10.record-part.columns
+              - work_day.records.all_records.each do |record|
+                .record-layout = render "records/form", work_day: work_day, record: record

@@ -18,11 +18,18 @@
   }
 }
 
+.select-master {
+    height: 50px;
+}
+
+.record-info {
+  height: 125px;
+}
+
 .record-info, .select-master {
   text-align: center;
   border-top: 1px solid #E6E7E8;
   width: 100%;
-  height: 50px;
   margin-bottom: 0 !important;
   background-color: #fff;
   color: #6b6b6b;
@@ -73,10 +80,27 @@
 .client-info, .online-status {
   margin-top: 6px;
   font-size: 0.9rem;
+
+    .client-info-name {
+      margin-top: 15px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      font-family: "Segoe UI", sans-serif;
+      font-variant: small-caps;
+      font-weight: bolder;
+    }
+
+    .client-info-phone {
+      padding: 2px;
+      font-size: 0.9rem;
+      font-family: "Segoe UI", sans-serif;
+      font-variant: small-caps;
+    }
 }
 
 .online-status {
   margin-top: 2px;
+  position: absolute;
 }
 
 .badge.success {
@@ -88,7 +112,6 @@
 
 .time {
   font-size: 0.75rem;
-  padding-left: 3px;
 }
 
 .time-online {
@@ -121,6 +144,29 @@ table.white {
     td {
       padding: 0;
     }
+  }
+}
+
+.current-record {
+  padding: 10px;
+
+  .record {
+
+  }
+  
+  .master-record-current-img {
+    width: 50px;
+  }
+}
+
+.date-today {
+  a {
+    text-align: center;
+    color: #24292e;
+    padding: 10px;
+    font-size: 1.5rem;
+    background-color: #fff;
+    box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.2);
   }
 }
 
@@ -169,6 +215,23 @@ table.white {
 
   a{
     color: #fff;
+  }
+}
+
+.records {
+  float: left;
+  margin-bottom: 20px;
+
+  .record-part {
+    float: left;
+
+    .record-layout {
+      float: left;
+      width: 125px;
+      border-bottom: 1px solid #E6E7E8;
+      border-right: 1px solid #E6E7E8;
+      box-shadow: 0 7px 10px 0 rgba(104, 104, 104, 0.2);
+    }
   }
 }
 

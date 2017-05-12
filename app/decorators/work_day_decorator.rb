@@ -1,6 +1,26 @@
 class WorkDayDecorator < ApplicationDecorator
   delegate_all
 
+  def current_record
+    hour_now = Time.now.hour
+    client_name = ""
+
+    object.records.all.each do |record|
+      if record.start_time.hour == hour_now
+        if !record.client_name.nil?
+          client_name = record.client_name
+        else
+          client_name = "Нет записи"
+        end
+      end
+    end
+
+    return client_name
+  end
+
+  def next_record
+  end
+
   def show_work_day_price
     sum = 0
     object.records.all.each do |record|

@@ -109,14 +109,12 @@ td.part-day-number {
   }
 }
 
-@media (max-width: 640px) {
-  .calendar-big {
-    display: none;
-  }
+.calendar-reveal {
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
-@media (min-width: 640px) {
-  .calendar-small {
-    display: none;
-  }
+.close-button {
+  color: #24292e;
 }
