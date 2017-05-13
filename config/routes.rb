@@ -113,6 +113,7 @@ Rails.application.routes.draw do
   match 'add_shelf/:id', to: 'shelves#add_shelf', as: :add_shelf, via: [:get, :post]
   match 'close_order/:id', to: 'orders#close', as: :close, via: [:get, :post]
   match 'add_to_stock/:id', to: 'product_lists#add_to_stock', as: :add_to_stock, via: [:get, :post]
+  match 'set_dinner/:id', to: 'records#set_dinner', as: :set_dinner, via: [:get, :post]
 
   get 'fill_schedule', to: 'months#fill_schedule'
 

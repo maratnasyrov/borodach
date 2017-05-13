@@ -56,4 +56,24 @@ class DayDecorator < ApplicationDecorator
   def show_date_number
     "#{object.number_of_the_day}.#{Month.find_by(id: object.month_id).number}"
   end
+
+  def full_date
+    month_flag = Month.find_by id: object.month_id
+    year_flag = Year.find_by id: month_flag.year_id
+
+    day = ""
+    month = ""
+
+    if object.number_of_the_day.to_s.length == 1
+      day_flag = "0" + object.number_of_the_day.to_s
+    else
+      day_flag = object.number_of_the_day
+    end
+
+    if month_flag.number.to_s.length == 1
+      month = "0" + month_flag.number.to_s
+    end
+
+    return "#{day_flag}.#{month}.#{year_flag.number}"
+  end
 end

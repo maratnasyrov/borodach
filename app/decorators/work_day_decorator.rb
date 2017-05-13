@@ -10,7 +10,7 @@ class WorkDayDecorator < ApplicationDecorator
         if !record.client_name.nil?
           client_name = record.client_name
         else
-          client_name = "Нет записи"
+          client_name = "Z z z"
         end
       end
     end
@@ -19,6 +19,20 @@ class WorkDayDecorator < ApplicationDecorator
   end
 
   def next_record
+    hour_next = Time.now.hour + 1
+    client_name = ""
+
+    object.records.all.each do |record|
+      if record.start_time.hour == hour_next
+        if !record.client_name.nil?
+          client_name = record.client_name
+        else
+          client_name = "Z z z"
+        end
+      end
+    end
+
+    return client_name
   end
 
   def show_work_day_price

@@ -1,18 +1,20 @@
-.row
-  .medium-12.small-12
-    center.info-layout
-      p.date-today
-        a data-open="calendar" 10.05.2017
-      #calendar.reveal.calendar-reveal data-reveal="" 
-        = render "small_calendar"
-        button.close-button aria-label=("Close reveal") data-close="" type="button" 
-          span aria-hidden="true"  &times;
-      .current-record
-         - work_days.each do |work_day|
-          - if current_user.id == Master.find_by(id: work_day.master_id).user_id || UserPolicy.new(current_user).admin? || UserPolicy.new(current_user).superadmin?
+center
+  .info-layout
+    p.date-today
+      a data-open="calendar"
+        = image_tag("calendar.png", class: "show-calendar")
+        = day.decorate.full_date
+    #calendar.reveal.calendar-reveal data-reveal="" data-animation-in="fade-in" data-animation-out="fade-out"
+      = render "small_calendar"
+      button.close-button aria-label=("Close reveal") data-close="" type="button" 
+        span aria-hidden="true"  &times;
+    .records-all
+      - work_days.each do |work_day|
+        .record-part
+          - if UserPolicy.new(current_user).all_rights?
             = image_tag(Master.find_by(id: work_day.master_id).avatar.url, class: "master-record-current-img")
-            = work_day.decorate.current_record
-            = work_day.decorate.next_record
+            .current-record = work_day.decorate.current_record
+            .next-record = work_day.decorate.next_record
 
   - if !day.pre_records.empty? && UserPolicy.new(current_user).all_rights?
     ul.vertical.menu.pre-record data-accordion-menu="" 

@@ -12,14 +12,16 @@
       .client-info
         .client-info-name
           = record.client_name
-        .client-info-phone
-          = record.client_phone
+        - if UserPolicy.new(current_user).all_rights?
+          .client-info-phone
+            = record.client_phone
     - else
       .client-info
         .client-info-name
           = record.client_name
-        .client-info-phone
-          = record.client_phone
+        - if UserPolicy.new(current_user).all_rights?
+          .client-info-phone
+            = record.client_phone
 
 - elsif UserPolicy.new(current_user).all_rights?
   button class="button record-info #{RecordPolicy.new(record).set_status_class}" data-toggle="work-day-dropdown-#{work_day.id}-#{record.id}" type="button"
@@ -36,40 +38,42 @@
       .client-info
         = record.decorate.client_info(current_user)
 
-  div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane" data-auto-focus="true" data-dropdown=""
+  div id="work-day-dropdown-#{work_day.id}-#{record.id}" class="dropdown-pane dropdown-record" data-auto-focus="true" data-dropdown="" data-v-offset="10" data-animation-in="fade-in" data-animation-out="fade-out"
     div class="dropdown-title new-record #{RecordPolicy.new(record).set_status_class}"
       = record.decorate.record_number
     = simple_form_for [work_day, record] do |f|
-      .row
-        .form-input
-          - if !RecordPolicy.new(record).status_added?
-            .medium-12.dinner-checkbox 
-              = f.input :dinner, label: "Закрыть", input_html: { class: "custom checkbox" }
-          - if RecordPolicy.new(record).status_closed?
-            .time
-              center
-                .medium-6.columns
-                  - if UserPolicy.new(User.find_by(id: Master.find_by(id: work_day.master_id).user_id)).director?
-                    = f.input :start_time, start_hour: 8, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"
-                  - else
-                    = f.input :start_time, start_hour: 9, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"
-                .medium-6.columns
-                  = f.input :end_time, start_hour: record.start_time.hour + 1, end_hour: 20, hour_step: 1, minute_step: 15, label: "Окончание"
-          .medium-6.columns
-            = f.error_notification
-            label = f.input :client_name, label: false, placeholder: "Имя"
-            = f.input :client_added, as: :hidden, input_html: { value: true }
-            = f.input :not_show, as: :hidden, input_html: { value: true }
-            
-          - if RecordPolicy.new(record).status_added?
-            - if UserPolicy.new(current_user).all_rights?
+      .form-input
+        - if RecordPolicy.new(record).status_added?
+          .time
+            center
               .medium-6.columns
-                label = f.input :client_phone, label: false, placeholder: "Телефон"
-          - else
-            .medium-6.columns
-                label = f.input :client_phone, label: false, placeholder: "Телефон"
-          - if RecordPolicy.new(record).status_closed?
-            .btn-form-record
-              - if RecordPolicy.new(record).status_added?
-                = link_to "Очистить", record_clear_path(record), class: "btn-clear"
+                - if UserPolicy.new(User.find_by(id: Master.find_by(id: work_day.master_id).user_id)).director?
+                  = f.input :start_time, start_hour: 8, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"
+                - else
+                  = f.input :start_time, start_hour: 9, end_hour: 19, hour_step: 1, minute_step: 15, label: "Время начала"
+              .medium-6.columns
+                = f.input :end_time, start_hour: record.start_time.hour + 1, end_hour: 20, hour_step: 1, minute_step: 15, label: "Окончание"
+        .medium-12
+          = f.error_notification
+          label = f.input :client_name, label: false, placeholder: "Имя"
+          = f.input :client_added, as: :hidden, input_html: { value: true }
+          = f.input :not_show, as: :hidden, input_html: { value: true }
+          
+        - if RecordPolicy.new(record).status_added?
+          - if UserPolicy.new(current_user).all_rights?
+            .medium-12
+              label = f.input :client_phone, label: false, placeholder: "Телефон"
+        - else
+          .medium-12
+              label = f.input :client_phone, label: false, placeholder: "Телефон"
+        - if RecordPolicy.new(record).status_closed?
+          .btn-form-record.btn-form-all-records
+            - if RecordPolicy.new(record).status_added?
+              = link_to "Очистить", record_clear_path(record), class: "btn-clear"
+            .medium-6.columns.btn-layout
+              - if record.dinner == true
+                = link_to "Открыть", set_dinner_path(record), class: "dinner-btn button"
+              - else
+                = link_to "Закрыть", set_dinner_path(record), class: "dinner-btn button"
+            .medium-6.columns.btn-layout
               = f.button :submit, "Сохранить", class: "btn-save"
