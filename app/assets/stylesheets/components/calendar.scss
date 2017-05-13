@@ -68,9 +68,9 @@ ul.accordion.months  {
 }
 
 .calendar {
+  border-collapse: inherit;
   margin-bottom: 0;
   border: none;
-  position: absolute;
   box-shadow: none;
   border-bottom: none;
 
@@ -158,14 +158,18 @@ td.part-day-number {
   }
 }
 
-@media (max-width: 640px) {
-  .calendar-big {
-    display: none;
-  }
+.calendar-reveal {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 400px;
 }
 
-@media (min-width: 640px) {
-  .calendar-small {
-    display: none;
-  }
+.close-button {
+  color: #24292e;
+}
+
+.show-calendar {
+  width: 50px;
+  padding: 5px 10px 10px 5px;
 }
