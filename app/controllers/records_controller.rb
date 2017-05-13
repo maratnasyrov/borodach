@@ -66,6 +66,20 @@ class RecordsController < ApplicationController
     redirect_to success_path
   end
 
+  def set_dinner
+    work_day_flag = WorkDay.find_by id: record.work_day_id
+    day_flag = Day.find_by id: work_day_flag.day_id
+    month_flag = Month.find_by id: day_flag.month_id
+
+    if record.dinner == true
+      record.update_attributes(dinner: false)
+    else
+      record.update_attributes(dinner: true)
+    end
+
+    redirect_to month_day_path(month_flag, day_flag)
+  end
+
   def change_payment_type
     record.payment_method.eql?("Карта") ? payment_method = "Наличные" : payment_method = "Карта"
 
@@ -328,49 +342,53 @@ class RecordsController < ApplicationController
     record_policy = RecordPolicy.new(record)
     user_policy = UserPolicy.new(current_user)
 
-    if record.start_time.hour != start_time.to_i
-      record_id = 0
+    if start_time != nil
+      if record.start_time.hour != start_time.to_i
+        record_id = 0
 
-      if start_time.to_i < record.start_time.hour
-        flag = record.start_time.hour - start_time.to_i
-        record_id = record.id - flag
-      elsif start_time.to_i > record.start_time.hour
-        flag = start_time.to_i - record.start_time.hour
-        record_id = record.id + flag
+        if start_time.to_i < record.start_time.hour
+          flag = record.start_time.hour - start_time.to_i
+          record_id = record.id - flag
+        elsif start_time.to_i > record.start_time.hour
+          flag = start_time.to_i - record.start_time.hour
+          record_id = record.id + flag
+        else
+          record_id = record.id
+        end
+
+        record_find = work_day.records.all.find_by(id: record_id)
+
+        if record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
+          params["end_time(4i)"] = (start_time.to_i+1).to_s
+          record_find.update_attributes(params)
+
+          if !record.record_services.all.empty?
+            record.record_services.all.each do |record_service|
+              record_service.update_attributes(record_id: record_find.id)
+            end
+          end
+
+          if !record.record_purchases.all.empty?
+            record.record_purchases.all.each do |record_purchase|
+              record_purchase.update_attributes(record_id: record_find.id)
+            end
+          end
+
+          if !record.record_shelves.all.empty?
+            record.record_shelves.all.each do |record_shef|
+              record_shef.update_attributes(record_id: record_find.id)
+            end
+          end
+
+          if !record.clients.first.nil?
+            record.clients.first.update_attributes(record_id: record_find.id)
+          end
+
+          record.update_attributes(clear_params)
+        elsif record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
+          record.update_attributes(params)
+        end
       else
-        record_id = record.id
-      end
-
-      record_find = work_day.records.all.find_by(id: record_id)
-
-      if record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
-        params["end_time(4i)"] = (start_time.to_i+1).to_s
-        record_find.update_attributes(params)
-
-        if !record.record_services.all.empty?
-          record.record_services.all.each do |record_service|
-            record_service.update_attributes(record_id: record_find.id)
-          end
-        end
-
-        if !record.record_purchases.all.empty?
-          record.record_purchases.all.each do |record_purchase|
-            record_purchase.update_attributes(record_id: record_find.id)
-          end
-        end
-
-        if !record.record_shelves.all.empty?
-          record.record_shelves.all.each do |record_shef|
-            record_shef.update_attributes(record_id: record_find.id)
-          end
-        end
-
-        if !record.clients.first.nil?
-          record.clients.first.update_attributes(record_id: record_find.id)
-        end
-
-        record.update_attributes(clear_params)
-      elsif record_find.dinner.eql?(false) && record_find.client_added.eql?(false)
         record.update_attributes(params)
       end
     else
