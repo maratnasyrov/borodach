@@ -20,6 +20,8 @@ class FinanceDaysController < ApplicationController
   expose(:first_part_of_the_week) { month.days.first(15) }
   expose(:second_part_of_the_week) { month.days.all - first_part_of_the_week }
 
+  expose(:salons) { Salon.all }
+
 
   def show_current_finance_day
     current_year = Date.today.year

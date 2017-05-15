@@ -226,7 +226,7 @@ class RecordsController < ApplicationController
         record_services.each do |record_service|
           service = Service.all.find_by(id: record_service.service_id)
 
-          create_finances(master, record, service.price, service.id, "true")
+          create_finances(master, record, service.price, service.id, "true", work_day_flag.salon_id)
         end
       end
 
@@ -234,7 +234,7 @@ class RecordsController < ApplicationController
         purchases.each do |purchase|
           find_purchase = Purchase.all.find_by(id: purchase.purchase_id)
 
-          create_finances(master, record, find_purchase.price, find_purchase.id, "false")
+          create_finances(master, record, find_purchase.price, find_purchase.id, "false", work_day_flag.salon_id)
 
           flag_number = find_purchase.number
           success = find_purchase.update_attributes(number: find_purchase.number - 1)
@@ -420,7 +420,7 @@ class RecordsController < ApplicationController
     end
   end
 
-  def create_finances(master, record, price, service_id, service_type)
+  def create_finances(master, record, price, service_id, service_type, salon_id)
     month = Month.find_by id: day.month_id
     month_salary = MonthSalary.find_by(master_id: master.id, month_id: month.id)
     working_shift_find = WorkingShift.find_by(master_id: master.id, day_id: day.id)
@@ -455,7 +455,8 @@ class RecordsController < ApplicationController
       cash_type: payment_method,
       finance_day_id: finance_day.id,
       record_id: record.id,
-      working_shift_id: working_shift_find.id)
+      working_shift_id: working_shift_find.id,
+      salon_id: salon_id)
     finance.save
 
     if finance.service_type.eql?(false)

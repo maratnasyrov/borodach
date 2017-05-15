@@ -4,6 +4,8 @@
   .medium-12
     = f.input :price, label: false, placeholder: "Сумма"
   .medium-12
+    = f.input :salon_id, collection: Salon.all, selected: Salon.all.first, label: false
+  .medium-12
     = f.input :service_id, collection: Cost.all, prompt: "Список только для расхода", label: false, selected: Cost.all.first
   .medium-12
     = f.select :finance_type, ["Расход", "Приход"], selected: "Расход"

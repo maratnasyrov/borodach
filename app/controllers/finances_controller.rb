@@ -52,6 +52,7 @@ class FinancesController < ApplicationController
       :day_id,
       :finance_day_id,
       :finance_type,
-      :comment)
+      :comment,
+      :salon_id)
   end
 end
