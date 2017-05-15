@@ -15,7 +15,7 @@ class DayDecorator < ApplicationDecorator
   def show_salon_consumption(salon_id)
     overall_consumption = 0
     object.finances.all.each do |finance|
-      if finance.salon_id = salon_id
+      if finance.salon_id == salon_id
         if finance.finance_type == false
           overall_consumption += finance.price
         end
