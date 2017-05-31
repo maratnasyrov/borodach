@@ -8,6 +8,26 @@
   margin: 10px; 
 }
 
+.info-btn {
+  transform: rotate(3deg);
+  margin-right: 40px;
+  margin-top: -5px;
+
+  a {
+    padding: 15px 20px 15px 20px;
+    font-size: 1.1rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    outline: none;
+    background-color: #000;
+    color: #fff;
+
+    &:hover {
+      background-color: #888787;
+    }
+  }
+}
+
 .online-menu, .info-contacts {
   background-color: #fff !important;
   font-size: 1rem;
@@ -255,6 +275,18 @@
 }
 
 @media screen and (max-width: 480px) {
+  .info-btn {
+    margin-top: -15px;
+    margin-left: -9px;
+
+    a {
+      font-size: 0.7rem;
+      padding: 8px 13px 8px 13px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px; 
+    }
+  }
+
   .phrase {
     padding: 20px;
     font-size: 4.7rem;

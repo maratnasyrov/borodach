@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :success_online, :about]
+  skip_before_action :authenticate_user!, only: [:index, :success_online, :about, :info]
 
   expose(:masters) { Master.all }
 
@@ -13,5 +13,11 @@ class PagesController < ApplicationController
 
   def success_online
     render "success_online"
+  end
+
+  def info
+    file_path = "https://s3.amazonaws.com/svp-kzn/info/Davayte_znakomitsya.pdf"
+    
+    redirect_to file_path
   end
 end

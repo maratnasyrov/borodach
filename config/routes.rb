@@ -116,7 +116,7 @@ Rails.application.routes.draw do
   match 'set_dinner/:id', to: 'records#set_dinner', as: :set_dinner, via: [:get, :post]
 
   get 'fill_schedule', to: 'months#fill_schedule'
-
+  get 'info', to: 'pages#info'
   get 'success', to: 'pages#success_online'
   
   get 'now', to: 'days#show_current_date'
